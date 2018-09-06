@@ -4,8 +4,8 @@ const initialState = {
 	user_email   : '',
 	auth_id      : '',
 	auth_picture : '',
-	user_bg      : 'https://images.unsplash.com/photo-1473654729523-203e25dfda10?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=ef5339f6a7615ab9cf6927fcebfdaa77&auto=format&fit=crop&w=1950&q=80',
-	color        : '#CCC',
+	user_bg      : 'https://images.unsplash.com/photo-1536130371825-ac75012d9b24?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=c1c97eb0f52f1174d7a8281dd8348828&auto=format&fit=crop&w=1050&q=80',
+	color        : '115, 164, 191',
 	theme        : 'light'
 }
 
