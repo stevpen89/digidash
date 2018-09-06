@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import AnalogClock, { Themes } from 'react-analog-clock';
 import Digital from './Digital'
 
-import './App.css';
-
 class Clock extends Component {
   constructor() {
     super()
