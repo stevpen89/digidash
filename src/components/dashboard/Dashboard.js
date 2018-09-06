@@ -58,11 +58,12 @@ class Dashboard extends Component {
     let arr =[]
     var height = 8;
     var width = this.state.width;
-    for(let q =0;q<11;q++){
+    for(let q =0;q<3;q++){
       arr.push(
         <div onMouseUpCapture={()=>this.updateDB(q)} 
         style={{backgroundColor: 'gray'}} className="gridItem" key={q.toString()} 
         data-grid={{i: q.toString(),x: 0, y: 0, w: width, h: height, static:this.state.locked}}>We Are Clones
+        <Clock/>
         <button onMouseUp={()=>console.log(this.state.layout[q])}>Do the Things</button>
         </div>
       )
@@ -70,8 +71,9 @@ class Dashboard extends Component {
     return arr;
   }
 
-  lock(){
-    this.setState({locked:!this.state.locked})
+  lockToggle(){
+    this.setState((prevState)=>{return {locked:!prevState.locked}});
+    console.log(this.state.locked)
   }
 
   render() {
@@ -84,9 +86,12 @@ class Dashboard extends Component {
          <ReactGridLayout  className="layout" cols={30} rowHeight={5} width={800} height={300}
                    layout={this.state.layout}
                    onLayoutChange={this.onLayoutChange}
+                   isDraggable={this.state.locked}
+                   isResizable={this.state.locked}
                    // onLayoutChange={this.onLayoutChange}
          >
            {this.map()}
+           
          </ReactGridLayout>
         </div>
       </div>

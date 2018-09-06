@@ -26,6 +26,7 @@
     "lodash": "^4.17.10",
     "massive": "^5.2.0",
     "node-vibrant": "^3.0.0",
+    "npm": "^6.4.1",
     "react": "^16.4.2",
     "react-analog-clock": "^2.1.0",
     "react-dom": "^16.4.2",
