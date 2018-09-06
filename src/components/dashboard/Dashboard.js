@@ -1,44 +1,33 @@
+//DEPENDENCIES
 import React, { Component } from 'react'
+import ReactGridLayout from 'react-grid-layout'
 import axios from 'axios'
-import ReactGridLayout from 'react-grid-layout';
-import Clock from '../widgets/clock/Clock'
+//REDUX
+import {connect}  from 'react-redux'
+import {setUser}  from '../../ducks/reducer'
+//WIDGETS
+import Clock      from '../widgets/clock/Clock'
 import Dictionary from '../widgets/dictionary/Dictionary'
-import Note from '../widgets/note/Note'
-import Search from '../widgets/search/Search'
-import Weather from '../widgets/weather/Weather'
-import '../../../node_modules/react-grid-layout/css/styles.css'
+import Note       from '../widgets/note/Note'
+import Search     from '../widgets/search/Search'
+import Weather    from '../widgets/weather/Weather'
 
+class Dashboard extends Component {
+  //grabs the user id
+  componentDidMount () {axios.get('/api/user-data').then(response => this.props.setUser(response.data))}
 
-export default class Dashboard extends Component {
-  constructor() {
-    super()
-    this.state = {
-
-    }
+  login () {
+    //logs the user in
+    const {REACT_APP_DOMAIN, REACT_APP_CLIENT_ID} = process.env;
+    const url = `${window.location.origin}/auth/callback`;
+    window.location = `https://${REACT_APP_DOMAIN}/authorize?client_id=${REACT_APP_CLIENT_ID}&scope=openid%20profile%20email&redirect_uri=${url}&response_type=code`
   }
-
-
-  componentDidMount() {
-    axios.get('/api/user-data').then(response => {
-      console.log('response', response)
-      this.props.setUser(response.data);
-    })
-  }
-
-
-  login() {
-    let { REACT_APP_DOMAIN, REACT_APP_CLIENT_ID } = process.env
-    let url = `${window.location.origin}/auth/callback`
-    window.location = `https://${REACT_APP_DOMAIN}/authorize?client_id=${REACT_APP_CLIENT_ID}&scope=openid%20profile%20email&redirct_uri=${url}&response_type=code`
-  }
-
-
 
   render() {
     return (
       <div>
         Ay bruv, this is the Dashboard.
-        <button onClick={() => this.login()}></button>
+        <button onClick={() => this.login()}>Login</button>
         <ReactGridLayout className="layout" cols={30} rowHeight={20} width={1200} height={300}>
           <div key="1" data-grid={{ i: '1', x: 3, y: 5, w: 3, h: 4 }}><Clock /></div>
           <div key="2" data-grid={{ i: '2', x: 3, y: 5, w: 3, h: 4 }}><Dictionary /></div>
@@ -50,3 +39,6 @@ export default class Dashboard extends Component {
     )
   }
 }
+
+function mapStateToProps (state) {return {user_id: state.user_id}};
+export default connect(mapStateToProps, {setUser})(Dashboard);
