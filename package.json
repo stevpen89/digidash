@@ -4,6 +4,9 @@
   "private": true,
   "main": "server/server.js",
   "proxy": {
+    "/api": {
+      "target": "http://localhost:4040"
+    },
     "/widget": {
       "target": "http://localhost:4040"
     },
@@ -24,10 +27,14 @@
     "express": "^4.16.3",
     "express-session": "^1.15.6",
     "massive": "^5.2.0",
+    "node-vibrant": "^3.0.0",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
     "react-grid-layout": "^0.16.6",
-    "react-scripts": "1.1.5"
+    "react-redux": "^5.0.7",
+    "react-router-dom": "^4.3.1",
+    "react-scripts": "1.1.5",
+    "redux": "^4.0.0"
   },
   "scripts": {
     "start": "react-scripts start",
