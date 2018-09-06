@@ -8,7 +8,6 @@ import {setUser}  from '../../ducks/reducer'
 //WIDGETS
 import Clock      from '../widgets/clock/Clock'
 import Dictionary from '../widgets/dictionary/Dictionary'
-<<<<<<< HEAD
 import Note       from '../widgets/note/Note'
 import Search     from '../widgets/search/Search'
 import Weather    from '../widgets/weather/Weather'
@@ -22,28 +21,6 @@ class Dashboard extends Component {
     const {REACT_APP_DOMAIN, REACT_APP_CLIENT_ID} = process.env;
     const url = `${window.location.origin}/auth/callback`;
     window.location = `https://${REACT_APP_DOMAIN}/authorize?client_id=${REACT_APP_CLIENT_ID}&scope=openid%20profile%20email&redirect_uri=${url}&response_type=code`
-=======
-import Note from '../widgets/note/Note'
-import Search from '../widgets/search/Search'
-import Weather from '../widgets/weather/Weather'
-import '../../../node_modules/react-grid-layout/css/styles.css'
-
-
-export default class Dashboard extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-
-    }
-  }
-
-
-  componentDidMount() {
-    axios.get('/api/user-data').then(response => {
-      console.log('response', response)
-      this.props.setUser(response.data);
-    })
->>>>>>> master
   }
 
   render() {
