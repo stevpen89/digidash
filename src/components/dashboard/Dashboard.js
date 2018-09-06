@@ -22,8 +22,9 @@ class Dashboard extends Component {
       super(props)
       this.state={
         width: 10,
-      height: 2,
-      layout: []
+        height: 2,
+        layout: [],
+        locked:false
       }
       this.onLayoutChange=this.onLayoutChange.bind(this);
     }
@@ -59,19 +60,25 @@ class Dashboard extends Component {
     var width = this.state.width;
     for(let q =0;q<11;q++){
       arr.push(
-
-        <div onMouseUpCapture={()=>this.updateDB(q)} style={{backgroundColor: 'gray'}} className="gridItem" key={q.toString()} data-grid={{i: q.toString(),x: 0, y: 0, w: width, h: height,}}>we are clones
-        <button onMouseUp={()=>console.log(this.state.layout[q])}>do the things</button>
+        <div onMouseUpCapture={()=>this.updateDB(q)} 
+        style={{backgroundColor: 'gray'}} className="gridItem" key={q.toString()} 
+        data-grid={{i: q.toString(),x: 0, y: 0, w: width, h: height, static:this.state.locked}}>We Are Clones
+        <button onMouseUp={()=>console.log(this.state.layout[q])}>Do the Things</button>
         </div>
       )
     }
     return arr;
   }
 
+  lock(){
+    this.setState({locked:!this.state.locked})
+  }
+
   render() {
     return (
       <div>
         Ay bruv, this is the Dashboard.
+        <button onClick={() => this.lockToggle()}>Lock</button>
         <button onClick={() => this.login()}>Login</button>
         <div style={{width: '100%', height: '100vh',  overflow: 'scroll'}}>
          <ReactGridLayout  className="layout" cols={30} rowHeight={5} width={800} height={300}
