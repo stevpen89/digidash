@@ -10,8 +10,8 @@ import '../../../node_modules/react-grid-layout/css/styles.css'
 
 
 export default class Dashboard extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
 
     }

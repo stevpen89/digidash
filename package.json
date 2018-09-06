@@ -12,6 +12,9 @@
     },
     "/auth/callback": {
       "target": "http://localhost:4040"
+    },
+    "/api": {
+      "target": "http://localhost:4040"
     }
   },
   "dependencies": {
