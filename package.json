@@ -15,9 +15,6 @@
     },
     "/auth/callback": {
       "target": "http://localhost:4040"
-    },
-    "/api": {
-      "target": "http://localhost:4040"
     }
   },
   "dependencies": {
@@ -26,6 +23,7 @@
     "dotenv": "^6.0.0",
     "express": "^4.16.3",
     "express-session": "^1.15.6",
+    "lodash": "^4.17.10",
     "massive": "^5.2.0",
     "node-vibrant": "^3.0.0",
     "react": "^16.4.2",

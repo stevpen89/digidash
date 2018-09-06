@@ -1,6 +1,7 @@
 //DEPENDENCIES
 import React, { Component } from 'react'
-import ReactGridLayout from 'react-grid-layout'
+import RGL, { WidthProvider } from "react-grid-layout";
+import '../../../node_modules/react-grid-layout/css/styles.css'
 import axios from 'axios'
 //REDUX
 import {connect}  from 'react-redux'
@@ -12,8 +13,20 @@ import Note       from '../widgets/note/Note'
 import Search     from '../widgets/search/Search'
 import Weather    from '../widgets/weather/Weather'
 
+const ReactGridLayout = WidthProvider(RGL);
+
+
 class Dashboard extends Component {
   //grabs the user id
+    constructor(props) {
+      super(props)
+      this.state={
+        width: 10,
+      height: 2,
+      layout: []
+      }
+      this.onLayoutChange=this.onLayoutChange.bind(this);
+    }
   componentDidMount () {axios.get('/api/user-data').then(response => this.props.setUser(response.data))}
 
   login () {
@@ -22,19 +35,53 @@ class Dashboard extends Component {
     const url = `${window.location.origin}/auth/callback`;
     window.location = `https://${REACT_APP_DOMAIN}/authorize?client_id=${REACT_APP_CLIENT_ID}&scope=openid%20profile%20email&redirect_uri=${url}&response_type=code`
   }
+  onLayoutChange(val){
+    console.log()
+    this.setState({
+      layout: val
+    })
+  }
+  updateDB(i){
+		const {layout} = this.state
+		let indexKeys  = layout.map((val)=>{return val.i})
+		let layoutKey  = indexKeys.indexOf(i.toString())
+		let dashX      = layout[layoutKey].x
+		let dashY      = layout[layoutKey].y
+		let dashHeight = layout[layoutKey].h
+		let dashWidth  = layout[layoutKey].w
+		console.log("i", i, "x", dashX, "y", dashY, "h", dashHeight, "w", dashWidth)
+		// axios.put(`/widget/position/${this.props.user_id` ,{i:i,x:dashX,y:dashY,w:dashWidth,h:dashHeight}).then((res)=>{console.log(i,x,y,h,w)})
+	}
+
+  map(){
+    let arr =[]
+    var height = 8;
+    var width = this.state.width;
+    for(let q =0;q<11;q++){
+      arr.push(
+
+        <div onMouseUpCapture={()=>this.updateDB(q)} style={{backgroundColor: 'gray'}} className="gridItem" key={q.toString()} data-grid={{i: q.toString(),x: 0, y: 0, w: width, h: height,}}>we are clones
+        <button onMouseUp={()=>console.log(this.state.layout[q])}>do the things</button>
+        </div>
+      )
+    }
+    return arr;
+  }
 
   render() {
     return (
       <div>
         Ay bruv, this is the Dashboard.
         <button onClick={() => this.login()}>Login</button>
-        <ReactGridLayout className="layout" cols={30} rowHeight={20} width={1200} height={300}>
-          <div key="1" data-grid={{ i: '1', x: 3, y: 5, w: 3, h: 4 }}><Clock /></div>
-          <div key="2" data-grid={{ i: '2', x: 3, y: 5, w: 3, h: 4 }}><Dictionary /></div>
-          <div key="3" data-grid={{ i: '3', x: 3, y: 5, w: 3, h: 4 }}><Note /></div>
-          <div key="4" data-grid={{ i: '4', x: 3, y: 5, w: 3, h: 4 }}><Search /></div>
-          <div key="5" data-grid={{ i: '5', x: 3, y: 5, w: 3, h: 4 }}><Weather /></div>
-        </ReactGridLayout>
+        <div style={{width: '100%', height: '100vh',  overflow: 'scroll'}}>
+         <ReactGridLayout  className="layout" cols={30} rowHeight={5} width={800} height={300}
+                   layout={this.state.layout}
+                   onLayoutChange={this.onLayoutChange}
+                   // onLayoutChange={this.onLayoutChange}
+         >
+           {this.map()}
+         </ReactGridLayout>
+        </div>
       </div>
     )
   }
