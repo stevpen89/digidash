@@ -2,7 +2,6 @@
 import React, { Component } from 'react'
 import RGL, { WidthProvider } from "react-grid-layout";
 import '../../../node_modules/react-grid-layout/css/styles.css'
-import "../../../node_modules/react-resizable/css/styles.css"
 import axios from 'axios'
 //REDUX
 import { connect } from 'react-redux'
