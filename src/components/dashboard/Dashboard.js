@@ -63,14 +63,29 @@ class Dashboard extends Component {
     this.setState((prevState) => { return { locked: !prevState.locked } });
   }
 
+  widgetSwitch(val) {
+    switch (val * 1) {
+      case 1:
+        return <Search />;
+      case 2:
+        return <Dictionary />;
+      case 3:
+        return <Note />;
+      case 4:
+        return <Clock />;
+      case 5:
+        return <Weather />;
+      default:
+        return 'defaulted';
+    }
+  }
+
   render() {
     return (
       <div>
-        Ay bruv, this is the Dashboard.
         <button onClick={() => this.lockToggle()}>Lock</button>
         <button onClick={() => this.login()}>Login</button>
         <div>
-          {JSON.stringify(this.state.layout)}
           <ReactGridLayout className="layout" cols={30} rowHeight={5} width={800} height={300}
             layout={this.state.layout}
             onLayoutChange={this.onLayoutChange}
@@ -80,12 +95,13 @@ class Dashboard extends Component {
 
             {this.state.widgets.map((val) => (
               <div
-                style={{ border: "1px solid chartreuse" }}
+                style={{ borderRadius: '5px', overflow: 'hidden' }}
                 key={`${val.master_id}`}
                 data-grid={{ i: `${val.master_id}`, x: val.x, y: val.y, w: val.w, h: val.h }}
                 onMouseUpCapture={() => this.updateDB(val.master_id)}
               >
-                <Clock />
+                {console.log(val.widget_id)}
+                {this.widgetSwitch(val.widget_id)}
               </div>
             ))}
 
