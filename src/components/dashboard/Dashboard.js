@@ -56,7 +56,7 @@ class Dashboard extends Component {
     let dashHeight = layout[layoutKey].h
     let dashWidth = layout[layoutKey].w
     console.log("i", i, "x", dashX, "y", dashY, "h", dashHeight, "w", dashWidth)
-    axios.put(`/widget/position/${this.props.user_id}`, { i: i, x: dashX, y: dashY, w: dashWidth, h: dashHeight })
+    axios.put(`/widget/position/${i}`, { i: i, x: dashX, y: dashY, w: dashWidth, h: dashHeight })
   }
 
   lockToggle() {
