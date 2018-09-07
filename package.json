@@ -15,9 +15,6 @@
     },
     "/auth/callback": {
       "target": "http://localhost:4040"
-    },
-    "/api": {
-      "target": "http://localhost:4040"
     }
   },
   "dependencies": {
@@ -34,6 +31,7 @@
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.3.1",
     "react-scripts": "1.1.5",
+    "reactstrap": "^6.4.0",
     "redux": "^4.0.0"
   },
   "scripts": {
