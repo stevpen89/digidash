@@ -39,7 +39,13 @@ CREATE TABLE master (
 );
 
 INSERT INTO master (user_id, widget_id, x, y, w, h)
-VALUES (1, 1, 0, 0, 0, 0);
+VALUES (2, 1, 2, 2, 16, 16);
+
+INSERT INTO master (user_id, widget_id, x, y, w, h)
+VALUES (2, 2, 4, 4, 16, 16);
+
+INSERT INTO master (user_id, widget_id, x, y, w, h)
+VALUES (2, 4, 6, 6, 16, 16);
 
 select * from master;
 
