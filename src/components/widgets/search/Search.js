@@ -1,6 +1,5 @@
 
 import React, { Component } from 'react';
-import 'bootstrap/dist/css/bootstrap.css';
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 
 class Search extends Component {
