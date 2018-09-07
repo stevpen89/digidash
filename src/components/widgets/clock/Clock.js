@@ -25,7 +25,6 @@ class Clock extends Component {
 
 
   render() {
-    console.log(this.state)
     return (
       <div className="App">
         <button onClick={() => { this.toggle() }}>{this.state.show ? 'Digital' : 'Analog' }</button>
