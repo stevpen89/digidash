@@ -11,9 +11,9 @@ module.exports = {
 	create: (req, res) => {
     const db = req.app.get('db');
     const {user_id} = req.params;
-		const {widget_id, x, y, w, h, o1, o2, o3, o4, o5, o6} = req.body;
+		const {widget_name, x, y, w, h, o1, o2, o3, o4, o5, o6} = req.body;
 
-		db.widgets.create_widget([user_id, widget_id, x, y, w, h, o1, o2, o3, o4, o5, o6])
+		db.widgets.create_widget([user_id, widget_name, x, y, w, h, o1, o2, o3, o4, o5, o6])
 			.then(widget => res.status(200).send(widget[0]))
 			.catch(err => console.log(`Error Message: ${err}`))
 	},

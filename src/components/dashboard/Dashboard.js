@@ -66,16 +66,16 @@ class Dashboard extends Component {
   }
   //Rendering specific widgets according to Widget Id in database and its case number... Add a widget here when created.
   widgetSwitch(val) {
-    switch (val * 1) {
-      case 1:
+    switch (val) {
+      case 'search':
         return <Search />;
-      case 2:
+      case 'dictionary':
         return <Dictionary />;
-      case 3:
+      case 'note':
         return <Note />;
-      case 4:
+      case 'clock':
         return <Clock />;
-      case 5:
+      case 'weather':
         return <Weather />;
       default:
         return 'defaulted';
@@ -88,22 +88,26 @@ class Dashboard extends Component {
         <button onClick={() => this.lockToggle()}>Lock</button>
         <button onClick={() => this.login()}>Login</button>
         <div>
+          <style>
+            {`.react-grid-item.react-grid-placeholder{background:rgb(${this.props.themeColor}); opacity: .75; border-radius: 5px;}`}
+          </style>
           <ReactGridLayout className="layout" cols={30} rowHeight={5} width={800} height={300}
             layout={this.state.layout}
             onLayoutChange={this.onLayoutChange}
             isDraggable={this.state.locked}
             isResizable={this.state.locked}
-            verticalCompact={false}>
+            compactType={null}
+            preventCollision={true}>
 
             {this.state.widgets.map((val) => (
               <div
+                className="widget"
                 style={{ borderRadius: '5px', overflow: 'hidden' }}
                 key={`${val.master_id}`}
                 data-grid={{ i: `${val.master_id}`, x: val.x, y: val.y, w: val.w, h: val.h }}
                 onMouseUpCapture={() => this.updateDB(val.master_id)}
               >
-                {console.log(val.widget_id)}
-                {this.widgetSwitch(val.widget_id)}
+                {this.widgetSwitch(val.widget_name)}
               </div>
             ))}
           </ReactGridLayout>
@@ -117,5 +121,5 @@ class Dashboard extends Component {
   }
 }
 
-function mapStateToProps(state) { return { user_id: state.user_id } };
+function mapStateToProps(state) { return { user_id: state.user_id, themeColor: state.color } };
 export default connect(mapStateToProps, { setUser })(Dashboard);
