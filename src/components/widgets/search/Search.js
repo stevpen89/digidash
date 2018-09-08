@@ -5,8 +5,10 @@ class Search extends Component {
 		super()
 		this.state = { selected: 'https://www.google.com/search?q=', search: '' }
 	}
+	
 	handleInput(val) { this.setState({ search: val }) }
 	keyPress(e) { if (e.keyCode === 13) { document.getElementById('searchButton').click() } }
+
 	render() {
 		return (
 			<div>
