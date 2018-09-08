@@ -1,4 +1,3 @@
-DROP TABLE widgets;
 DROP TABLE master;
 DROP TABLE users;
 
@@ -25,7 +24,7 @@ select * from users;
 CREATE TABLE master (
 	master_id	SERIAL PRIMARY KEY,
 	user_id		VARCHAR(100),
-	widget_id	VARCHAR(100),
+	widget_name	VARCHAR(100),
 	x					INTEGER,
 	y					INTEGER,
 	w					INTEGER,
@@ -38,37 +37,13 @@ CREATE TABLE master (
 	o6				TEXT DEFAULT NULL
 );
 
-INSERT INTO master (user_id, widget_id, x, y, w, h)
-VALUES (2, 1, 2, 2, 16, 16);
+INSERT INTO master (user_id, widget_name, x, y, w, h)
+VALUES (2, 'search', 2, 2, 16, 16);
 
-INSERT INTO master (user_id, widget_id, x, y, w, h)
-VALUES (2, 2, 4, 4, 16, 16);
+INSERT INTO master (user_id, widget_name, x, y, w, h)
+VALUES (2, 'dictionary', 4, 4, 16, 16);
 
-INSERT INTO master (user_id, widget_id, x, y, w, h)
-VALUES (2, 4, 6, 6, 16, 16);
+INSERT INTO master (user_id, widget_name, x, y, w, h)
+VALUES (2, 'clock', 6, 6, 16, 16);
 
 select * from master;
-
-
-
-CREATE TABLE widgets (
-	widget_id	SERIAL PRIMARY KEY,
-	name			TEXT
-);
-
-INSERT INTO widgets (widget_id, name)
-VALUES (1, 'search');
-
-INSERT INTO widgets (widget_id, name)
-VALUES (2, 'dictionary');
-
-INSERT INTO widgets (widget_id, name)
-VALUES (3, 'note');
-
-INSERT INTO widgets (widget_id, name)
-VALUES (4, 'clock');
-
-INSERT INTO widgets (widget_id, name)
-VALUES (5, 'weather');
-
-select * from widgets;

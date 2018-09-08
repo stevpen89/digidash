@@ -4,6 +4,7 @@ const //CONTROLLERS
       auth0Controller  = require ('./controllers/auth0Controller' ),
       widgetController = require ('./controllers/widgetController'),
       stripeController = require ('./controllers/stripeController'),
+      apiController    = require ('./controllers/apiController'),
       //NODE MODULES
       express          = require ('express'        ),
       session          = require ('express-session'),
@@ -33,6 +34,9 @@ app.post   ('/widget/:user_id',            widgetController.create  );
 app.put    ('/widget/position/:master_id', widgetController.position);
 app.put    ('/widget/settings/:master_id', widgetController.settings);
 app.delete ('/widget/:master_id',          widgetController.delete  );
+
+//API ENDPOINTS
+app.post ('/api/dictionary', apiController.dictionary);
 
 //RUN THE SERVER
 app.listen(SERVER_PORT, () => console.log(`server started on port ${SERVER_PORT}`));

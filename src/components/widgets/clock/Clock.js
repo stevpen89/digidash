@@ -40,26 +40,26 @@ class WidgetClock extends Component {
         {this.state.show ? <div><button onClick={() => { this.themeChange() }}>theme change</button></div> : null}
         <div>{this.state.show ? <Clock
           value={this.state.date}
-          className="analog-clock"
-          hourHandLength='80'
-          hourHandOppositeLength='20'
-          hourHandWidth='3'
-          hourMarksLength='8'
-          hourMarksWidth='2'
-          minuteHandLength='60'
-          minuteHandOppositeLength='20'
-          minuteHandWidth='2'
-          minuteMarksLength='6'
-          minuteMarksWidth='1'
-          renderHourMarks={true}
-          renderMinuteHand={true}
-          renderMinuteMarks={true}
-          renderNumbers={false}
-          renderSecondHand={true}
-          secondHandLength='80'
-          secondHandOppositeLength='20'
-          secondHandWidth='2'
-          size='150'
+          // className="analog-clock"
+          // hourHandLength='80'
+          // hourHandOppositeLength='20'
+          // hourHandWidth='3'
+          // hourMarksLength='8'
+          // hourMarksWidth='2'
+          // minuteHandLength='60'
+          // minuteHandOppositeLength='20'
+          // minuteHandWidth='2'
+          // minuteMarksLength='6'
+          // minuteMarksWidth='1'
+          // renderHourMarks={true}
+          // renderMinuteHand={true}
+          // renderMinuteMarks={true}
+          // renderNumbers={false}
+          // renderSecondHand={true}
+          // secondHandLength='80'
+          // secondHandOppositeLength='20'
+          // secondHandWidth='2'
+          // size='150'
         /> : <Digital />}</div>
       </div>
     );
