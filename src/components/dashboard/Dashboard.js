@@ -33,19 +33,21 @@ class Dashboard extends Component {
     //   axios.get(`/widget/${res.payload.user_id}`).then(res => this.setState({ layout: res.data }))
     // })
   }
-  //
+  //authZero
   login() {
     //logs the user in
     const { REACT_APP_DOMAIN, REACT_APP_CLIENT_ID } = process.env;
     const url = `${window.location.origin}/auth/callback`;
     window.location = `https://${REACT_APP_DOMAIN}/authorize?client_id=${REACT_APP_CLIENT_ID}&scope=openid%20profile%20email&redirect_uri=${url}&response_type=code`
   }
+  //layout business with RGL
   onLayoutChange(val) {
     console.log()
     this.setState({
       layout: val
     })
   }
+  //Updating layout according to specific user
   updateDB(i) {
     const { layout } = this.state
     console.log(layout);
@@ -58,11 +60,11 @@ class Dashboard extends Component {
     console.log("i", i, "x", dashX, "y", dashY, "h", dashHeight, "w", dashWidth)
     axios.put(`/widget/position/${i}`, { i: i, x: dashX, y: dashY, w: dashWidth, h: dashHeight })
   }
-
+  //makes it so you cannot move your widgets with RGL.
   lockToggle() {
     this.setState((prevState) => { return { locked: !prevState.locked } });
   }
-
+  //Rendering specific widgets according to Widget Id in database and its case number... Add a widget here when created.
   widgetSwitch(val) {
     switch (val * 1) {
       case 1:
@@ -104,8 +106,11 @@ class Dashboard extends Component {
                 {this.widgetSwitch(val.widget_id)}
               </div>
             ))}
-
           </ReactGridLayout>
+
+          <div>
+
+          </div>
         </div>
       </div>
     )
