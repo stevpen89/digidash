@@ -21,7 +21,6 @@ export default class Dictionary extends Component {
 	getDefinition(){
 		axios.post(`/api/dictionary`,{query:this.state.input})
 		.then((res)=>{this.setState({returnedData:res.data})})
-
 	}
 
 	render() {
@@ -30,7 +29,7 @@ export default class Dictionary extends Component {
 			<div className="dictionary standard-widget">
 				<input onChange={(e)=>{this.changeHandler(e.target.value)}} onKeyDown={this.keyPress}/>
 				<button onClick={()=>{this.getDefinition()}} id="goButton" className="filled-button theme-color">GO</button>
-				<h1 className="theme-text">{this.state.returnedData.results ? this.state.returnedData.results[0].word : ""}:</h1>
+				<h1 className="theme-text">{this.state.returnedData.results ? this.state.returnedData.results[0].word : ""}</h1>
 				<p>Definition:{this.state.returnedData ? this.state.returnedData.results[0].lexicalEntries.map((val,i) => <div>{i+1} : {val.entries[0].senses[0].definitions}</div>) : "" }</p>
 				<div className="theme-glow"></div>
 				<div className="theme-accent"></div>
