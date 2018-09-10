@@ -22,7 +22,6 @@ class Digital extends Component {
         const { time } = this.state; // retrieve the time from state
         return (
             <div>
-                <h1>Digital Clock</h1>
                 <h2>{time.toLocaleTimeString()}</h2>
             </div>
         );
