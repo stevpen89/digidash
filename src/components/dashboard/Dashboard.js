@@ -7,11 +7,11 @@ import '../../../node_modules/react-grid-layout/css/styles.css'
 import GridTheme from './GridTheme'
 import './Dashboard.css'
 //WIDGETS
-import Clock      from '../widgets/clock/Clock'
+import Clock from '../widgets/clock/Clock'
 import Dictionary from '../widgets/dictionary/Dictionary'
-import Note       from '../widgets/note/Note'
-import Search     from '../widgets/search/Search'
-import Weather    from '../widgets/weather/Weather'
+import Note from '../widgets/note/Note'
+import Search from '../widgets/search/Search'
+import Weather from '../widgets/weather/Weather'
 //REDUX
 import { connect } from 'react-redux'
 import { setUser } from '../../ducks/reducer'
@@ -22,10 +22,10 @@ class Dashboard extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      widgets    : [],
-      layout     : [],
-      locked     : false,
-      drawerOpen : false,
+      widgets: [],
+      layout: [],
+      locked: false,
+      drawerOpen: false,
     }
     this.onLayoutChange = this.onLayoutChange.bind(this);
   }
@@ -46,32 +46,33 @@ class Dashboard extends Component {
   }
 
   //layout business with RGL
-  onLayoutChange(val) {this.setState({layout: val})}
+  onLayoutChange(val) { this.setState({ layout: val }) }
 
   //Updating layout according to specific user
   updateDB(i) {
     const { layout } = this.state
-    let indexKeys  = layout.map(val => val.i)
-    let layoutKey  = indexKeys.indexOf(i.toString())
-    let x          = layout[layoutKey].x
-    let y          = layout[layoutKey].y
-    let h          = layout[layoutKey].h
-    let w          = layout[layoutKey].w
+    let indexKeys = layout.map(val => val.i)
+    let layoutKey = indexKeys.indexOf(i.toString())
+    let x = layout[layoutKey].x
+    let y = layout[layoutKey].y
+    let h = layout[layoutKey].h
+    let w = layout[layoutKey].w
     axios.put(`/widget/position/${i}`, { i, x, y, w, h })
   }
 
   //makes it so you cannot move your widgets with RGL.
-  lockToggle() {this.setState((prevState) => {return{locked: !prevState.locked }})}
+  lockToggle() { this.setState((prevState) => { return { locked: !prevState.locked } }) }
 
   //Rendering specific widgets according to Widget Id in database and its case number... Add a widget here when created.
   widgetSwitch(val) {
-    switch (val) {
-      case 'search'     : return <Search />;
-      case 'dictionary' : return <Dictionary />;
-      case 'note'       : return <Note />;
-      case 'clock'      : return <Clock />;
-      case 'weather'    : return <Weather />;
-      default           : return 'defaulted';
+    console.log(val)
+    switch (val.widget_name) {
+      case 'Search': return <Search o={val} />;
+      case 'Dictionary': return <Dictionary o={val} />;
+      case 'Note': return <Note o={val} />;
+      case 'Clock': return <Clock o={val} />;
+      case 'Weather': return <Weather o={val} />;
+      default: return 'defaulted';
     }
   }
 
@@ -105,41 +106,41 @@ class Dashboard extends Component {
         {/* REACT GRID */}
         <GridTheme />
         <ReactGridLayout
-          className        = "layout"
-          cols             = {30}
-          rowHeight        = {5}
-          width            = {800}
-          height           = {300}
-          layout           = {this.state.layout}
-          onLayoutChange   = {this.onLayoutChange}
-          isDraggable      = {this.state.locked}
-          isResizable      = {this.state.locked}
-          compactType      = {null}
-          preventCollision = {true}>
+          className="layout"
+          cols={30}
+          rowHeight={5}
+          width={800}
+          height={300}
+          layout={this.state.layout}
+          onLayoutChange={this.onLayoutChange}
+          isDraggable={this.state.locked}
+          isResizable={this.state.locked}
+          compactType={null}
+          preventCollision={true}>
 
           {this.state.widgets.map((val) => (
             <div
-              key              = {`${val.master_id}`}
-              data-grid        = {{ i: `${val.master_id}`, x: val.x, y: val.y, w: val.w, h: val.h }}
-              onMouseUpCapture = {() => this.updateDB(val.master_id)}>
-              {this.widgetSwitch(val.widget_name)}
+              key={`${val.master_id}`}
+              data-grid={{ i: `${val.master_id}`, x: val.x, y: val.y, w: val.w, h: val.h }}
+              onMouseUpCapture={() => this.updateDB(val.master_id)}>
+              {this.widgetSwitch(val)}
             </div>
           ))}
         </ReactGridLayout>
 
         {/* DRAWER */}
         <div style={{
-          display         : `flex`,
-          width           : `100vw`,
-          height          : `100vh`,
-          zIndex          : `5`,
-          position        : `absolute`,
-          top             : `0`,
-          left            : `0`,
-          backgroundColor : `black`,
-          pointerEvents   : this.state.drawerOpen ? `auto` : `none`,
-          opacity         : this.state.drawerOpen ? `1` : `0`,
-          transition      : `.5s`
+          display: `flex`,
+          width: `100vw`,
+          height: `100vh`,
+          zIndex: `5`,
+          position: `absolute`,
+          top: `0`,
+          left: `0`,
+          backgroundColor: `black`,
+          pointerEvents: this.state.drawerOpen ? `auto` : `none`,
+          opacity: this.state.drawerOpen ? `1` : `0`,
+          transition: `.5s`
         }}>
           <div className="drawer">
             <button className="filled-button">Drawer</button>
@@ -150,7 +151,7 @@ class Dashboard extends Component {
         {/* TOOLBAR */}
         <div className={this.state.locked ? 'toolbar toolbar-open' : 'toolbar'}>
           <div></div>
-          <div><button onClick={() => this.setState({drawerOpen: !this.state.drawerOpen})}><i class="fas fa-plus-square"></i></button></div>
+          <div><button onClick={() => this.setState({ drawerOpen: !this.state.drawerOpen })}><i class="fas fa-plus-square"></i></button></div>
         </div>
       </div>
     )
