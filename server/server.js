@@ -13,7 +13,7 @@ const //CONTROLLERS
                          require ('dotenv').config();
 
 //SERVER SETUP
-const { SERVER_PORT, SESSION_SECRET, CONNECTION_STRING } = process.env;
+const { SERVER_PORT, SESSION_SECRET, CONNECTION_STRING, } = process.env;
 const app = express();
 
 //MIDDLEWARE
@@ -34,7 +34,7 @@ app.post   ('/widget/:user_id',            widgetController.create  );
 app.put    ('/widget/position/:master_id', widgetController.position);
 app.put    ('/widget/settings/:master_id', widgetController.settings);
 app.delete ('/widget/:master_id',          widgetController.delete  );
-
+app.post('/api/getWeather', widgetController.createWeather)
 //API ENDPOINTS
 app.post ('/api/dictionary', apiController.dictionary);
 

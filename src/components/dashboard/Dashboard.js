@@ -66,11 +66,11 @@ class Dashboard extends Component {
   //Rendering specific widgets according to Widget Id in database and its case number... Add a widget here when created.
   widgetSwitch(val) {
     switch (val) {
-      case 'search'     : return <Search />;
-      case 'dictionary' : return <Dictionary />;
-      case 'note'       : return <Note />;
-      case 'clock'      : return <Clock />;
-      case 'weather'    : return <Weather />;
+      case 'Search'     : return <Search />;
+      case 'Dictionary' : return <Dictionary />;
+      case 'Note'       : return <Note />;
+      case 'Clock'      : return <Clock />;
+      case 'Weather'    : return <Weather />;
       default           : return 'defaulted';
     }
   }
@@ -126,7 +126,7 @@ class Dashboard extends Component {
             </div>
           ))}
         </ReactGridLayout>
-
+          <Weather />
         {/* DRAWER */}
         <div style={{
           display         : `flex`,

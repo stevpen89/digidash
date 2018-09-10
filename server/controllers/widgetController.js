@@ -1,3 +1,4 @@
+const axios =require('axios')
 module.exports = {
   read: (req, res) => {
     const db = req.app.get('db');
@@ -45,5 +46,17 @@ module.exports = {
 		db.widgets.delete_widget([master_id])
 			.then(widget => res.status(200).send(widget))
 			.catch(err => console.log(`Error Message: ${err}`))
-	}
+	},
+    createWeather:(req,res,next) =>{  
+        const db = req.app.get('db');
+        const {lat,lng} = req.body
+        //change  location
+        console.log(lat)
+        // db.getMaster()
+        // .then(data=>{
+        axios.get(`https://api.darksky.net/forecast/${process.env.REACT_APP_WEATHERKEY}/${lat},${lng}`).then(response=>{
+
+        res.status(200).send(response.data)
+        // })
+      })}
 }
