@@ -1,15 +1,12 @@
 
 import React, { Component } from 'react';
-import 'bootstrap/dist/css/bootstrap.css';
-import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+
 
 class Search extends Component {
     constructor(props){
         super(props)
-        this.toggle = this.toggle.bind(this);
         this.state={
             selected: "http://www.google.com/search",
-            dropdownOpen: false
         }
     }
     selectYahoo(){
@@ -44,11 +41,6 @@ class Search extends Component {
     
     }
 
-    toggle() {
-        this.setState(prevState => ({
-          dropdownOpen: !prevState.dropdownOpen
-        }));
-      }
     
   render() {
       console.log(this.state)
@@ -66,21 +58,17 @@ class Search extends Component {
             <input type="hidden"  /></td></tr>
             </table>
             </div>
-            <div  className='container' style={{float: 'right', }}>
-                <Dropdown  isOpen={this.state.dropdownOpen} toggle={this.toggle}>
-                <DropdownToggle caret>
-                Search
-                </DropdownToggle>
-                <DropdownMenu>
-                <DropdownItem onClick={()=>this.selectGoogle()}>google</DropdownItem>
-                <DropdownItem onClick={()=>this.selectYahoo()}>yahoo</DropdownItem>
-                <DropdownItem onClick={()=>this.selectBing()}>bing</DropdownItem>
-                <DropdownItem onClick={()=>this.selectDuck()}>duckduckgo</DropdownItem>
-                <DropdownItem onClick={()=>this.selectNetscape()}>Netscape</DropdownItem>
-                </DropdownMenu>
-            </Dropdown>
-            </div>
+
             </form>
+			<div >
+
+<button onClick={()=>this.selectGoogle()}>google</button>
+<button onClick={()=>this.selectYahoo()}>yahoo</button>
+<button onClick={()=>this.selectBing()}>bing</button>
+<button onClick={()=>this.selectDuck()}>duckduckgo</button>
+<button onClick={()=>this.selectNetscape()}>Netscape</button>
+
+</div>
         </div>
       </div>
     );
