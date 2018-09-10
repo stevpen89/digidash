@@ -13,7 +13,7 @@ const //CONTROLLERS
 require('dotenv').config();
 
 //SERVER SETUP
-const { SERVER_PORT, SESSION_SECRET, CONNECTION_STRING, } = process.env;
+const { SERVER_PORT, SESSION_SECRET, CONNECTION_STRING } = process.env;
 const app = express();
 
 //MIDDLEWARE
