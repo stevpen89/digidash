@@ -1,16 +1,6 @@
 .clock {
-	height: 100%;
-	width: 100%;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	flex-direction: column;
-	/* overflow: hidden; */
-	/* border-radius: 5px; */
-	background: rgba(255,255,255,0.5);
-}
-
-.analog-clock {
-	background: rgba(255,255,255,0.5);
-	border-radius: 50%;
 }

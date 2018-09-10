@@ -1,22 +1,24 @@
-@import url('https://fonts.googleapis.com/css?family=Montserrat|Noto+Sans');
+@import url('https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800,900');
 *{box-sizing: border-box}
 
 #App {
   font-family: 'Montserrat', sans-serif;
+  user-select: none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -o-user-select: none;
 }
 
-button, input {font-family: 'Montserrat', sans-serif;}
+button, input, select {font-family: 'Montserrat', sans-serif; transition: .25s;}
 
 button {
   border: none;
-  padding: 7px 30px;
-  border-radius: 50px;
-  color: black;
   text-transform: uppercase;
   font-size: 14px;
   letter-spacing: 3px;
-  opacity: .85;
-  transition: .25s;
+  opacity: .85; 
+  background: transparent
 }
 
 button:hover {opacity: 1;}
@@ -25,18 +27,79 @@ button:focus {
   outline: none;
 }
 
-.widget {
-  color: rgb(30, 30, 30);
-  background: rgba(255,255,255,0.85);
+.filled-button {
+  color: white;
+  padding: 7px 30px;
+  border-radius: 50px;
+  background: rgba(255,255,255,.25)
+}
+
+.standard-widget {
+  width: 100%;
+  height: 100%;
+  color: white;
+  position: relative;
   display: flex;
   flex-direction: column;
-  width: 400px;
-  padding: 25px;
-  margin: 25px;
+  align-items: center;
   border-radius: 3px;
-  box-shadow: 0px 5px 10px 0px rgba(0,0,0,0.15);
   overflow: hidden;
+	background: rgba(255,255,255,0.04);
+	box-shadow: 0px 5px 10px 0px rgba(0,0,0,0.15);
 }
+
+.widget-settings-button {
+  background: transparent;
+	padding: 0;
+	margin: 10px;
+	width: 30px;
+	font-size: 18px;
+	-webkit-text-stroke: .75px white;
+	color: transparent;
+  border-radius: 0;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 3;
+}
+
+.widget-settings {
+  position: absolute;
+  display: none;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+  top: 0; 
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.8);
+  z-index: 2;
+}
+
+.checkbox {
+  width: 25px;
+  height: 25px;
+  font-size: 14px;
+  border-radius: 3px;
+  color: rgba(255,255,255,.3);
+  background: rgba(255,255,255,0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: .25s;
+  margin: 10px;
+}
+.checkbox:hover {color: rgba(255,255,255,.75);}
+
+.checked {color: rgba(255,255,255,1); opacity: .85;}
+.checked:hover {color: rgba(255,255,255,1); opacity: 1;}
 
 a, p, h1, h2, h3, h4, h5, h6 {
   padding: 0;
@@ -46,6 +109,7 @@ a, p, h1, h2, h3, h4, h5, h6 {
 h1, h2, h3, h4, h5, h6 {
   text-transform: uppercase;
   letter-spacing: 2px;
+  font-weight: 300;
 }
 
 h1 {font-size: 30px;}
@@ -54,4 +118,24 @@ h3 {font-size: 20px;}
 h4 {font-size: 16px;}
 h5 {font-size: 14px;}
 h6 {font-size: 12px;}
-a, p {font-size: 16px; letter-spacing: 1px;}
+a, p {
+  font-size: 16px;
+  font-weight: 200;
+  letter-spacing: 1px;
+}
+
+.search .theme-text {color: rgb(0, 174, 255)}
+.search .theme-input  {border: solid rgb(0, 174, 255)}
+.search .theme-input  {border: solid rgb(0, 174, 255); border-width : 0 0 1px 0;}
+.search .theme-accent {background: rgba(0, 174, 255)}
+.search .theme-glow {background: rgba(0, 174, 255, .35)}
+
+.dictionary .theme-color {background: rgb(140, 0, 255)}
+.dictionary .theme-text {color: rgb(140, 0, 255)}
+.dictionary .theme-accent {background: rgba(140, 0, 255)}
+.dictionary .theme-glow {background: rgba(140, 0, 255, .1)}
+
+.clock .theme-color {background: rgba(255, 0, 0)}
+.clock .theme-accent {background: rgba(255, 0, 0)}
+.clock .theme-glow {background: rgba(255, 0, 0, .08)}
+.clock .react-clock__second-hand__body {background-color: rgba(255, 0, 0)}
