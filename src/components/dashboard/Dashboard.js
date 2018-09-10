@@ -28,15 +28,18 @@ class Dashboard extends Component {
       drawerOpen: false,
     }
     this.onLayoutChange = this.onLayoutChange.bind(this);
+    this.updateWidgets = this.updateWidgets.bind(this);
   }
 
   //axios call to get user data from auth zero storing on redux.
   componentDidMount() {
-    axios.get(`/widget/${this.props.user_id}`).then(res => this.setState({ widgets: res.data }))
+    this.updateWidgets()
     // axios.get('/api/user-data').then(response => this.props.setUser(response.data)).then((res) => {
     //   axios.get(`/widget/${res.payload.user_id}`).then(res => this.setState({ layout: res.data }))
     // })
   }
+
+  updateWidgets() { axios.get(`/widget/${this.props.user_id}`).then(res => this.setState({ widgets: res.data })) }
 
   //authZero
   login() {
@@ -46,7 +49,7 @@ class Dashboard extends Component {
   }
 
   //layout business with RGL
-  onLayoutChange(val) { this.setState({ layout: val }) }
+  onLayoutChange(val) { this.setState({ layout: val }); }
 
   //Updating layout according to specific user
   updateDB(i) {
@@ -61,17 +64,18 @@ class Dashboard extends Component {
   }
 
   //makes it so you cannot move your widgets with RGL.
-  lockToggle() { this.setState((prevState) => { return { locked: !prevState.locked } }) }
+  lockToggle() {
+    this.setState((prevState) => { return { locked: !prevState.locked } })
+  }
 
   //Rendering specific widgets according to Widget Id in database and its case number... Add a widget here when created.
   widgetSwitch(val) {
-    console.log(val)
     switch (val.widget_name) {
-      case 'Search': return <Search o={val} />;
-      case 'Dictionary': return <Dictionary o={val} />;
-      case 'Note': return <Note o={val} />;
-      case 'Clock': return <Clock o={val} />;
-      case 'Weather': return <Weather o={val} />;
+      case 'Search': return <Search o={val} updateWidgets={this.updateWidgets} />;
+      case 'Dictionary': return <Dictionary o={val} updateWidgets={this.updateWidgets} />;
+      case 'Note': return <Note o={val} updateWidgets={this.updateWidgets} />;
+      case 'Clock': return <Clock o={val} updateWidgets={this.updateWidgets} />;
+      case 'Weather': return <Weather o={val} updateWidgets={this.updateWidgets} />;
       default: return 'defaulted';
     }
   }
