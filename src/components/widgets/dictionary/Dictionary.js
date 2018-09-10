@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import './Dictionary.css'
 
 export default class Dictionary extends Component {
 	constructor(){
@@ -23,16 +24,14 @@ export default class Dictionary extends Component {
 
 	render() {
 		return (
-			<div>
+			<div className="dictionary standard-widget">
 				Dictionary
 				<input onChange={(e)=>{this.changeHandler(e.target.value)}}/>
-				<button onClick={()=>{this.getDefinition()}}>GO</button>
-				<h1>{JSON.stringify(this.state.results)}</h1>
+				<button onClick={()=>{this.getDefinition()}} className="filled-button theme-color">GO</button>
+				{/* <h1 className="theme-text">{JSON.stringify(this.state.results)}</h1> */}
+				<div className="theme-glow"></div>
+				<div className="theme-accent"></div>
 			</div>
 		)
 	}
 }
-
-// https://od-api.oxforddictionaries.com:443/api/v1/entries/en/communism
-// app_id     88bb1831
-// app_key    6005c83d676a675cf2eb25e1573d50ed

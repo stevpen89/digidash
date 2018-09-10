@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './Search.css';
 
 class Search extends Component {
 	constructor() {
@@ -11,16 +12,18 @@ class Search extends Component {
 
 	render() {
 		return (
-			<div>
+			<div className="search">
 				<select onChange={(e) => this.setState({ selected: e.target.value })} placeholder="Google">
-					<option value='https://www.google.com/search?q=' onClick={() => this.selectGoogle()}>Google</option>
+					<option value='https://www.google.com/search?q='>Google</option>
 					<option value='https://search.yahoo.com/search?q='>Yahoo</option>
 					<option value='https://www.bing.com/search?q='>Bing</option>
-					<option value='https://duckduckgo.com/?q='>Duckduckgo</option>
+					<option value='https://duckduckgo.com/?q='>Duck Duck Go</option>
 					<option value='https://search.aol.com/aol/search?q='>Netscape</option>
+					<option value='https://en.wikipedia.org/w/index.php?search='>wikipedia</option>
 				</select>
-				<input onChange={(e) => this.handleInput(e.target.value)} onKeyDown={this.keyPress} />
-				<a href={`${this.state.selected}${this.state.search}`} target="_blank" id="searchButton"><button>Go!</button></a>
+				<input onChange={(e) => this.handleInput(e.target.value)} onKeyDown={this.keyPress} className="theme-input"/>
+				<a href={`${this.state.selected}${this.state.search}`} target="_blank" id="searchButton"><button className="theme-text">Go</button></a>
+				<div className="theme-glow"></div>
 			</div>
 		);
 	}
