@@ -126,7 +126,6 @@ class Dashboard extends Component {
             </div>
           ))}
         </ReactGridLayout>
-        <Dictionary/>
 
         {/* DRAWER */}
         <div style={{
