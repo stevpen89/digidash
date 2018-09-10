@@ -20,7 +20,6 @@ class WidgetClock extends Component {
   toggle() { this.setState({ show: !this.state.show }) }
 
   render() {
-    console.log('chicken nugget swag', this.props.o.o1)
     return (
       <div className="clock standard-widget">
 

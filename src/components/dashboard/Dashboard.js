@@ -76,6 +76,21 @@ class Dashboard extends Component {
     }
   }
 
+  toolbarSwitch(val){
+    switch (val.widget_name) {
+      case 'Search': return <i className="fas fa-search"></i>;
+      case 'Dictionary': return <i className="fas fa-book-open"></i>;
+      case 'Note': return <i className="fas fa-sticky-note"></i>;
+      case 'Clock': return <i className="fas fa-clock"></i>;
+      case 'Weather': return <i className="fas fa-sun"></i>;
+      default: return 'defaulted';
+    }
+  }
+
+  addWidget(val){
+    
+  }
+
   render() {
     return (
       <div>
@@ -127,6 +142,7 @@ class Dashboard extends Component {
             </div>
           ))}
         </ReactGridLayout>
+        <Note/>
 
         {/* DRAWER */}
         <div style={{
@@ -149,8 +165,12 @@ class Dashboard extends Component {
         </div>
 
         {/* TOOLBAR */}
-        <div className={this.state.locked ? 'toolbar toolbar-open' : 'toolbar'}>
-          <div></div>
+        <div className={this.state.locked ? 
+          'toolbar toolbar-open' :
+           'toolbar'}>
+        <div style={{display:"flex", color:"red"}}>{this.state.widgets ?
+           this.state.widgets.map((val)=>{return <div style={{fontSize:"30px", margin:"0 10px"}} onClick={()=>this.addWidget(val.widget_name)}>{this.toolbarSwitch(val)}</div>}) :
+            ''}</div>
           <div><button onClick={() => this.setState({ drawerOpen: !this.state.drawerOpen })}><i class="fas fa-plus-square"></i></button></div>
         </div>
       </div>
