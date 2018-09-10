@@ -5,8 +5,8 @@ import Digital from './Digital'
 import './Clock.css'
 
 class WidgetClock extends Component {
-  constructor(props) {
-    super(props)
+  constructor() {
+    super()
     this.state = {
       miniSettings: false,
       show: true,
@@ -20,7 +20,7 @@ class WidgetClock extends Component {
   toggle() { this.setState({ show: !this.state.show }) }
 
   render() {
-    console.log(this.props)
+    console.log('chicken nugget swag', this.props.o.o1)
     return (
       <div className="clock standard-widget">
 

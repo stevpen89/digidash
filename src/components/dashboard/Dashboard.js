@@ -67,12 +67,12 @@ class Dashboard extends Component {
   widgetSwitch(val) {
     console.log(val)
     switch (val.widget_name) {
-      case 'Search'     : return <Search     o1={val.o1} o2={val.o2} o3={val.o3} o4={val.o4} o5={val.o5} o6={val.o6}/>;
-      case 'Dictionary' : return <Dictionary o1={val.o1} o2={val.o2} o3={val.o3} o4={val.o4} o5={val.o5} o6={val.o6}/>;
-      case 'Note'       : return <Note       o1={val.o1} o2={val.o2} o3={val.o3} o4={val.o4} o5={val.o5} o6={val.o6}/>;
-      case 'Clock'      : return <Clock      o1={val.o1} o2={val.o2} o3={val.o3} o4={val.o4} o5={val.o5} o6={val.o6}/>;
-      case 'Weather'    : return <Weather    o1={val.o1} o2={val.o2} o3={val.o3} o4={val.o4} o5={val.o5} o6={val.o6}/>;
-      default           : return 'defaulted';
+      case 'Search': return <Search o={val} />;
+      case 'Dictionary': return <Dictionary o={val} />;
+      case 'Note': return <Note o={val} />;
+      case 'Clock': return <Clock o={val} />;
+      case 'Weather': return <Weather o={val} />;
+      default: return 'defaulted';
     }
   }
 
