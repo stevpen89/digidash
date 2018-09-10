@@ -146,6 +146,7 @@ class Dashboard extends Component {
             </div>
           ))}
         </ReactGridLayout>
+        <Weather />
         <Note/>
 
         {/* DRAWER */}

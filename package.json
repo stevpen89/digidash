@@ -33,9 +33,11 @@
     "react-clock": "^2.3.0",
     "react-dom": "^16.4.2",
     "react-grid-layout": "^0.16.6",
+    "react-places-autocomplete": "^7.2.0",
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.3.1",
     "react-scripts": "1.1.5",
+    "react-skycons": "^0.7.0",
     "reactstrap": "^6.4.0",
     "redux": "^4.0.0"
   },
