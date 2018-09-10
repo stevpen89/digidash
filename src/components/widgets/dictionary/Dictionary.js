@@ -7,7 +7,7 @@ export default class Dictionary extends Component {
 		super()
 		this.state={
 			input:'',
-			results:'nuffin back yet bruv'
+			returnedData:''
 		}
 	}
 
@@ -15,20 +15,23 @@ export default class Dictionary extends Component {
 		this.setState({input:val})
 	}
 
+	keyPress(e) { if (e.keyCode === 13) { document.getElementById('goButton').click() } }
+
+
 	getDefinition(){
 		axios.post(`/api/dictionary`,{query:this.state.input})
-		.then((res)=>{this.setState({results:res.data})})
-			// makes an axios call to the dictionary API
-			// then updates state "results" to show the returned data
+		.then((res)=>{this.setState({returnedData:res.data})})
+
 	}
 
 	render() {
+		console.log(this.state.returnedData)
 		return (
 			<div className="dictionary standard-widget">
-				Dictionary
-				<input onChange={(e)=>{this.changeHandler(e.target.value)}}/>
-				<button onClick={()=>{this.getDefinition()}} className="filled-button theme-color">GO</button>
-				{/* <h1 className="theme-text">{JSON.stringify(this.state.results)}</h1> */}
+				<input onChange={(e)=>{this.changeHandler(e.target.value)}} onKeyDown={this.keyPress}/>
+				<button onClick={()=>{this.getDefinition()}} id="goButton" className="filled-button theme-color">GO</button>
+				<h1 className="theme-text">{this.state.returnedData.results ? this.state.returnedData.results[0].word : ""}:</h1>
+				<p>Definition:{this.state.returnedData ? this.state.returnedData.results[0].lexicalEntries.map((val,i) => <div>{i+1} : {val.entries[0].senses[0].definitions}</div>) : "" }</p>
 				<div className="theme-glow"></div>
 				<div className="theme-accent"></div>
 			</div>
