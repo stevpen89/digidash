@@ -4,9 +4,9 @@ export default class Note extends Component {
 	constructor(){
 		super()
 		this.state={
-			selectedColor:'red',
+			selectedColor:'rgba(255,0,0,.5)',
 			selectedFont:'',
-			selectedFontSize:'',
+			selectedFontSize:20,
 			selectedFontColor:'rgb(30,30,30)',
 			selectedWeight:'initial',
 			input:""
@@ -24,7 +24,6 @@ export default class Note extends Component {
 	updateWeight(){
 		if(this.state.selectedWeight === 'bold'){this.setState({selectedWeight:'initial'})}
 		else if (this.state.selectedWeight === 'initial'){this.setState({selectedWeight:'bold'})}
-		console.log(this.state.selectedWeight)
 	}
 	updateFontColor(val){
 		this.setState({selectedFontColor:val})
@@ -32,19 +31,24 @@ export default class Note extends Component {
 
 	handleInput(val){
 		this.setState({input:val})
-		console.log(this.state.input)
+	}
+
+	fontIncrement(){
+		this.setState({selectedFontSize:this.state.selectedFontSize += 6})
+	}
+	fontDecrement(){
+		this.setState({selectedFontSize:this.state.selectedFontSize -= 6})
 	}
 
 	render() {
 		return (
 			<div>
-				<div>Sticky Note</div>
 				<div style={{display:"flex"}}>
-					<div style={{backgroundColor:'red', 		height:'50px',width:'50px', borderRadius:"25%", border:"2px solid black"}} onClick={()=>this.updateColor('red')}>		</div>
-					<div style={{backgroundColor:'blue', 		height:'50px',width:'50px', borderRadius:"25%", border:"2px solid black"}} onClick={()=>this.updateColor('blue')}>	</div>
-					<div style={{backgroundColor:'green', 	height:'50px',width:'50px', borderRadius:"25%", border:"2px solid black"}} onClick={()=>this.updateColor('green')}>	</div>
-					<div style={{backgroundColor:'yellow', 	height:'50px',width:'50px', borderRadius:"25%", border:"2px solid black"}} onClick={()=>this.updateColor('yellow')}></div>
-					<div style={{backgroundColor:'grey', 		height:'50px',width:'50px', borderRadius:"25%", border:"2px solid black"}} onClick={()=>this.updateColor('grey')}>	</div>
+					<div style={{backgroundColor:'rgba(255,0,0,.5)', 		height:'50px',width:'50px', borderRadius:"25%", border:"2px solid black"}} onClick={()=>this.updateColor('rgba(255,0,0,.5)')}>		</div>
+					<div style={{backgroundColor:'rgba(0,0,255,.5)', 		height:'50px',width:'50px', borderRadius:"25%", border:"2px solid black"}} onClick={()=>this.updateColor('rgba(0,0,255,.5)')}>	</div>
+					<div style={{backgroundColor:'rgba(0,255,0,.5)', 		height:'50px',width:'50px', borderRadius:"25%", border:"2px solid black"}} onClick={()=>this.updateColor('rgba(0,255,0,.5)')}>	</div>
+					<div style={{backgroundColor:'rgba(255,255,0,.5)', 	height:'50px',width:'50px', borderRadius:"25%", border:"2px solid black"}} onClick={()=>this.updateColor('rgba(255,255,0,.5)')}></div>
+					<div style={{backgroundColor:'rgba(128,128,128,.5)',height:'50px',width:'50px', borderRadius:"25%", border:"2px solid black"}} onClick={()=>this.updateColor('rgba(128,128,128,.5)')}>	</div>
 				</div>
 				<div style={{display:"flex"}}>
 					<h3>Font: </h3>
@@ -70,8 +74,19 @@ export default class Note extends Component {
 						<option value="grey">Grey</option>
 					</select>
 				</div>
+				<div>FONT SIZE
+					<button onClick={()=>{this.fontIncrement()}}>| + |</button>
+					<button onClick={()=>{this.fontDecrement()}}>| - |</button>
+				</div>
 				<div style={{ height:'400px',width:'400px'}}>
-					<textarea onChange={(e)=>this.handleInput(e.target.value)} style={{height:"100%", width:"100%", color:this.state.selectedFontColor, backgroundColor:this.state.selectedColor, fontFamily:this.state.selectedFont, fontWeight:this.state.selectedWeight}}>
+					<textarea onChange={(e)=>this.handleInput(e.target.value)} style={{
+						height:"100%", 
+						width:"100%", 
+						color:this.state.selectedFontColor, 
+						backgroundColor:this.state.selectedColor, 
+						fontFamily:this.state.selectedFont, 
+						fontWeight:this.state.selectedWeight, 
+						fontSize:this.state.selectedFontSize}}>
 					</textarea>
 				</div>
 			</div>
