@@ -20,9 +20,9 @@ const dict = new Dictionary(config)
 // };
 
 module.exports = {
-  dictionary: (req, res) => {
-		let lookup = dict.definitions('waffle').then((res)=>{console.log(res)})
-		
+  dictionary: async (req, res) => {
+		let lookup = await dict.definitions(req.body.query)
+		res.status(200).send(lookup)
 	}
 }
 
