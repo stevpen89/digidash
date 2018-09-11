@@ -127,7 +127,7 @@ export default class Autocomplete extends Component {
         >
 
           {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
-            <div>
+            <div  className="widget-settings">
               <input style={{marginTop: '50px'}} {...getInputProps({ placeholder: 'Search Places ...', className: 'location-search-input', })} />
 
               <div className="autocomplete-dropdown-container">
