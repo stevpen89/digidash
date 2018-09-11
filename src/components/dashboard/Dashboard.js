@@ -26,6 +26,7 @@ class Dashboard extends Component {
       layout: [],
       locked: false,
       drawerOpen: false,
+      deleteMode: false
     }
     this.onLayoutChange = this.onLayoutChange.bind(this);
     this.updateWidgets = this.updateWidgets.bind(this);
@@ -68,6 +69,8 @@ class Dashboard extends Component {
     this.setState((prevState) => { return { locked: !prevState.locked } })
   }
 
+  toggleDeleteMode() {this.setState({deleteMode: !this.state.deleteMode})}
+
   //Rendering specific widgets according to Widget Id in database and its case number... Add a widget here when created.
   widgetSwitch(val) {
     switch (val.widget_name) {
@@ -91,8 +94,8 @@ class Dashboard extends Component {
     }
   }
 
-  addWidget(val) {
-
+  deleteWidget(val) {
+    axios.delete(`/widget/${val}`).then(() => this.updateWidgets())
   }
 
   render() {
@@ -208,12 +211,27 @@ class Dashboard extends Component {
 
         {/* TOOLBAR */}
         <div className={this.state.locked ? 'toolbar toolbar-open' : 'toolbar'}>
-          <div style={{ display: "flex" }}>{this.state.widgets ?
-            this.state.widgets.map((val) => { return <div style={{ fontSize: "30px", margin: "0 10px" }} onClick={() => this.addWidget(val.widget_name)}>{this.toolbarSwitch(val)}</div> }) :
-            ''}</div>
-          <div><button onClick={() => this.setState({ drawerOpen: !this.state.drawerOpen })}>{this.state.drawerOpen ? <i class="fas fa-minus-square"></i> : <i class="fas fa-plus-square"></i>}</button></div>
-        </div>
-      </div>
+          <div style={{ display: "flex" }}>
+            {this.state.widgets ?
+            this.state.widgets.map((val) => {
+              return (
+                <div style={{ fontSize: "30px", margin: "0 10px" }}>
+                  <div className="toolbar-icon">{this.toolbarSwitch(val)}
+                    {this.state.deleteMode ?
+                      <a onClick={() => this.deleteWidget(val.master_id)} className="delete-button">
+                      <i class="fas fa-times"></i>
+                      </a> : null}
+                  </div>
+                </div>
+              )
+            }) : null}
+          </div>
+            <div className="toolbar-controls">
+              <button onClick={() => this.toggleDeleteMode()}><i class="fas fa-trash-alt"></i></button>
+              <button onClick={() => this.setState({ drawerOpen: !this.state.drawerOpen })}>{this.state.drawerOpen ? <i class="fas fa-minus-square"></i> : <i class="fas fa-plus-square"></i>}</button>
+            </div>
+          </div >
+        </div >
     )
   }
 }
