@@ -38,12 +38,12 @@ CREATE TABLE master (
 );
 
 INSERT INTO master (user_id, widget_name, x, y, w, h)
-VALUES (2, 'search', 2, 2, 16, 16);
+VALUES (2, 'Search', 2, 2, 16, 16);
 
 INSERT INTO master (user_id, widget_name, x, y, w, h)
-VALUES (2, 'dictionary', 4, 4, 16, 16);
+VALUES (2, 'Dictionary', 4, 4, 16, 16);
 
 INSERT INTO master (user_id, widget_name, x, y, w, h, o1)
-VALUES (2, 'clock', 6, 6, 16, 16, 'true');
+VALUES (2, 'Clock', 6, 6, 16, 16, 'true');
 
 select * from master;

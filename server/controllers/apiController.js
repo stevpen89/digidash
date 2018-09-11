@@ -18,7 +18,7 @@ module.exports = {
 		res.status(200).send(lookup)
 	},
 
-	weather: (req, res, next) => {
+	weather: (req, res) => {
 		const db = req.app.get('db');
 		const { lat, lng } = req.body
 		
