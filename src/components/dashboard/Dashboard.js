@@ -12,6 +12,7 @@ import Dictionary from '../widgets/dictionary/Dictionary'
 import Note from '../widgets/note/Note'
 import Search from '../widgets/search/Search'
 import Weather from '../widgets/weather/Weather'
+import GlobalSettings from './GlobalSettings'
 //REDUX
 import { connect } from 'react-redux'
 import { setUser } from '../../ducks/reducer'
@@ -26,7 +27,8 @@ class Dashboard extends Component {
       layout: [],
       locked: false,
       drawerOpen: false,
-      deleteMode: false
+      deleteMode: false,
+      globalOpen: false
     }
     this.onLayoutChange = this.onLayoutChange.bind(this);
     this.updateWidgets = this.updateWidgets.bind(this);
@@ -98,10 +100,15 @@ class Dashboard extends Component {
     axios.delete(`/widget/${val}`).then(() => this.updateWidgets())
   }
 
+  globalToggle(){
+    this.setState({globalOpen:!this.state.globalOpen})
+    console.log(this.state.globalOpen)
+  }
+
   render() {
     return (
       <div>
-
+        
         {/* HEADER */}
         <div className="header">
 
@@ -110,7 +117,7 @@ class Dashboard extends Component {
           </div>
 
           <div className="user-controls">
-            <button>
+            <button onClick={()=>this.globalToggle()}>
               •••
             </button><a>|</a>
 
@@ -124,6 +131,10 @@ class Dashboard extends Component {
           </div>
 
         </div>
+        {this.state.globalOpen?
+      <div className="widget-settings globalWrapper" >
+        <GlobalSettings/>
+      </div>:null}
 
         {/* REACT GRID */}
         <GridTheme />

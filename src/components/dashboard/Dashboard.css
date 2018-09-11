@@ -102,4 +102,12 @@
 
 .delete-button:hover {
 	color: rgba(255, 0, 0, 1);
+
+}
+
+.globalWrapper{
+	margin:5.5vh 2vw ;
+	height:89vh ;
+	width:96vw ;
+	border-radius: 10px 
 }
