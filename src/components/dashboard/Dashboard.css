@@ -28,13 +28,39 @@
 
 .drawer {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-start;
+  justify-content: flex-start;
   width: 100vw;
   height: 100vh;
   box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.15);
   transition: .25s;
-  z-index: 4;
+	z-index: 4;
+	color: white;
+}
+
+.drawer div {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	padding: 15px;
+	text-transform: uppercase;
+	opacity: .75;
+	transition: .25s
+}
+
+.drawer div:hover {opacity: 1}
+
+.drawer i {
+	font-size: 60px;
+	padding: 35px;
+	-webkit-text-stroke: .75px white;
+	color: transparent;
+}
+
+.drawer a {
+	font-size: 12px;
+	letter-spacing: 4px;
 }
 
 .toolbar {
@@ -50,8 +76,10 @@
 	align-items: center;
 	justify-content: space-between;
   transition: .25s;
-  z-index: 5;
+	z-index: 5;
+	color: rgba(255,255,255,0.5)
 }
+
 .toolbar-open {bottom: 0;}
 
 .toolbar button {font-size: 40px; opacity: .5; color: white;}
