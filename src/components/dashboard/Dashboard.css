@@ -2,7 +2,6 @@
 	height: 50px;
 	color: white;
 	padding: 0;
-	/* background: rgba(255,255,255,.04); */
 	display: flex;
 	flex-direction: row;
 	align-items: center;
@@ -80,7 +79,27 @@
 	color: rgba(255,255,255,0.5)
 }
 
+.toolbar-controls button {margin-left: 20px;}
+.toolbar-icon {margin-right: 10px;}
+
 .toolbar-open {bottom: 0;}
 
 .toolbar button {font-size: 40px; opacity: .5; color: white;}
 .toolbar button:hover {font-size: 40px; opacity: .85;}
+
+.delete-button {
+	position: relative;
+	height: 0px;
+	width: 0px;
+	bottom: 17px;
+	right: 5px;
+	margin-right: -12px;
+	padding-bottom: -17px;
+	font-size: 16px;
+	color: rgba(255, 255, 255, .85);
+	transition: .25s;
+}
+
+.delete-button:hover {
+	color: rgba(255, 0, 0, 1);
+}
