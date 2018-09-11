@@ -25,4 +25,4 @@ module.exports = {
 		axios.get(`https://api.darksky.net/forecast/${process.env.REACT_APP_WEATHERKEY}/${lat},${lng}`)
 			.then(api => { res.status(200).send(api.data) })
 	}
-}
+}		
