@@ -3,7 +3,7 @@ import axios from 'axios'
 import './Weather.css'
 import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
 import Skycons from 'react-skycons'
-
+import { Scrollbars } from 'react-custom-scrollbars';
 export default class Autocomplete extends Component {
   constructor(props) {
     super(props);
@@ -11,7 +11,9 @@ export default class Autocomplete extends Component {
       address: '',
       weather: [],
       toggle: false,
-      day: {}
+	  day: {},
+	  input:"",
+	  miniSettings:false,
     };
   }
 
@@ -98,12 +100,27 @@ export default class Autocomplete extends Component {
       </div>
     </div>)
   }
+  toggleSettings() {
+		this.setState({ miniSettings: !this.state.miniSettings })
+		console.log(this.props.o)
+    axios.put(`/widget/settings/${this.props.o.master_id}`, {
+      o1: null,
+      o2: null,
+      o3: null,
+      o4: null,
+      o5: null,
+      o6: null,
+    }).then(this.props.updateWidgets())
+  }
 
   render() {
+	const {miniSettings} = this.state
     return (
       <div className="standard-widget weather">
-
-        <PlacesAutocomplete
+	  <Scrollbars>
+		<button className="widget-settings-button" onClick={() => this.toggleSettings()}>•••</button>
+    	{miniSettings ?
+		<PlacesAutocomplete
           value={this.state.address}
           onChange={this.handleChange}
           onSelect={this.handleSelect}
@@ -111,7 +128,7 @@ export default class Autocomplete extends Component {
 
           {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
             <div>
-              <input {...getInputProps({ placeholder: 'Search Places ...', className: 'location-search-input', })} />
+              <input style={{marginTop: '50px'}} {...getInputProps({ placeholder: 'Search Places ...', className: 'location-search-input', })} />
 
               <div className="autocomplete-dropdown-container">
                 {/* loading text */}
@@ -135,10 +152,11 @@ export default class Autocomplete extends Component {
             </div>
           )}
         </PlacesAutocomplete>
-
-        <div className='view'>
+		:
+        <div style={{marginTop: '40px'}} className='view'>
           {this.state.day.ind >= 0 && this.state.toggle === true ? this.deatailed() : this.weather()}
-        </div>
+		</div>}
+		</Scrollbars>
       </div>
     );
   }

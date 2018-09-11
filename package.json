@@ -31,6 +31,7 @@
     "react": "^16.4.2",
     "react-analog-clock": "^2.1.0",
     "react-clock": "^2.3.0",
+    "react-custom-scrollbars": "^4.2.1",
     "react-dom": "^16.4.2",
     "react-grid-layout": "^0.16.6",
     "react-places-autocomplete": "^7.2.0",
