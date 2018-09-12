@@ -2,10 +2,26 @@ import React from 'react';
 import {connect} from 'react-redux';
 
 function AppTheme (props) {
+	
 	const {background, themeColor, flavor} = props
+
 	let blue   = '0, 174, 255',
+	    yellow = '255, 255, 0',
+			red    = '255, 0, 0',
 			purple = '140, 0, 255',
-			red    = '255, 0, 0'
+			green  = '0, 255, 0',
+			orange = '255, 175, 0'
+
+	let theme = (widget, color, strength) => {
+		return (`
+			.${widget} .theme-text   {color      : rgb(${color})}
+			.${widget} .theme-color  {background : rgb(${color})}
+			.${widget} .theme-accent {background : rgb(${color})}
+			.${widget} .theme-glow   {background : rgb(${color}, ${strength})}
+			.${widget} .theme-input  {border     : rgb(${color}) solid; border-width : 0 0 1px 0;}
+		`)
+	}			
+
 	return (
 		<style>
 			{`
@@ -52,6 +68,7 @@ function AppTheme (props) {
 					z-index: 0;
 					filter: blur(100px);
 					pointer-events: none;
+					z-index: 2;
 				}
 
 				.theme-accent {
@@ -61,33 +78,20 @@ function AppTheme (props) {
 					left: 0;
 					bottom: 0;
 					background-color: rgb(${themeColor});
-					z-index: 0;
+					z-index: 2;
 				}
 
 				${flavor === 'modern' ? 
-				
 				`
-					.search .theme-text   {color: rgb(${blue})}
-					.search .theme-input  {border: solid rgb(${blue})}
-					.search .theme-input  {border: solid rgb(${blue}); border-width : 0 0 1px 0;}
-					.search .theme-accent {background: rgba(${blue})}
-					.search .theme-glow   {background: rgba(${blue}, .35)}
+					${theme('search',     blue  , '.35')}
+					${theme('clock',      red   , '.15')}
+					${theme('weather',    green , '.1 ')}
+					${theme('dictionary', purple, '.15')}
+					${theme('note',       yellow, '.25')}
+					${theme('calculator', orange, '.25')}
 
-					.dictionary .theme-text   {color: rgb(${purple})}
-					.dictionary .theme-color  {background: rgb(${purple})}
-					.dictionary .theme-accent {background: rgba(${purple})}
-					.dictionary .theme-glow   {background: rgba(${purple}, .1)}
-					.dictionary .theme-input  {border: solid rgb(${purple}); border-width: 0 0 1px 0;}
-
-					.clock .theme-color  {background: rgba(${red})}
-					.clock .theme-accent {background: rgba(${red})}
-					.clock .theme-glow   {background: rgba(${red}, .08)}
 					.clock .react-clock__second-hand__body {background-color: rgba(${red})}
-
-					.weather .theme-accent {background: rgba(${blue})}
-					.weather .theme-glow   {background: rgba(${blue}, .1)}
 				`
-
 				: null}
 			`}
 		</style>
