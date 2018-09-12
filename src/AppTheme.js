@@ -2,7 +2,10 @@ import React from 'react';
 import {connect} from 'react-redux';
 
 function AppTheme (props) {
-	const {background, themeColor} = props
+	const {background, themeColor, flavor} = props
+	let blue   = '0, 174, 255',
+			purple = '140, 0, 255',
+			red    = '255, 0, 0'
 	return (
 		<style>
 			{`
@@ -60,10 +63,36 @@ function AppTheme (props) {
 					background-color: rgb(${themeColor});
 					z-index: 0;
 				}
+
+				${flavor === 'modern' ? 
+				
+				`
+					.search .theme-text   {color: rgb(${blue})}
+					.search .theme-input  {border: solid rgb(${blue})}
+					.search .theme-input  {border: solid rgb(${blue}); border-width : 0 0 1px 0;}
+					.search .theme-accent {background: rgba(${blue})}
+					.search .theme-glow   {background: rgba(${blue}, .35)}
+
+					.dictionary .theme-text   {color: rgb(${purple})}
+					.dictionary .theme-color  {background: rgb(${purple})}
+					.dictionary .theme-accent {background: rgba(${purple})}
+					.dictionary .theme-glow   {background: rgba(${purple}, .1)}
+					.dictionary .theme-input  {border: solid rgb(${purple}); border-width: 0 0 1px 0;}
+
+					.clock .theme-color  {background: rgba(${red})}
+					.clock .theme-accent {background: rgba(${red})}
+					.clock .theme-glow   {background: rgba(${red}, .08)}
+					.clock .react-clock__second-hand__body {background-color: rgba(${red})}
+
+					.weather .theme-accent {background: rgba(${blue})}
+					.weather .theme-glow   {background: rgba(${blue}, .1)}
+				`
+
+				: null}
 			`}
 		</style>
 	)
 }
 
-function mapStateToProps (state) {return {background: state.user_bg, themeColor: state.color}};
+function mapStateToProps (state) {return {background: state.user_bg, themeColor: state.color, flavor : state.flavor}};
 export default connect(mapStateToProps)(AppTheme);

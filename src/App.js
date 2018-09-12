@@ -11,7 +11,7 @@ export default class App extends Component {
 
   render() {
     return (
-      <frosted-glass-container>
+      <div>
         <AppTheme />
         <div id="App">
           <HashRouter>
@@ -21,8 +21,8 @@ export default class App extends Component {
             </Switch>
           </HashRouter>
         </div>
+      </div>
 
-      </frosted-glass-container>
     );
   }
 }

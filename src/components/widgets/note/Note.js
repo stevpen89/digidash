@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import './Note.css'
+import {connect} from 'react-redux'
 
-export default class Note extends Component {
+class Note extends Component {
 	constructor(props) {
 		const { o1, o2, o3, o4, o5, o6 } = props.o
 		super(props)
 		this.state = {
-			selectedColor: o1 ? o1 : 'rgba(255,0,0,.5)',
+			selectedColor: o1 ? o1 : this.props.themeColor,
 			selectedFont: o2 ? o2 : '',
 			selectedFontColor: o3 ? o3 : 'rgb(30,30,30)',
 			input: o4 ? o4 : "",
@@ -46,6 +47,7 @@ export default class Note extends Component {
 				<div>{miniSettings ?
 					<div className="widget-settings" style={{ display: "flex", flexDirection: "column", alignItems: 'center' }}>
 						<div className="widget-settings-item color-picker">
+							<div className="theme-color" onClick={() => this.updateColor(`rgb(${this.props.themeColor})`)}>			</div>
 							<div style={{ backgroundColor: 'rgb(255,0,0)' }} onClick={() => this.updateColor('rgba(255,0,0,.5)')}>			</div>
 							<div style={{ backgroundColor: 'rgb(0,0,255)' }} onClick={() => this.updateColor('rgba(0,0,255,.5)')}>			</div>
 							<div style={{ backgroundColor: 'rgb(0,255,0)' }} onClick={() => this.updateColor('rgba(0,255,0,.5)')}>			</div>
@@ -81,18 +83,12 @@ export default class Note extends Component {
 						}} />
 					</div>
 				</div>
-				<div className="theme-glow" style={{ backgroundColor: this.state.selectedColor, opacity: `.15` }}></div>
+				<div className="theme-glow" style={{ backgroundColor: this.state.selectedColor, opacity: `.25` }}></div>
 				<div className="theme-accent" style={{ backgroundColor: this.state.selectedColor }}></div>
 			</div>
 		)
 	}
 }
 
-// {miniSettings ?
-// 	<div className="widget-settings">
-// 		<div className={!this.state.show ? `checkbox checked theme-color` : `checkbox`} onClick={() => { this.toggle() }}>
-// 			<i class="fas fa-check"></i>
-// 		</div>
-// 		<a>Digital</a>
-// 	</div> : null
-// }
+function mapStateToProps(state) { return { themeColor: state.color } };
+export default connect(mapStateToProps)(Note);
