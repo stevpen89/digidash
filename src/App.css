@@ -136,20 +136,3 @@ a, p {
   font-weight: 200;
   letter-spacing: 1px;
 }
-
-.search .theme-text {color: rgb(0, 174, 255)}
-.search .theme-input  {border: solid rgb(0, 174, 255)}
-.search .theme-input  {border: solid rgb(0, 174, 255); border-width : 0 0 1px 0;}
-.search .theme-accent {background: rgba(0, 174, 255)}
-.search .theme-glow {background: rgba(0, 174, 255, .35)}
-
-.dictionary .theme-color {background: rgb(140, 0, 255)}
-.dictionary .theme-text {color: rgb(140, 0, 255)}
-.dictionary .theme-accent {background: rgba(140, 0, 255)}
-.dictionary .theme-glow {background: rgba(140, 0, 255, .1)}
-.dictionary .theme-input {border: solid rgb(140, 0, 255); border-width: 0 0 1px 0;}
-
-.clock .theme-color {background: rgba(255, 0, 0)}
-.clock .theme-accent {background: rgba(255, 0, 0)}
-.clock .theme-glow {background: rgba(255, 0, 0, .08)}
-.clock .react-clock__second-hand__body {background-color: rgba(255, 0, 0)}

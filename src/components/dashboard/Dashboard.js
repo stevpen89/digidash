@@ -37,9 +37,9 @@ class Dashboard extends Component {
   //axios call to get user data from auth zero storing on redux.
   componentDidMount() {
     this.updateWidgets()
-    // axios.get('/api/user-data').then(response => this.props.setUser(response.data)).then((res) => {
-    //   axios.get(`/widget/${res.payload.user_id}`).then(res => this.setState({ layout: res.data }))
-    // })
+    axios.get('/api/user-data').then(response =>this.props.setUser(response.data)).then((res) => {
+      axios.get(`/widget/${res.payload.user_id}`).then(res => this.setState({ layout: res.data }))
+    })
   }
 
   updateWidgets() { axios.get(`/widget/${this.props.user_id}`).then(res => this.setState({ widgets: res.data })) }
@@ -122,7 +122,7 @@ class Dashboard extends Component {
             </button><a>|</a>
 
             <button onClick={() => this.login()} className="theme-color">
-              <i class="fas fa-users"></i>
+              <i className="fas fa-users"></i>
             </button><a>|</a>
 
             <button onClick={() => this.lockToggle()} className="theme-color">

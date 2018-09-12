@@ -157,6 +157,8 @@ export default class Autocomplete extends Component {
           {this.state.day.ind >= 0 && this.state.toggle === true ? this.deatailed() : this.weather()}
 		</div>}
 		</Scrollbars>
+      <div className="theme-glow"></div>
+			<div className="theme-accent"></div>
       </div>
     );
   }
