@@ -14,6 +14,7 @@ import Search from '../widgets/search/Search'
 import Weather from '../widgets/weather/Weather'
 import GlobalSettings from './GlobalSettings'
 import Calculator from '../widgets/calculator/Calculator'
+import Favorites from '../widgets/favorites/Favorites'
 //REDUX
 import { connect } from 'react-redux'
 import { setUser } from '../../ducks/reducer'
@@ -163,6 +164,7 @@ class Dashboard extends Component {
             </div>
           ))}
         </ReactGridLayout>
+        <Favorites/>
 
         {/* DRAWER */}
         <div style={{
