@@ -1,0 +1,8 @@
+
+
+
+.Calculator-container {
+  display: grid;
+  grid-gap: 3px;
+  grid-template-columns: repeat(4, 40px);
+}

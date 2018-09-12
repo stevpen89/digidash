@@ -51,7 +51,7 @@ class WidgetClock extends Component {
           </div> : null
         }
 
-        <div>{show ? <Clock value={this.state.date} size='200' /> : <Digital />}</div>
+        <div>{show ? <Clock value={this.state.date} size='125' /> : <Digital />}</div>
         <div className="theme-glow"></div>
         <div className="theme-accent"></div>
       </div>
