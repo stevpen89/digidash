@@ -15,6 +15,7 @@ body {
 }
 
 button, input, select {font-family: 'Montserrat', sans-serif; transition: .25s;}
+button, input, select:focus {outline: none;}
 
 button {
   border: none;
@@ -75,7 +76,7 @@ button:focus {
   height: 100%;
   overflow: hidden;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   text-transform: uppercase;
@@ -85,6 +86,14 @@ button:focus {
   bottom: 0;
   background-color: rgba(0,0,0,0.8);
   z-index: 2;
+}
+
+.widget-settings-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin: 10px;
 }
 
 .checkbox {
@@ -138,6 +147,7 @@ a, p {
 .dictionary .theme-text {color: rgb(140, 0, 255)}
 .dictionary .theme-accent {background: rgba(140, 0, 255)}
 .dictionary .theme-glow {background: rgba(140, 0, 255, .1)}
+.dictionary .theme-input {border: solid rgb(140, 0, 255); border-width: 0 0 1px 0;}
 
 .clock .theme-color {background: rgba(255, 0, 0)}
 .clock .theme-accent {background: rgba(255, 0, 0)}

@@ -137,8 +137,8 @@ class Dashboard extends Component {
           onLayoutChange={this.onLayoutChange}
           isDraggable={this.state.locked}
           isResizable={this.state.locked}
-          compactType={null}
-          preventCollision={true}>
+          compactType={'vertical'}
+          preventCollision={false}>
 
           {this.state.widgets.map((val) => (
             <div
