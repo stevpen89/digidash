@@ -5,12 +5,12 @@ function AppTheme (props) {
 	
 	const {background, themeColor, flavor} = props
 
-	let blue   = '0, 174, 255',
-	    yellow = '255, 255, 0',
-			red    = '255, 0, 0',
-			purple = '140, 0, 255',
-			green  = '0, 255, 0',
-			orange = '255, 175, 0'
+	let blue   = '000, 174, 255',
+	    yellow = '255, 255, 000',
+			red    = '255, 000, 000',
+			purple = '140, 000, 255',
+			green  = '000, 255, 000',
+			orange = '255, 175, 000'
 
 	let theme = (widget, color, strength) => {
 		return (`
@@ -88,7 +88,7 @@ function AppTheme (props) {
 					${theme('weather',    green , '.1 ')}
 					${theme('dictionary', purple, '.15')}
 					${theme('note',       yellow, '.25')}
-					${theme('calculator', orange, '.25')}
+					${theme('calculator', orange, '.15')}
 
 					.clock .react-clock__second-hand__body {background-color: rgba(${red})}
 				`

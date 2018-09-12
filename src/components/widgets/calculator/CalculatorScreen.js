@@ -4,7 +4,7 @@ import './CalculatorScreen.css';
 
 export default function CalculatorScreen(props) {
   return (
-    <div className="CalculatorScreen">
+    <div className="CalculatorScreen theme-text">
       {props.value}
     </div>
   );

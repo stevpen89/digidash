@@ -1,10 +1,5 @@
 .CalculatorScreen {
-  /* background-color: #e8e8e8; */
-  border-color:rgba(255,255,255,.65);
-  border-radius: 3px;
-  border-style: solid;
-  border-width: thin;
-  color: orange;
+  background: rgba(255,255,255, .05);
   font-size: 18px;
   font-weight: lighter;
   grid-column-end: span 4;
