@@ -1,0 +1,32 @@
+.globalBig{
+	display:flex;
+	flex-direction:column;
+	height:600px;
+	width:800px
+}
+.globalSmall{
+	margin-bottom:40px ;
+	display:flex;
+	justify-content:center;
+	color:white
+}
+.globalMain{
+	height: 100%;
+	color:white;
+	display:flex; 
+	justify-content: space-evenly
+}
+.globalItem{
+	color:white
+}
+.globalThemes{
+	width:50%;
+	display:flex;
+	justify-content: center;
+	border-right:.05px solid white;
+}
+.globalLayout{
+	width:50%;
+	display:flex;
+	justify-content: center
+}
