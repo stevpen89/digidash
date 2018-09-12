@@ -25,6 +25,7 @@
     "express-session": "^1.15.6",
     "lodash": "^4.17.10",
     "massive": "^5.2.0",
+    "moment": "^2.22.2",
     "node-vibrant": "^3.0.0",
     "npm": "^6.4.1",
     "oxford-dictionary": "^1.4.1",
