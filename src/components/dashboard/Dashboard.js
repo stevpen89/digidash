@@ -15,6 +15,7 @@ import Weather from '../widgets/weather/Weather'
 import GlobalSettings from './GlobalSettings'
 import Calculator from '../widgets/calculator/Calculator'
 import Favorites from '../widgets/favorites/Favorites'
+import Bitcoin from '../widgets/bitcoin/Bitcoin'
 //REDUX
 import { connect } from 'react-redux'
 import { setUser } from '../../ducks/reducer'
@@ -84,6 +85,8 @@ class Dashboard extends Component {
       case 'Clock': return <Clock o={val} updateWidgets={this.updateWidgets} />;
       case 'Weather': return <Weather o={val} updateWidgets={this.updateWidgets} />;
       case 'Calculator': return <Calculator o={val} updateWidgets={this.updateWidgets} />;
+      case 'Bitcoin': return <Bitcoin o={val} updateWidgets={this.updateWidgets} />;
+      case 'Favorites': return <Favorites o={val} updateWidgets={this.updateWidgets} />;
       default: return 'defaulted';
     }
   }
@@ -96,6 +99,8 @@ class Dashboard extends Component {
       case 'Clock': return <i className="fas fa-clock"></i>;
       case 'Weather': return <i className="fas fa-cloud"></i>;
       case 'Calculator': return <i class="fas fa-calculator"></i>;
+      case 'Bitcoin': return <i class="fab fa-btc"></i>;
+      case 'Favorites': return <i class="fas fa-star"></i>;
       default: return 'defaulted';
     }
   }
@@ -164,7 +169,6 @@ class Dashboard extends Component {
             </div>
           ))}
         </ReactGridLayout>
-        <Favorites/>
 
         {/* DRAWER */}
         <div style={{
@@ -229,6 +233,22 @@ class Dashboard extends Component {
                 .then(() => this.updateWidgets())
             }
             }><i class="fas fa-calculator"></i><a>Calculator</a></div>
+            <div onClick={() => {
+              axios.post(`/widget/${this.props.user_id}`, {
+                user_id: this.props.user_id,
+                widget_name: 'Bitcoin', x: 0, y: 0, w: 15, h: 22
+              })
+                .then(() => this.updateWidgets())
+            }
+            }><i class="fab fa-btc"></i><a>Bitcoin</a></div>
+            <div onClick={() => {
+              axios.post(`/widget/${this.props.user_id}`, {
+                user_id: this.props.user_id,
+                widget_name: 'Favorites', x: 0, y: 0, w: 6, h: 8
+              })
+                .then(() => this.updateWidgets())
+            }
+            }><i class="fas fa-star"></i><a>Favorites</a></div>
           </div>
           <div className="drawer-background"></div>
         </div>

@@ -41,7 +41,7 @@ export default class Favorites extends Component {
 	render() {
 		const {url1,url2,url3,url4,url5,url6} = this.state
 		return (
-			<div className="favorites-big standard-widget">
+			<div className="favorites standard-widget">
 				<div className="favorites-insert">
 					<h1 className="widget-settings-button" onClick={()=>this.toggleSettings()}>...</h1>
 				{this.state.showSettings?
@@ -99,8 +99,8 @@ export default class Favorites extends Component {
 						</div>
 					</div>
 				</div>
-				<div className="theme-glow" style={{ backgroundColor: this.state.selectedColor, opacity: `.25` }}></div>
-				<div className="theme-accent" style={{ backgroundColor: this.state.selectedColor }}></div>
+				<div className="theme-glow"></div>
+				<div className="theme-accent"></div>
 			</div>
 		)
 	}
