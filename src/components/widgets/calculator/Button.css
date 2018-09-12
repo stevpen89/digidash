@@ -1,11 +1,14 @@
 .Button {
-  border-radius: 3px;
-  border-style: solid;
-  border-width: thin;
   font-size: 10px;
   padding: 7px 0;
   color: rgba(255,255,255,.65);
   margin: 2px;
+  background: rgba(255,255,255,.05);
+  transition: .25s
+}
+
+.Button:hover {
+  background: rgba(255,255,255,.1)
 }
 
 .Button-big {

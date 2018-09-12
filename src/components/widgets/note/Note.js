@@ -10,7 +10,7 @@ class Note extends Component {
 		this.state = {
 			selectedColor: o1 ? o1 : this.props.themeColor,
 			selectedFont: o2 ? o2 : '',
-			selectedFontColor: o3 ? o3 : 'rgb(30,30,30)',
+			selectedFontColor: o3 ? o3 : 'rgb(255,255,255)',
 			input: o4 ? o4 : "",
 			miniSettings: false,
 		}
@@ -48,11 +48,11 @@ class Note extends Component {
 					<div className="widget-settings" style={{ display: "flex", flexDirection: "column", alignItems: 'center' }}>
 						<div className="widget-settings-item color-picker">
 							<div className="theme-color" onClick={() => this.updateColor(`rgb(${this.props.themeColor})`)}>			</div>
-							<div style={{ backgroundColor: 'rgb(255,0,0)' }} onClick={() => this.updateColor('rgba(255,0,0,.5)')}>			</div>
-							<div style={{ backgroundColor: 'rgb(0,0,255)' }} onClick={() => this.updateColor('rgba(0,0,255,.5)')}>			</div>
-							<div style={{ backgroundColor: 'rgb(0,255,0)' }} onClick={() => this.updateColor('rgba(0,255,0,.5)')}>			</div>
-							<div style={{ backgroundColor: 'rgb(255,255,0)' }} onClick={() => this.updateColor('rgba(255,255,0,.5)')}>		</div>
-							<div style={{ backgroundColor: 'rgb(128,128,128)' }} onClick={() => this.updateColor('rgba(128,128,128,.5)')}>	</div>
+							<div style={{ backgroundColor: 'rgb(255,0,0)' }} onClick={() => this.updateColor('rgb(255,0,0)')}>			</div>
+							<div style={{ backgroundColor: 'rgb(0,0,255)' }} onClick={() => this.updateColor('rgb(0,0,255)')}>			</div>
+							<div style={{ backgroundColor: 'rgb(0,255,0)' }} onClick={() => this.updateColor('rgb(0,255,0)')}>			</div>
+							<div style={{ backgroundColor: 'rgb(255,255,0)' }} onClick={() => this.updateColor('rgb(255,255,0)')}>		</div>
+							<div style={{ backgroundColor: 'rgb(128,128,128)' }} onClick={() => this.updateColor('rgb(128,128,128)')}>	</div>
 						</div>
 						<div className="widget-settings-item">
 							<h3>Font: </h3>
@@ -83,7 +83,7 @@ class Note extends Component {
 						}} />
 					</div>
 				</div>
-				<div className="theme-glow" style={{ backgroundColor: this.state.selectedColor, opacity: `.25` }}></div>
+				<div className="theme-glow" style={{ backgroundColor: this.state.selectedColor, opacity: `.15` }}></div>
 				<div className="theme-accent" style={{ backgroundColor: this.state.selectedColor }}></div>
 			</div>
 		)

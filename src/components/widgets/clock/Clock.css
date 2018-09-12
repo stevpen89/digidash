@@ -3,4 +3,6 @@
 	align-items: center;
 	justify-content: center;
 	flex-direction: column;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }

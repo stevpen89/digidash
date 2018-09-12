@@ -55,7 +55,7 @@ class Dashboard extends Component {
   }
 
   //layout business with RGL
-  onLayoutChange(val) { this.setState({ layout: val }); }
+  onLayoutChange(val) { this.setState({ layout: val }); console.log(val) }
 
   //Updating layout according to specific user
   updateDB(i) {
@@ -111,7 +111,6 @@ class Dashboard extends Component {
 
   globalToggle(){
     this.setState({globalOpen:!this.state.globalOpen})
-    console.log(this.state.globalOpen)
   }
 
   render() {
