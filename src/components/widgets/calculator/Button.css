@@ -1,0 +1,13 @@
+.Button {
+  border-radius: 3px;
+  border-style: solid;
+  border-width: thin;
+  font-size: 10px;
+  padding: 7px 0;
+  color: rgba(255,255,255,.65);
+  margin: 2px;
+}
+
+.Button-big {
+  grid-row-end: span 2;
+}

@@ -13,6 +13,7 @@ import Note from '../widgets/note/Note'
 import Search from '../widgets/search/Search'
 import Weather from '../widgets/weather/Weather'
 import GlobalSettings from './GlobalSettings'
+import Calculator from '../widgets/calculator/Calculator'
 //REDUX
 import { connect } from 'react-redux'
 import { setUser } from '../../ducks/reducer'
@@ -81,6 +82,7 @@ class Dashboard extends Component {
       case 'Note': return <Note o={val} updateWidgets={this.updateWidgets} />;
       case 'Clock': return <Clock o={val} updateWidgets={this.updateWidgets} />;
       case 'Weather': return <Weather o={val} updateWidgets={this.updateWidgets} />;
+      case 'Calculator': return <Calculator o={val} updateWidgets={this.updateWidgets} />;
       default: return 'defaulted';
     }
   }
@@ -92,6 +94,7 @@ class Dashboard extends Component {
       case 'Note': return <i className="fas fa-sticky-note"></i>;
       case 'Clock': return <i className="fas fa-clock"></i>;
       case 'Weather': return <i className="fas fa-cloud"></i>;
+      case 'Calculator': return <i class="fas fa-calculator"></i>;
       default: return 'defaulted';
     }
   }
@@ -203,7 +206,7 @@ class Dashboard extends Component {
             <div onClick={() => {
               axios.post(`/widget/${this.props.user_id}`, {
                 user_id: this.props.user_id,
-                widget_name: 'Clock', x: 0, y: 0, w: 10, h: 15, o1: 'true'
+                widget_name: 'Clock', x: 0, y: 0, w: 5, h: 11, o1: 'true'
               })
                 .then(() => this.updateWidgets())
             }
@@ -211,11 +214,19 @@ class Dashboard extends Component {
             <div onClick={() => {
               axios.post(`/widget/${this.props.user_id}`, {
                 user_id: this.props.user_id,
-                widget_name: 'Note', x: 0, y: 0, w: 10, h: 10
+                widget_name: 'Note', x: 0, y: 0, w: 5, h: 18
               })
                 .then(() => this.updateWidgets())
             }
             }><i class="fas fa-sticky-note"></i><a>Note</a></div>
+            <div onClick={() => {
+              axios.post(`/widget/${this.props.user_id}`, {
+                user_id: this.props.user_id,
+                widget_name: 'Calculator', x: 0, y: 0, w: 5, h: 18
+              })
+                .then(() => this.updateWidgets())
+            }
+            }><i class="fas fa-calculator"></i><a>Calculator</a></div>
           </div>
           <div className="drawer-background"></div>
         </div>
