@@ -1,119 +1,88 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import './Note.css'
 
 export default class Note extends Component {
-	constructor(props){
+	constructor(props) {
+		const { o1, o2, o3, o4, o5, o6 } = props.o
 		super(props)
-		this.state={
-			selectedColor:'rgba(255,0,0,.5)',
-			selectedFont:'',
-			selectedFontSize:20,
-			selectedFontColor:'rgb(30,30,30)',
-			selectedWeight:'initial',
-			input:"",
-			miniSettings:false,
+		this.state = {
+			selectedColor: o1 ? o1 : 'rgba(255,0,0,.5)',
+			selectedFont: o2 ? o2 : '',
+			selectedFontColor: o3 ? o3 : 'rgb(30,30,30)',
+			input: o4 ? o4 : "",
+			miniSettings: false,
 		}
 	}
 
-	updateColor(val){
-		this.setState({selectedColor:val})
+	updateColor(val) { this.setState({ selectedColor: val }) }
+	updateFont(val) { this.setState({ selectedFont: val }) }
+	updateFontColor(val) { this.setState({ selectedFontColor: val }) }
+	handleInput(val) {
+		this.setState({ input: val })
 	}
 
-	updateFont(val){
-		this.setState({selectedFont:val})
-	}
-
-	updateWeight(){
-		if(this.state.selectedWeight === 'bold'){this.setState({selectedWeight:'initial'})}
-		else if (this.state.selectedWeight === 'initial'){this.setState({selectedWeight:'bold'})}
-	}
-	updateFontColor(val){
-		this.setState({selectedFontColor:val})
-	}
-
-	handleInput(val){
-		this.setState({input:val})
-	}
-
-	fontIncrement(){
-		this.setState({selectedFontSize:this.state.selectedFontSize += 6})
-	}
-	fontDecrement(){
-		this.setState({selectedFontSize:this.state.selectedFontSize -= 6})
-	}
 	toggleSettings() {
-    const {selectedColor,selectedFontColor,selectedWeight,selectedFontSize,selectedFont,input} = this.state
 		this.setState({ miniSettings: !this.state.miniSettings })
-		console.log(this.props.o)
-    axios.put(`/widget/settings/${this.props.o.master_id}`, {
-      o1: selectedColor,
-      o2: selectedFontColor,
-      o3: selectedWeight,
-      o4: selectedFontSize,
-      o5: selectedFont,
-      o6: input,
-    }).then(this.props.updateWidgets())
-  }
+		this.saveData();
+	}
+
+	saveData() {
+		const { selectedColor, selectedFontColor, selectedFont, input } = this.state
+		axios.put(`/widget/settings/${this.props.o.master_id}`, {
+			o1: selectedColor,
+			o2: selectedFont,
+			o3: selectedFontColor,
+			o4: input
+		}).then(this.props.updateWidgets())
+	}
 
 	render() {
-		const {miniSettings} = this.state
+		const { miniSettings } = this.state
 		return (
-			<div className="standard-widget"style={{height:"100%", width:"100%", backgroundColor:this.state.selectedColor}}>
+			<div className="standard-widget" style={{ height: "100%", width: "100%" }}>
 				<button className="widget-settings-button" onClick={() => this.toggleSettings()}>•••</button>
-				<div>{miniSettings ? // TERNARY BEGINS HERE
-					<div className="widget-settings" style={{display:"flex", flexDirection:"column", alignItems: 'center'}}>
-						<div style={{display:"flex"}}>
-							<div style={{backgroundColor:'rgba(255,0,0,.5)', 		margin:"5px", height:'30px',width:'30px', borderRadius:"50%"}} onClick={()=>this.updateColor('rgba(255,0,0,.5)')}>			</div>
-							<div style={{backgroundColor:'rgba(0,0,255,.5)', 		margin:"5px", height:'30px',width:'30px', borderRadius:"50%"}} onClick={()=>this.updateColor('rgba(0,0,255,.5)')}>			</div>
-							<div style={{backgroundColor:'rgba(0,255,0,.5)', 		margin:"5px", height:'30px',width:'30px', borderRadius:"50%"}} onClick={()=>this.updateColor('rgba(0,255,0,.5)')}>			</div>
-							<div style={{backgroundColor:'rgba(255,255,0,.5)', 	margin:"5px", height:'30px',width:'30px', borderRadius:"50%"}} onClick={()=>this.updateColor('rgba(255,255,0,.5)')}>		</div>
-							<div style={{backgroundColor:'rgba(128,128,128,.5)',margin:"5px", height:'30px',width:'30px', borderRadius:"50%"}} onClick={()=>this.updateColor('rgba(128,128,128,.5)')}>	</div>
+
+				<div>{miniSettings ?
+					<div className="widget-settings" style={{ display: "flex", flexDirection: "column", alignItems: 'center' }}>
+						<div className="widget-settings-item color-picker">
+							<div style={{ backgroundColor: 'rgb(255,0,0)' }} onClick={() => this.updateColor('rgba(255,0,0,.5)')}>			</div>
+							<div style={{ backgroundColor: 'rgb(0,0,255)' }} onClick={() => this.updateColor('rgba(0,0,255,.5)')}>			</div>
+							<div style={{ backgroundColor: 'rgb(0,255,0)' }} onClick={() => this.updateColor('rgba(0,255,0,.5)')}>			</div>
+							<div style={{ backgroundColor: 'rgb(255,255,0)' }} onClick={() => this.updateColor('rgba(255,255,0,.5)')}>		</div>
+							<div style={{ backgroundColor: 'rgb(128,128,128)' }} onClick={() => this.updateColor('rgba(128,128,128,.5)')}>	</div>
 						</div>
-						<div style={{display:"flex", margin:"20px"}}>
-							<h3 style={{color: 'white'}}>Font: </h3>
-							<select onChange={(e)=>this.updateFont(e.target.value)}>
-								<option value="montserrat">Default</option>
+						<div className="widget-settings-item">
+							<h3>Font: </h3>
+							<select onChange={(e) => this.updateFont(e.target.value)}>
+								<option value="Noto Sans">Default</option>
 								<option value="impact">Impact</option>
 								<option value="times new roman">Times New Roman</option>
 								<option value="courier new">Courier New</option>
 								<option value="verdana">Verdana</option>
 							</select>
 						</div>
-						<div style={{display:"flex", margin:"20px"}}>
-							<h3 style={{color: 'white'}}>Weight: </h3>
-							<button onClick={()=>this.updateWeight()} style={{backgroundColor: 'white'}}>Bold</button>
-						</div>
-						<div style={{display:"flex", margin:"20px"}}>
-							<h3 style={{color: 'white'}}>Font Color: </h3>
-							<select onChange={(e)=>this.updateFontColor(e.target.value)}>
-								<option value="rgb(30,30,30)">Default</option>
+						<div className="widget-settings-item">
+							<h3>Font Color: </h3>
+							<select onChange={(e) => this.updateFontColor(e.target.value)} selected={this.state.selectedFontColor}>
+								<option value="white">Default</option>
 								<option value="green">Green</option>
-								<option value="blue">Blue</option>
 								<option value="white">White</option>
 								<option value="grey">Grey</option>
 							</select>
 						</div>
-						<div style={{display:'flex', margin:"20px"}}>
-							<h3>FONT SIZE</h3>
-							<button onClick={()=>{this.fontIncrement()}} style={{backgroundColor: 'white'}}>+</button>
-							<button onClick={()=>{this.fontDecrement()}} style={{backgroundColor: 'white'}}>-</button>
-						</div>
-					</div> : //TERNARY SPLITS HERE
-					<div style={{ height:'100%',width:'100%'}}>
-						<textarea onChange={(e)=>this.handleInput(e.target.value)} style={{
-							margin:"40px 0 0 0",
-							border:"none",
-							height:"260px", 
-							width:"100%", 
-							color:this.state.selectedFontColor, 
-							backgroundColor:"transparent", 
-							fontFamily:this.state.selectedFont, 
-							fontWeight:this.state.selectedWeight, 
-							fontSize:this.state.selectedFontSize}}>
-						</textarea>
-					</div>} 
-				</div> 
-				{/* TERNARY ENDS JUST ABOVE HERE */}
+					</div> : null}
+
+					<div>
+						<textarea className="note-area" onBlur={() => this.saveData()} onChange={(e) => this.handleInput(e.target.value)} value={this.state.input} style={{
+							color: this.state.selectedFontColor,
+							fontFamily: this.state.selectedFont,
+							fontWeight: this.state.selectedWeight,
+						}} />
+					</div>
+				</div>
+				<div className="theme-glow" style={{ backgroundColor: this.state.selectedColor, opacity: `.15` }}></div>
+				<div className="theme-accent" style={{ backgroundColor: this.state.selectedColor }}></div>
 			</div>
 		)
 	}

@@ -32,6 +32,8 @@ function AppTheme (props) {
 				.theme-text {color : rgb(${themeColor})}
 				
 				.theme-input  {
+					color        : white;
+					background   : transparent;
 					border       : solid rgb(${themeColor});
 					border-width : 0 0 1px 0;
 				}

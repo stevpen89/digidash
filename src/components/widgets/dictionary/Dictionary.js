@@ -3,11 +3,12 @@ import axios from 'axios'
 import './Dictionary.css'
 
 export default class Dictionary extends Component {
-	constructor(){
-		super()
+	constructor(props){
+		const {o1} = props.o
+		super(props)
 		this.state={
-			input:'',
-			returnedData:''
+			input: '',
+			returnedData: o1 ? JSON.parse(o1) : ''
 		}
 	}
 
@@ -17,20 +18,30 @@ export default class Dictionary extends Component {
 
 	keyPress(e) { if (e.keyCode === 13) { document.getElementById('goButton').click() } }
 
-
 	getDefinition(){
 		axios.post(`/api/dictionary`,{query:this.state.input})
-		.then((res)=>{this.setState({returnedData:res.data})})
+		.then((res)=>{
+			this.setState({returnedData:res.data});
+			axios.put(`/widget/settings/${this.props.o.master_id}`, {
+				o1: JSON.stringify(res.data)
+			}).then(this.props.updateWidgets())
+		})
 	}
 
 	render() {
-		console.log(this.state.returnedData)
 		return (
 			<div className="dictionary standard-widget">
-				<input onChange={(e)=>{this.changeHandler(e.target.value)}} onKeyDown={this.keyPress}/>
-				<button onClick={()=>{this.getDefinition()}} id="goButton" className="filled-button theme-color">GO</button>
-				<h1 className="theme-text">{this.state.returnedData.results ? this.state.returnedData.results[0].word : ""}</h1>
-				<p>Definition:{this.state.returnedData ? this.state.returnedData.results[0].lexicalEntries.map((val,i) => <div>{i+1} : {val.entries[0].senses[0].definitions}</div>) : "" }</p>
+				<div className="dictionary-head">
+					<input onChange={(e)=>{this.changeHandler(e.target.value)}} onKeyDown={this.keyPress} className="theme-input"/>
+					<button onClick={()=>{this.getDefinition()}} id="goButton">Define</button>
+				</div>
+				<div className="dictionary-body">
+					{ !this.state.returnedData ?
+						<div className="dictionary-empty"><p>Oxford dictionary</p></div>
+						:
+						<p>{this.state.returnedData ? this.state.returnedData.results[0].lexicalEntries.map((val,i) => <div className="dictionary-result">{i+1}. {val.entries[0].senses[0].definitions}</div>) : "" }</p>
+					}
+				</div>
 				<div className="theme-glow"></div>
 				<div className="theme-accent"></div>
 			</div>

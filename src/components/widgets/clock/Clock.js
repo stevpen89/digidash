@@ -8,7 +8,7 @@ import './Clock.css'
 class WidgetClock extends Component {
   constructor(props) {
     super(props)
-    const { o1, o2, o3, o4, o5, o6 } = this.props.o
+    const { o1 } = this.props.o
     this.state = {
       miniSettings: false,
       show: o1 === 'true' ? true : false,
@@ -42,10 +42,12 @@ class WidgetClock extends Component {
 
         {miniSettings ?
           <div className="widget-settings">
-            <div className={!this.state.show ? `checkbox checked theme-color` : `checkbox`} onClick={() => { this.toggle() }}>
-              <i class="fas fa-check"></i>
+            <div className="widget-settings-item">
+              <div className={!this.state.show ? `checkbox checked theme-color` : `checkbox`} onClick={() => { this.toggle() }}>
+                <i class="fas fa-check"></i>
+              </div>
+              <a>Digital</a>
             </div>
-            <a>Digital</a>
           </div> : null
         }
 
