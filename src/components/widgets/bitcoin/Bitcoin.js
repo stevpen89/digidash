@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import moment from 'moment';
 import './Bitcoin.css';
+import BitCoinTheme from './BitCoinTheme';
 import LineChart from './LineChart';
 import ToolTip from './ToolTip';
 import InfoBox from './InfoBox';
@@ -53,6 +54,7 @@ class Bitcoin extends Component {
     return (
 
       <div className='bitcoin'>
+        <BitCoinTheme />
         <div className='row'>
         </div>
         <div className='row'>

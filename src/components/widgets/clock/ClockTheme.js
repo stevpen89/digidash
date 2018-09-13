@@ -2,7 +2,8 @@ import React from 'react';
 import {connect} from 'react-redux';
 
 function ClockTheme (props) {
-	const {themeColor, theme} = props
+	const {themeColor} = props
+	const theme = `background: rgba(255,255,255,.5)`
 	return (
 		<style>
 			{`

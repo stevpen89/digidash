@@ -4,7 +4,8 @@
   color: rgba(255,255,255,.65);
   margin: 2px;
   background: rgba(255,255,255,.05);
-  transition: .25s
+  transition: .25s;
+  border-radius: 2px;
 }
 
 .Button:hover {

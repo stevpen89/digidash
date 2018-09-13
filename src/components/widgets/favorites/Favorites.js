@@ -10,7 +10,7 @@ export default class Favorites extends Component {
 			url2:"https://www.instagram.com",
 			url3:"https://www.snapchat.com",
 			url4:"https://news.google.com/?hl=en-US&gl=US&ceid=US:en",
-			url5:"https://github.com",
+			url5:"https://youtube.com",
 			url6:"https://devmountain.com"
 		}
 	}

@@ -10,7 +10,8 @@ function AppTheme (props) {
 			red    = '255, 000, 000',
 			purple = '140, 000, 255',
 			green  = '000, 255, 000',
-			orange = '255, 175, 000'
+			orange = '255, 175, 000',
+			pink   = '255, 000, 230'
 
 	let theme = (widget, color, strength) => {
 		return (`
@@ -83,14 +84,23 @@ function AppTheme (props) {
 
 				${flavor === 'modern' ? 
 				`
-					${theme('search',     blue  , '.35')}
 					${theme('clock',      red   , '.15')}
-					${theme('weather',    green , '.1 ')}
+					${theme('bitcoin',    green , '.1 ')}
+					${theme('weather',    blue  , '.15')}
 					${theme('dictionary', purple, '.15')}
 					${theme('note',       yellow, '.25')}
 					${theme('calculator', orange, '.15')}
+					${theme('favorites',  pink,   '.15')}
 
 					.clock .react-clock__second-hand__body {background-color: rgba(${red})}
+					.bitcoin .linechart_area {fill: rgb(${green})}
+					.bitcoin .linechart_label {fill: rgb(${green}) !important}
+					.bitcoin .linechart_path {stroke: rgb(${green}) !important}
+					.bitcoin .label {fill: rgb(${green})}
+					.bitcoin {stroke: rgb(${green})}
+					.bitcoin circle {stroke: rgb(${green})}
+					.bitcoin .heading {color: rgb(${green})}
+					.bitcoin .subtext {color: rgb(${green})}
 				`
 				: null}
 			`}
