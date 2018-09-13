@@ -251,8 +251,7 @@ class Dashboard extends Component {
           </div>
           <div className="drawer-background"></div>
         </div>
-
-        {/* TOOLBAR */}
+        {/* TOOLBAR */} 
         <div className={this.state.locked ? 'toolbar toolbar-open' : 'toolbar'}>
           <div style={{ display: "flex" }}>
             {this.state.widgets ?
