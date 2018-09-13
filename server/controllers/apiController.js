@@ -63,5 +63,17 @@ module.exports = {
 		db.users.user_wallpaper([image, color, theme, user_id])
 			.then (user => res.status(200).send(user))
 			.catch(err  => console.log(`Error Message: ${err}`))
-	}
+	},
+	getcurency:(req,res,next) =>{  
+        const db = req.app.get('db');
+        const {val1,val2} = req.body
+        //change  location
+        console.log(val1)
+        // db.getMaster()
+        // .then(data=>{
+        axios.get(`http://free.currencyconverterapi.com/api/v5/convert?q=${val1}_${val2}&count=2`).then(response=>{
+
+        res.status(200).send(response.data)
+        // })
+      })}
 }
