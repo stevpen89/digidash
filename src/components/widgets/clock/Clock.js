@@ -13,7 +13,6 @@ class WidgetClock extends Component {
       miniSettings: false,
       show: o1 === 'true' ? true : false,
       date: new Date(),
-      theme: `background: rgba(255,255,255,.5)`
     }
   }
 
@@ -37,7 +36,7 @@ class WidgetClock extends Component {
     return (
       <div className="clock standard-widget">
 
-        <ClockTheme theme={this.state.theme} />
+        <ClockTheme />
         <button className="widget-settings-button" onClick={() => this.toggleSettings()}>•••</button>
 
         {miniSettings ?

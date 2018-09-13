@@ -1,22 +1,19 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import './Note.css'
-import {connect} from 'react-redux'
 
 class Note extends Component {
 	constructor(props) {
-		const { o1, o2, o3, o4, o5, o6 } = props.o
+		const { o1, o2, o3 } = props.o
 		super(props)
 		this.state = {
-			selectedColor: o1 ? o1 : this.props.themeColor,
-			selectedFont: o2 ? o2 : '',
-			selectedFontColor: o3 ? o3 : 'rgb(255,255,255)',
-			input: o4 ? o4 : "",
-			miniSettings: false,
+			selectedFont      : o1 ? o1 : '',
+			selectedFontColor : o2 ? o2 : 'rgb(255,255,255)',
+			input             : o3 ? o3 : "",
+			miniSettings      : false
 		}
 	}
 
-	updateColor(val) { this.setState({ selectedColor: val }) }
 	updateFont(val) { this.setState({ selectedFont: val }) }
 	updateFontColor(val) { this.setState({ selectedFontColor: val }) }
 	handleInput(val) {
@@ -29,31 +26,22 @@ class Note extends Component {
 	}
 
 	saveData() {
-		const { selectedColor, selectedFontColor, selectedFont, input } = this.state
+		const { selectedFontColor, selectedFont, input } = this.state
 		axios.put(`/widget/settings/${this.props.o.master_id}`, {
-			o1: selectedColor,
-			o2: selectedFont,
-			o3: selectedFontColor,
-			o4: input
+			o1: selectedFont,
+			o2: selectedFontColor,
+			o3: input
 		}).then(this.props.updateWidgets())
 	}
 
 	render() {
 		const { miniSettings } = this.state
 		return (
-			<div className="standard-widget" style={{ height: "100%", width: "100%" }}>
+			<div className="note standard-widget" style={{ height: "100%", width: "100%" }}>
 				<button className="widget-settings-button" onClick={() => this.toggleSettings()}>•••</button>
 
 				<div>{miniSettings ?
 					<div className="widget-settings" style={{ display: "flex", flexDirection: "column", alignItems: 'center' }}>
-						<div className="widget-settings-item color-picker">
-							<div className="theme-color" onClick={() => this.updateColor(`rgb(${this.props.themeColor})`)}>			</div>
-							<div style={{ backgroundColor: 'rgb(255,0,0)' }} onClick={() => this.updateColor('rgb(255,0,0)')}>			</div>
-							<div style={{ backgroundColor: 'rgb(0,0,255)' }} onClick={() => this.updateColor('rgb(0,0,255)')}>			</div>
-							<div style={{ backgroundColor: 'rgb(0,255,0)' }} onClick={() => this.updateColor('rgb(0,255,0)')}>			</div>
-							<div style={{ backgroundColor: 'rgb(255,255,0)' }} onClick={() => this.updateColor('rgb(255,255,0)')}>		</div>
-							<div style={{ backgroundColor: 'rgb(128,128,128)' }} onClick={() => this.updateColor('rgb(128,128,128)')}>	</div>
-						</div>
 						<div className="widget-settings-item">
 							<h3>Font: </h3>
 							<select onChange={(e) => this.updateFont(e.target.value)}>
@@ -83,12 +71,11 @@ class Note extends Component {
 						}} />
 					</div>
 				</div>
-				<div className="theme-glow" style={{ backgroundColor: this.state.selectedColor, opacity: `.15` }}></div>
-				<div className="theme-accent" style={{ backgroundColor: this.state.selectedColor }}></div>
+				<div className="theme-glow"></div>
+				<div className="theme-accent"></div>
 			</div>
 		)
 	}
 }
 
-function mapStateToProps(state) { return { themeColor: state.color } };
-export default connect(mapStateToProps)(Note);
+export default Note;
