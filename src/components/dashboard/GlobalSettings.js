@@ -1,75 +1,88 @@
 import React, { Component } from 'react'
 import './GlobalSettings.css'
-import {connect} from 'react-redux'
-import {setTheme, setFlavor, setSearch, setCollision, setCompact} from '../../ducks/reducer'
+import { connect } from 'react-redux'
+import { setTheme, setFlavor, setSearch, setCollision, setCompact } from '../../ducks/reducer'
+import Bgp from './Bgp'
 
 class GlobalSettings extends Component {
-	constructor(props){
+	constructor(props) {
 		super(props)
-		const {search, compact, collision} = props	
+		const { search, compact, collision } = props
 		this.state = {
-			color         : '115, 164, 191',
-			bg_image      : 'https://images.unsplash.com/photo-1536130371825-ac75012d9b24?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=c1c97eb0f52f1174d7a8281dd8348828&auto=format&fit=crop&w=1050&q=80',
-			search        : search,
-			compact       : compact,
-			collision     : collision,
+			color: '115, 164, 191',
+			bg_image: 'https://images.unsplash.com/photo-1536130371825-ac75012d9b24?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=c1c97eb0f52f1174d7a8281dd8348828&auto=format&fit=crop&w=1050&q=80',
+			search: search,
+			compact: compact,
+			collision: collision,
+			bgPicker: false
 		}
 	}
 
+	bgPickerToggle() {this.setState({bgPicker: !this.state.bgPicker})}
+
 	render() {
-		const {setTheme, setFlavor, setSearch, setCollision, setCompact} = this.props
-		const {theme,color,flavor,bg_image,search,compact,collision} = this.props
+		const { setTheme, setFlavor, setSearch, setCollision, setCompact } = this.props
+		const { theme, color, flavor, bg_image, search, compact, collision } = this.props
 		console.log(flavor);
 		return (
-			<div className="globalBig">			
-				<div className="globalSmall">
-					<h1 className="settings">SETTINGS</h1>
-				</div>				
-				<div className="globalMain">
-					<div className="globalThemes">
-						<h2 className="globalItem">THEMES</h2>
-						<div className="list">
-							<div className="listItem">Modern
-								<div className={flavor === 'modern' ? `checkbox checked theme-color` : `checkbox`} onClick={() => {setFlavor(this.props.flavor === 'modern' ? 'classic' : 'modern') }}>
-									<i class="fas fa-check"></i>
+			<div className="globalBig">
+			{!this.state.bgPicker ? 
+				<div>							
+					<div className="globalSmall">
+						<h1 className="settings">SETTINGS</h1>
+					</div>
+					<div className="globalMain">
+						<div className="globalThemes">
+							<h2 className="globalItem">THEMES</h2>
+							<div className="list">
+								<div className="listItem">Modern
+									<div className={flavor === 'modern' ? `checkbox checked theme-color` : `checkbox`} onClick={() => { setFlavor(this.props.flavor === 'modern' ? 'classic' : 'modern') }}>
+										<i class="fas fa-check"></i>
+									</div>
+								</div>
+								<div className="listItem">Theme for Redux
+									<div className={theme === 'dark' ? `checkbox checked theme-color` : `checkbox`} onClick={() => { setTheme(this.props.theme === 'dark' ? 'light' : 'dark') }}>
+										<i class="fas fa-check"></i>
+									</div>
+								</div>
+								<div className="listItem">Text Default Color</div>
+								<div className="listItem">
+								{/* inline styling alert */}
+									<button style={{color:"white", backgroundColor:"rgba(255,255,255,.1)", padding:"20px"}} onClick={() => this.bgPickerToggle()}>Change Background</button>
+								{/* inline styling alert */}
 								</div>
 							</div>
-							<div className="listItem">Theme for Redux
-								<div className={theme === 'dark' ? `checkbox checked theme-color` : `checkbox`} onClick={() => {setTheme(this.props.theme === 'dark' ? 'light' : 'dark') }}>
-									<i class="fas fa-check"></i>
-								</div>
-							</div>
-							<div className="listItem">Text Default Color</div>
-							<div className="listItem">User Background</div>
 						</div>
-					</div>					
-					<div className="globalLayout">
-						<h2 className="globalItem">LAYOUT</h2>
-						<div className="list">
-							<div className={this.state.search ? `checkbox checked theme-color` : `checkbox`} onClick={() => {setSearch(); this.setState({search: !this.state.search}) }}>
-                <i className="fas fa-check"></i>
-              </div>
-							<div className="listItem">Search Bar Static</div>
+						<div className="globalLayout">
+							<h2 className="globalItem">LAYOUT</h2>
+							<div className="list">
+								<div className={this.state.search ? `checkbox checked theme-color` : `checkbox`} onClick={() => { setSearch(); this.setState({ search: !this.state.search }) }}>
+									<i className="fas fa-check"></i>
+								</div>
+								<div className="listItem">Search Bar Static</div>
 
-							<div className={this.state.compact ? `checkbox checked theme-color` : `checkbox`} onClick={() => {setCompact(); this.setState({compact: !this.state.compact})}}>
-                <i className="fas fa-check"></i>
-              </div>
-							<div className="listItem">Vertical Compact Toggle</div>
+								<div className={this.state.compact ? `checkbox checked theme-color` : `checkbox`} onClick={() => { setCompact(); this.setState({ compact: !this.state.compact }) }}>
+									<i className="fas fa-check"></i>
+								</div>
+								<div className="listItem">Vertical Compact Toggle</div>
 
-							<div className={this.state.collision ? `checkbox checked theme-color` : `checkbox`} onClick={() => {setCollision(); this.setState({collision: !this.state.collision})}}>
-                <i className="fas fa-check"></i>
-              </div>
-							<div className="listItem">Prevent Collision Toggle</div>
+								<div className={this.state.collision ? `checkbox checked theme-color` : `checkbox`} onClick={() => { setCollision(); this.setState({ collision: !this.state.collision }) }}>
+									<i className="fas fa-check"></i>
+								</div>
+								<div className="listItem">Prevent Collision Toggle</div>
+							</div>
 						</div>
 					</div>
-				</div>
+				</div> 
+				:	<Bgp />}
 			</div>
+		
 		)
 	}
 }
 
 function mapStateToProps(state) {
-	const  { flavor, theme } = state
+	const { flavor, theme } = state
 	return { flavor, theme }
 };
 export default connect(mapStateToProps, { setFlavor, setTheme, setSearch, setCollision, setCompact })(GlobalSettings);

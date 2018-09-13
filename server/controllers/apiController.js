@@ -1,8 +1,9 @@
 const axios = require('axios')
 const Dictionary = require('oxford-dictionary')
+const Vibrant = require('node-vibrant')
 
 require('dotenv').config();
-const { REACT_APP_DICTIONARY_ID, REACT_APP_DICTIONARY_KEY } = process.env;
+const { REACT_APP_WEATHERKEY, REACT_APP_DICTIONARY_ID, REACT_APP_DICTIONARY_KEY, REACT_APP_UNSPLASH } = process.env
 
 const config = {
 	app_id: REACT_APP_DICTIONARY_ID,
@@ -21,8 +22,46 @@ module.exports = {
 	weather: (req, res) => {
 		const db = req.app.get('db');
 		const { lat, lng } = req.body
-		
-		axios.get(`https://api.darksky.net/forecast/${process.env.REACT_APP_WEATHERKEY}/${lat},${lng}`)
+
+		axios.get(`https://api.darksky.net/forecast/${REACT_APP_WEATHERKEY}/${lat},${lng}`)
 			.then(api => { res.status(200).send(api.data) })
+	},
+
+	vibrant: async (req, res) => {
+		const db = req.app.get('db');
+		const { image } = req.body
+
+		let swatch = await Vibrant.from(`${image}&auto=format&fit=crop&w=200&q=80`).getPalette((err, palette) => palette)
+
+		function colorSelect(flavor) {
+			if (swatch[flavor]) {
+				let r = Math.trunc(swatch[flavor]._rgb[0]);
+				let g = Math.trunc(swatch[flavor]._rgb[1]);
+				let b = Math.trunc(swatch[flavor]._rgb[2]);
+				return `${r}, ${g}, ${b}`
+			}
+			else { return null }
+		}
+
+		let package = {
+			vibrant: colorSelect('Vibrant'),
+			muted: colorSelect('Muted'),
+			lightVibrant: colorSelect('LightVibrant'),
+			lightMuted: colorSelect('LightMuted'),
+			darkVibrant: colorSelect('DarkVibrant'),
+			darkMuted: colorSelect('DarkMuted')
+		}
+
+		res.status(200).send(package)
+	},
+
+	unsplash: async (req, res) => {
+		const db = req.app.get('db');
+		const { user_id } = req.params
+		const { image, color } = req.body
+
+		db.users.user_wallpaper([image, color, user_id])
+			.then(user => res.status(200).send(user))
+			.catch(err => console.log(`Error Message: ${err}`))
 	}
-}		
+}
