@@ -142,16 +142,8 @@ class Dashboard extends Component {
           </div>
 
         </div>
-<<<<<<< HEAD
-        {this.state.globalOpen?
-      <div className="widget-settings globalWrapper" >
-        <GlobalSettings/>
-      </div>:null}
-          
-=======
         { this.state.globalOpen ? <GlobalSettings/> : null }
 
->>>>>>> master
         {/* REACT GRID */}
         <Currency />
         <GridTheme />
