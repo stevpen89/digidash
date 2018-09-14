@@ -32,11 +32,11 @@ class Bgp extends Component {
     this.setState({ input: e });
   };
 
-
+  keyPress(e) { if (e.keyCode === 13) { document.getElementById('searchButton').click() } }
 
   performSearch = (query = this.state.input) => {
     const {REACT_APP_UNSPLASH} = process.env
-    axios.get(`https://api.unsplash.com/search/photos/?page=1&per_page=10&query=${query}&client_id=${REACT_APP_UNSPLASH}`).then(res => {
+    axios.get(`https://api.unsplash.com/search/photos/?page=1&per_page=20&query=${query}&client_id=${REACT_APP_UNSPLASH}`).then(res => {
       this.setState({ imgs: res.data.results });
     }).catch(err => {
       console.log('Error happened during fetching!', err);
@@ -49,7 +49,7 @@ class Bgp extends Component {
 
   bigPicture(index, image) {
     this.setState({ showBig: true, selected: index, image });
-    axios.put(`/api/vibrant`, {image}).then(res => this.setState({vibrant: res.data}));
+    axios.put(`/api/vibrant`, {image: `${image}&auto=format&fit=crop&w=200&q=80`}).then(res => this.setState({vibrant: res.data}));
   }
 
   chooseColor(color, theme) {
@@ -69,18 +69,27 @@ class Bgp extends Component {
   render() {
     const {color} = this.state
     const {vibrant, muted, lightVibrant, lightMuted, darkVibrant, darkMuted} = this.state.vibrant
-    console.log(this.state)
     return (
+
+      
       <div className="bgp">
-        <div className="bgp-header">Wallpaper</div>
-        <div className="bgp-search theme-text"><input onChange={(e) => this.changeHandle(e.target.value)} type="text" />
-          <button style={{ color: "white", backgroundColor: "rgba(255,255,255,.1)" }} onClick={() => this.performSearch()}>GO</button>
+
+
+        { !this.state.showBig ?
+        <div className="header-wrapper">
+          <h1 className="bgp-header">Choose your background</h1>
+          <div className="bgp-search theme-text">
+            <input onChange={(e) => this.changeHandle(e.target.value)} type="text" onKeyDown={this.keyPress}/>
+            <button onClick={() => this.performSearch()} id="searchButton"><i class="fas fa-search"></i></button>
+          </div>
         </div>
+        : null}
+
         <div className="bgp-images">
           {this.state.showBig ?
             this.state.showBig ?
-              <div>
-                <div onClick={() => this.smallPicture()} style={{ background: `url(${this.state.imgs[this.state.selected].urls.regular}) center`, backgroundSize: `cover`, borderRadius: `3px`, height: `600px`, width: `1100px` }}></div>
+              <div className="big-image-wrapper">
+                <div onClick={() => this.smallPicture()} style={{ background: `url(${this.state.imgs[this.state.selected].urls.regular}) center`, backgroundSize: `cover`, borderRadius: `3px`, height: `70%`, width: `70%` }}></div>
                 <div className="vibrant-picker">
                   {vibrant      ? <div onClick={() => this.chooseColor(vibrant, 'dark')}      style={{background: `rgba(${vibrant})`}}></div>      : null}
                   {muted        ? <div onClick={() => this.chooseColor(muted, 'dark')}        style={{background: `rgba(${muted})`}}></div>        : null}
@@ -94,7 +103,12 @@ class Bgp extends Component {
               : null
             :
             this.state.imgs ?
-            this.state.imgs.map((val, i) => { return <div className="map-item" onClick={() => this.bigPicture(i, this.state.imgs[i].urls.raw)} key={i} style={{ background: `url(${val.urls.small}) center`, backgroundSize: `cover`, borderRadius: `3px` }}></div> }) : null}
+              <div className="overall-wrapper">
+                <div className="thumbnail-wrapper">
+                  {this.state.imgs.map((val, i) => {return <div className="map-item" onClick={() => this.bigPicture(i, this.state.imgs[i].urls.raw)} key={i} style={{ background: `url(${val.urls.small}) center`, backgroundSize: `cover`, borderRadius: `3px` }}></div>})}
+                </div>
+              </div>
+              : null}
         </div>
 
       </div>

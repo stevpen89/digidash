@@ -25,7 +25,6 @@ export default class Autocomplete extends Component {
       let lat = latLng.lat
       let lng = latLng.lng
       axios.post('/api/weather', { lat, lng }).then(res => {
-        console.log(res.data)
         this.setState({ weather: res.data.daily.data });
       })
     })
@@ -51,7 +50,6 @@ export default class Autocomplete extends Component {
     for (let i = 0; i < weather.length; i++) {
       let iconz = weather[i].icon.toUpperCase();
       iconz = iconz.replace(/-/g, '_');
-      console.log(iconz)
       let current = this.dayoftheweek(day.getDay())
       display.push(
         <div className='card' onClick={() => this.setDay(i, current, iconz)}>
@@ -85,7 +83,7 @@ export default class Autocomplete extends Component {
     let ind = day.ind;
     return (<div>
       <div>
-        <button className="back-button" onClick={() => this.unset()}><i class="fas fa-caret-left"></i></button>
+        <button className="back-button" onClick={() => this.unset()}><i className="fas fa-caret-left"></i></button>
         <p>{day.day}</p>
         <div ><Skycons color='white' icon={day.icon} autoplay={true} /></div>
         <p>High: {weather[ind].apparentTemperatureHigh}°F</p>
@@ -102,7 +100,6 @@ export default class Autocomplete extends Component {
   }
   toggleSettings() {
 		this.setState({ miniSettings: !this.state.miniSettings })
-		console.log(this.props.o)
     axios.put(`/widget/settings/${this.props.o.master_id}`, {
       o1: null,
       o2: null,
