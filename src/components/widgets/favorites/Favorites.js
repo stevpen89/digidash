@@ -121,38 +121,6 @@ extractRootDomain(url,num) {
 					</div>
 				:null}
 				<div className="favorites-wrapper">
-<<<<<<< HEAD
-						<div className="favorites-container">
-							<div className="item-holder">
-								<a href={url1} target="_blank"><img alt="" src={`https://www.google.com/s2/favicons?domain=${url1}`}/></a>
-							</div>
-						</div>
-						<div className="favorites-container">
-							<div className="item-holder">
-								<a href={url2} target="_blank"><img alt="" src={`https://www.google.com/s2/favicons?domain=${url2}`}/></a>
-							</div>
-						</div>
-						<div className="favorites-container">
-							<div className="item-holder">
-								<a href={url3} target="_blank"><img alt="" src={`https://www.google.com/s2/favicons?domain=${url3}`}/></a>
-							</div>
-						</div>
-						<div className="favorites-container">
-							<div className="item-holder">
-								<a href={url4} target="_blank"><img alt="" src={`https://www.google.com/s2/favicons?domain=${url4}`}/></a>
-							</div>
-						</div>
-						<div className="favorites-container">
-							<div className="item-holder">
-								<a href={url5} target="_blank"><img alt="" src={`https://www.google.com/s2/favicons?domain=${url5}`}/></a>
-							</div>
-						</div>
-						<div className="favorites-container">
-							<div className="item-holder">
-								<a href={url6} target="_blank"><img alt="" src={`https://www.google.com/s2/favicons?domain=${url6}`}/></a>
-							</div>
-						</div>
-=======
 					
 						<a href={url1} className="favorites-container" target="_blank">
 								<h1>{this.extractRootDomain(this.state.url1)}</h1>
@@ -177,7 +145,6 @@ extractRootDomain(url,num) {
 						<a href={url6} className="favorites-container" target="_blank">
 								<h1>{this.extractRootDomain(this.state.url6)}</h1>
 						</a>
->>>>>>> master
 					</div>
 				</div>
 				<div className="theme-glow"></div>
