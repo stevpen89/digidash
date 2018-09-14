@@ -33,6 +33,36 @@ function AppTheme (props) {
 					transition      : 1s;
 				}
 
+				.global-settings-wrapper {
+					width           : 100%;
+					height          : 100%;
+					position        : fixed;
+					right           : 0;
+					bottom          : 0;
+					left            : 0;
+					background      : linear-gradient(to bottom, rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.7) 100%), center fixed url(${background});
+					background-size : cover;
+					z-index         : 4;
+				}
+
+				.global-settings {
+					width           : calc(100% - 40px);
+					height          : calc(100% - 70px);
+					position        : absolute;
+					right           : 0;
+					left            : 20px;
+					bottom          : 20px;
+					background      : linear-gradient(to bottom, rgba(0,0,0,0.8) 0%,rgba(0,0,0,0.8) 100%), center fixed url(${background});
+					background-size : cover;
+					border-radius   : 7px;
+					display         : flex;
+					justify-content : center;
+					align-items     : center;
+					overflow        : hidden;
+					color           : white;
+					text-transform  : uppercase;
+				}
+
 				.drawer-background {
 					filter          : blur(16px);
 					position        : absolute;
@@ -59,30 +89,30 @@ function AppTheme (props) {
 				}
 
 				.theme-glow {
-					position: absolute;
-					width: 100%;
-					height: 100%;
-					left: 0;
-					top: 50%;
-					border-radius: 50%;
-					background-color: rgba(${themeColor},.2);
-					z-index: 0;
-					filter: blur(100px);
-					pointer-events: none;
-					z-index: 2;
+					position         : absolute;
+					width            : 100%;
+					height           : 100%;
+					left             : 0;
+					top              : 50%;
+					border-radius    : 50%;
+					background-color : rgba(${themeColor},.2);
+					z-index          : 0;
+					filter           : blur(100px);
+					pointer-events   : none;
+					z-index          : 2;
 				}
 
 				.theme-accent {
-					position: absolute;
-					width: 100%;
-					height: 1px;
-					left: 0;
-					bottom: 0;
-					background-color: rgb(${themeColor});
-					z-index: 2;
+					position         : absolute;
+					width            : 100%;
+					height           : 1px;
+					left             : 0;
+					bottom           : 0;
+					background-color : rgb(${themeColor});
+					z-index          : 2;
 				}
 
-				${flavor === 'modern' ? 
+				${flavor === 'classic' ? 
 				`
 					${theme('clock',      red   , '.15')}
 					${theme('bitcoin',    green , '.1 ')}
@@ -93,14 +123,14 @@ function AppTheme (props) {
 					${theme('favorites',  pink,   '.15')}
 
 					.clock .react-clock__second-hand__body {background-color: rgba(${red})}
-					.bitcoin .linechart_area {fill: rgb(${green})}
+					.bitcoin .linechart_area  {fill: rgb(${green})}
 					.bitcoin .linechart_label {fill: rgb(${green}) !important}
-					.bitcoin .linechart_path {stroke: rgb(${green}) !important}
-					.bitcoin .label {fill: rgb(${green})}
-					.bitcoin {stroke: rgb(${green})}
-					.bitcoin circle {stroke: rgb(${green})}
-					.bitcoin .heading {color: rgb(${green})}
-					.bitcoin .subtext {color: rgb(${green})}
+					.bitcoin .linechart_path  {stroke: rgb(${green}) !important}
+					.bitcoin .label           {fill: rgb(${green})}
+					.bitcoin                  {stroke: rgb(${green})}
+					.bitcoin circle           {stroke: rgb(${green})}
+					.bitcoin .heading         {color: rgb(${green})}
+					.bitcoin .subtext         {color: rgb(${green})}
 				`
 				: null}
 			`}

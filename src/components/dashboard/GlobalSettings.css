@@ -1,50 +1,76 @@
-.globalBig{
-	display:flex;
-	flex-direction:column;
-	height:100%;
-	width:100%;
+.global-settings a {
+	letter-spacing: 3px;
 }
-.globalSmall{
-	margin-bottom:40px ;
-	display:flex;
-	justify-content:center;
-	color:white
-}
-.settings{
+
+.global-settings h1 {
 	letter-spacing: 10px;
+	font-weight: 300;
+	display: flex;
+	justify-content: center;
+	opacity: 1;
+	color: white;
+	margin-bottom: 25px;
 }
-.globalMain{
-	height: 100%;
+
+.global-options {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+}
+
+.global-main{
+	width: 100%;
 	color:white;
 	display:flex; 
-	justify-content: space-evenly
+	justify-content: center;
+	align-items: flex-start;
+	flex-direction: row;
 }
+
 .globalItem{
 	margin:30px;
 	color:white
 }
 .globalThemes{
-	width:50%;
 	display:flex;
 	flex-direction:column;
 	justify-content: center;
 	align-items:center;
-	border-right:.05px solid white;
+	width: 402px;
+	border-right: 1px solid white;
 }
 .globalLayout{
-	width:50%;
 	display:flex;
 	flex-direction:column;
 	justify-content: center;
-	align-items:center;
+	align-items: center;
+	width: 400px;
 }
 .list{
 	display:flex;
 	flex-direction:column;
-	justify-content: space-evenly;
-	align-items:center;
+	align-items:flex-start;
 }
 .listItem{
-	padding:40px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding:5px;
 }
 
+.global-settings-wrapper {
+	animation: fadeIn .15s linear;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity:0
+  }
+  100% {
+    opacity:1;
+  }
+}
+
+.global-settings-wrapper.none {
+  display:none
+}

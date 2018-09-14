@@ -31,7 +31,7 @@ module.exports = {
 		const db = req.app.get('db');
 		const { image } = req.body
 
-		let swatch = await Vibrant.from(`${image}&auto=format&fit=crop&w=200&q=80`).getPalette((err, palette) => palette)
+		let swatch = await Vibrant.from(image).getPalette((err, palette) => palette)
 
 		function colorSelect(flavor) {
 			if (swatch[flavor]) {

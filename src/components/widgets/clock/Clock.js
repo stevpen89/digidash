@@ -43,14 +43,14 @@ class WidgetClock extends Component {
           <div className="widget-settings">
             <div className="widget-settings-item">
               <div className={!this.state.show ? `checkbox checked theme-color` : `checkbox`} onClick={() => { this.toggle() }}>
-                <i class="fas fa-check"></i>
+                <i className="fas fa-check"></i>
               </div>
               <a>Digital</a>
             </div>
           </div> : null
         }
 
-        <div>{show ? <Clock value={this.state.date} size='125' /> : <Digital />}</div>
+        <div>{show ? <Clock value={this.state.date} size={125} /> : <Digital />}</div>
         <div className="theme-glow"></div>
         <div className="theme-accent"></div>
       </div>

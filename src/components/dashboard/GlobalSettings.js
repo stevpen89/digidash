@@ -22,61 +22,62 @@ class GlobalSettings extends Component {
 
 	render() {
 		const { setTheme, setFlavor, setSearch, setCollision, setCompact } = this.props
-		const { theme, color, flavor, bg_image, search, compact, collision } = this.props
-		console.log(flavor);
+		const { theme, flavor } = this.props
 		return (
-			<div className="globalBig">
-			{!this.state.bgPicker ? 
-				<div>							
-					<div className="globalSmall">
-						<h1 className="settings">SETTINGS</h1>
-					</div>
-					<div className="globalMain">
+			<div className="global-settings-wrapper">
+				<div className="global-settings">
+				{!this.state.bgPicker ?
+				<div className="global-options">
+					<h1>Settings</h1>
+					<div className="global-main">				
 						<div className="globalThemes">
 							<h2 className="globalItem">THEMES</h2>
 							<div className="list">
-								<div className="listItem">Modern
-									<div className={flavor === 'modern' ? `checkbox checked theme-color` : `checkbox`} onClick={() => { setFlavor(this.props.flavor === 'modern' ? 'classic' : 'modern') }}>
-										<i class="fas fa-check"></i>
-									</div>
-								</div>
-								<div className="listItem">Theme for Redux
-									<div className={theme === 'dark' ? `checkbox checked theme-color` : `checkbox`} onClick={() => { setTheme(this.props.theme === 'dark' ? 'light' : 'dark') }}>
-										<i class="fas fa-check"></i>
-									</div>
-								</div>
-								<div className="listItem">Text Default Color</div>
 								<div className="listItem">
-								{/* inline styling alert */}
-									<button style={{color:"white", backgroundColor:"rgba(255,255,255,.1)", padding:"20px"}} onClick={() => this.bgPickerToggle()}>Change Background</button>
-								{/* inline styling alert */}
+									<div className={flavor === 'modern' ? `checkbox checked theme-color` : `checkbox`} onClick={() => { setFlavor(this.props.flavor === 'modern' ? 'classic' : 'modern') }}>
+										<i className="fas fa-check"></i>
+									</div>
+									<a>Modern</a>
+								</div>
+								<div className="listItem">
+									<div className={theme === 'dark' ? `checkbox checked theme-color` : `checkbox`} onClick={() => { setTheme(this.props.theme === 'dark' ? 'light' : 'dark') }}>
+										<i className="fas fa-check"></i>
+									</div>
+									<a>Theme for Redux</a>
+								</div>
+								<div className="listItem">
+									<button className="filled-button" onClick={() => this.bgPickerToggle()}>Change Background</button>
 								</div>
 							</div>
 						</div>
 						<div className="globalLayout">
 							<h2 className="globalItem">LAYOUT</h2>
 							<div className="list">
-								<div className={this.state.search ? `checkbox checked theme-color` : `checkbox`} onClick={() => { setSearch(); this.setState({ search: !this.state.search }) }}>
-									<i className="fas fa-check"></i>
+								<div className="listItem">
+									<div className={this.state.search ? `checkbox checked theme-color` : `checkbox`} onClick={() => { setSearch(); this.setState({ search: !this.state.search }) }}>
+										<i className="fas fa-check"></i>
+									</div>
+									<a>Static Search Bar</a>
 								</div>
-								<div className="listItem">Search Bar Static</div>
-
-								<div className={this.state.compact ? `checkbox checked theme-color` : `checkbox`} onClick={() => { setCompact(); this.setState({ compact: !this.state.compact }) }}>
-									<i className="fas fa-check"></i>
+								<div className="listItem">
+									<div className={this.state.compact ? `checkbox checked theme-color` : `checkbox`} onClick={() => { setCompact(); this.setState({ compact: !this.state.compact }) }}>
+										<i className="fas fa-check"></i>
+									</div>
+									<a>Compact Widgets</a>
 								</div>
-								<div className="listItem">Vertical Compact Toggle</div>
-
-								<div className={this.state.collision ? `checkbox checked theme-color` : `checkbox`} onClick={() => { setCollision(); this.setState({ collision: !this.state.collision }) }}>
-									<i className="fas fa-check"></i>
+								<div className="listItem">
+									<div className={this.state.collision ? `checkbox checked theme-color` : `checkbox`} onClick={() => { setCollision(); this.setState({ collision: !this.state.collision }) }}>
+										<i className="fas fa-check"></i>
+									</div>
+									<a>Prevent Widget Collision</a>
 								</div>
-								<div className="listItem">Prevent Collision Toggle</div>
 							</div>
 						</div>
-					</div>
-				</div> 
+					</div> 
+				</div>
 				:	<Bgp />}
+				</div>
 			</div>
-		
 		)
 	}
 }

@@ -39,7 +39,7 @@ export default class Dictionary extends Component {
 					{ !this.state.returnedData ?
 						<div className="dictionary-empty"><p>Oxford dictionary</p></div>
 						:
-						<p>{this.state.returnedData ? this.state.returnedData.results[0].lexicalEntries.map((val,i) => <div className="dictionary-result">{i+1}. {val.entries[0].senses[0].definitions}</div>) : "" }</p>
+						<p>{this.state.returnedData ? this.state.returnedData.results[0].lexicalEntries.map((val,i) => <div key={i} className="dictionary-result">{i+1}. {val.entries[0].senses[0].definitions}</div>) : "" }</p>
 					}
 				</div>
 				<div className="theme-glow"></div>
