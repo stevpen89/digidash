@@ -105,7 +105,7 @@ class Dashboard extends Component {
     }
   }
 
-  deleteWidget(val) {
+  deleteWidget(val){
     axios.delete(`/widget/${val}`).then(() => this.updateWidgets())
   }
 
