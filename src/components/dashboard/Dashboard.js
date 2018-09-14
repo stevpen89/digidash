@@ -55,7 +55,7 @@ class Dashboard extends Component {
   }
 
   //layout business with RGL
-  onLayoutChange(val) { this.setState({ layout: val }); console.log(val) }
+  onLayoutChange(val) { this.setState({ layout: val }) }
 
   //Updating layout according to specific user
   updateDB(i) {
@@ -98,9 +98,9 @@ class Dashboard extends Component {
       case 'Note': return <i className="fas fa-sticky-note"></i>;
       case 'Clock': return <i className="fas fa-clock"></i>;
       case 'Weather': return <i className="fas fa-cloud"></i>;
-      case 'Calculator': return <i class="fas fa-calculator"></i>;
-      case 'Bitcoin': return <i class="fab fa-btc"></i>;
-      case 'Favorites': return <i class="fas fa-star"></i>;
+      case 'Calculator': return <i className="fas fa-calculator"></i>;
+      case 'Bitcoin': return <i className="fab fa-btc"></i>;
+      case 'Favorites': return <i className="fas fa-star"></i>;
       default: return 'defaulted';
     }
   }
@@ -134,15 +134,12 @@ class Dashboard extends Component {
             </button><a>|</a>
 
             <button onClick={() => this.lockToggle()} className="theme-color">
-              {!this.state.locked ? <i class="fas fa-lock"></i> : <i class="fas fa-lock-open"></i>}
+              {!this.state.locked ? <i className="fas fa-lock"></i> : <i className="fas fa-lock-open"></i>}
             </button>
           </div>
 
         </div>
-        {this.state.globalOpen?
-      <div className="widget-settings globalWrapper" >
-        <GlobalSettings/>
-      </div>:null}
+        { this.state.globalOpen ? <GlobalSettings/> : null }
 
         {/* REACT GRID */}
         <GridTheme />
@@ -191,7 +188,7 @@ class Dashboard extends Component {
               })
                 .then(() => this.updateWidgets())
             }
-            }><i class="fas fa-search"></i><a>Search</a></div>
+            }><i className="fas fa-search"></i><a>Search</a></div>
             <div onClick={() => {
               axios.post(`/widget/${this.props.user_id}`, {
                 user_id: this.props.user_id,
@@ -199,7 +196,7 @@ class Dashboard extends Component {
               })
                 .then(() => this.updateWidgets())
             }
-            }><i class="fas fa-cloud"></i><a>Weather</a></div>
+            }><i className="fas fa-cloud"></i><a>Weather</a></div>
             <div onClick={() => {
               axios.post(`/widget/${this.props.user_id}`, {
                 user_id: this.props.user_id,
@@ -207,7 +204,7 @@ class Dashboard extends Component {
               })
                 .then(() => this.updateWidgets())
             }
-            }><i class="fas fa-book-open"></i><a>Dictionary</a></div>
+            }><i className="fas fa-book-open"></i><a>Dictionary</a></div>
             <div onClick={() => {
               axios.post(`/widget/${this.props.user_id}`, {
                 user_id: this.props.user_id,
@@ -215,7 +212,7 @@ class Dashboard extends Component {
               })
                 .then(() => this.updateWidgets())
             }
-            }><i class="fas fa-clock"></i><a>Clock</a></div>
+            }><i className="fas fa-clock"></i><a>Clock</a></div>
             <div onClick={() => {
               axios.post(`/widget/${this.props.user_id}`, {
                 user_id: this.props.user_id,
@@ -223,7 +220,7 @@ class Dashboard extends Component {
               })
                 .then(() => this.updateWidgets())
             }
-            }><i class="fas fa-sticky-note"></i><a>Note</a></div>
+            }><i className="fas fa-sticky-note"></i><a>Note</a></div>
             <div onClick={() => {
               axios.post(`/widget/${this.props.user_id}`, {
                 user_id: this.props.user_id,
@@ -231,7 +228,7 @@ class Dashboard extends Component {
               })
                 .then(() => this.updateWidgets())
             }
-            }><i class="fas fa-calculator"></i><a>Calculator</a></div>
+            }><i className="fas fa-calculator"></i><a>Calculator</a></div>
             <div onClick={() => {
               axios.post(`/widget/${this.props.user_id}`, {
                 user_id: this.props.user_id,
@@ -239,7 +236,7 @@ class Dashboard extends Component {
               })
                 .then(() => this.updateWidgets())
             }
-            }><i class="fab fa-btc"></i><a>Bitcoin</a></div>
+            }><i className="fab fa-btc"></i><a>Bitcoin</a></div>
             <div onClick={() => {
               axios.post(`/widget/${this.props.user_id}`, {
                 user_id: this.props.user_id,
@@ -247,7 +244,7 @@ class Dashboard extends Component {
               })
                 .then(() => this.updateWidgets())
             }
-            }><i class="fas fa-star"></i><a>Favorites</a></div>
+            }><i className="fas fa-star"></i><a>Favorites</a></div>
           </div>
           <div className="drawer-background"></div>
         </div>
@@ -257,11 +254,11 @@ class Dashboard extends Component {
             {this.state.widgets ?
             this.state.widgets.map((val) => {
               return (
-                <div style={{ fontSize: "30px", margin: "0 10px" }}>
+                <div style={{ fontSize: "30px", margin: "0 10px" }} key={val.master_id}>
                   <div className="toolbar-icon">{this.toolbarSwitch(val)}
                     {this.state.deleteMode ?
                       <a onClick={() => this.deleteWidget(val.master_id)} className="delete-button">
-                      <i class="fas fa-times"></i>
+                      <i className="fas fa-times"></i>
                       </a> : null}
                   </div>
                 </div>
@@ -269,8 +266,8 @@ class Dashboard extends Component {
             }) : null}
           </div>
             <div className="toolbar-controls">
-              <button onClick={() => this.toggleDeleteMode()}><i class="fas fa-trash-alt"></i></button>
-              <button onClick={() => this.setState({ drawerOpen: !this.state.drawerOpen })}>{this.state.drawerOpen ? <i class="fas fa-minus-square"></i> : <i class="fas fa-plus-square"></i>}</button>
+              <button onClick={() => this.toggleDeleteMode()}><i className="fas fa-trash-alt"></i></button>
+              <button onClick={() => this.setState({ drawerOpen: !this.state.drawerOpen })}>{this.state.drawerOpen ? <i className="fas fa-minus-square"></i> : <i className="fas fa-plus-square"></i>}</button>
             </div>
           </div >
         </div >

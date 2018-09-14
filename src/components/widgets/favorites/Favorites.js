@@ -69,32 +69,32 @@ export default class Favorites extends Component {
 				<div className="favorites-wrapper">
 						<div className="favorites-container">
 							<div className="item-holder">
-								<a href={url1} target="_blank"><img src={`https://www.google.com/s2/favicons?domain=${url1}`}/></a>
+								<a href={url1} target="_blank"><img alt="" src={`https://www.google.com/s2/favicons?domain=${url1}`}/></a>
 							</div>
 						</div>
 						<div className="favorites-container">
 							<div className="item-holder">
-								<a href={url2} target="_blank"><img src={`https://www.google.com/s2/favicons?domain=${url2}`}/></a>
+								<a href={url2} target="_blank"><img alt="" src={`https://www.google.com/s2/favicons?domain=${url2}`}/></a>
 							</div>
 						</div>
 						<div className="favorites-container">
 							<div className="item-holder">
-								<a href={url3} target="_blank"><img src={`https://www.google.com/s2/favicons?domain=${url3}`}/></a>
+								<a href={url3} target="_blank"><img alt="" src={`https://www.google.com/s2/favicons?domain=${url3}`}/></a>
 							</div>
 						</div>
 						<div className="favorites-container">
 							<div className="item-holder">
-								<a href={url4} target="_blank"><img src={`https://www.google.com/s2/favicons?domain=${url4}`}/></a>
+								<a href={url4} target="_blank"><img alt="" src={`https://www.google.com/s2/favicons?domain=${url4}`}/></a>
 							</div>
 						</div>
 						<div className="favorites-container">
 							<div className="item-holder">
-								<a href={url5} target="_blank"><img src={`https://www.google.com/s2/favicons?domain=${url5}`}/></a>
+								<a href={url5} target="_blank"><img alt="" src={`https://www.google.com/s2/favicons?domain=${url5}`}/></a>
 							</div>
 						</div>
 						<div className="favorites-container">
 							<div className="item-holder">
-								<a href={url6} target="_blank"><img src={`https://www.google.com/s2/favicons?domain=${url6}`}/></a>
+								<a href={url6} target="_blank"><img alt="" src={`https://www.google.com/s2/favicons?domain=${url6}`}/></a>
 							</div>
 						</div>
 					</div>

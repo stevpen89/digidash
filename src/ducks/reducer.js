@@ -10,7 +10,7 @@ const initialState = {
   flavor       : 'modern',
   search       : true,
   compact      : true,
-  collision    : false    
+  collision    : false
 }
 
 const SET_USER      = "SET_USER";
@@ -44,5 +44,3 @@ export default function reducer(state = initialState, action) {
     default             : return state;
   }
 }
-
-// case PULL_TABLE_U: return Object.assign({},state,{flavor: action.payload})
