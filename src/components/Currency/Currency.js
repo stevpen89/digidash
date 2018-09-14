@@ -1,22 +1,23 @@
 import React, {Component} from 'react';
 import axios from 'axios'
-import './App.css'
 
 
 
-export default class Autocomplete extends Component {
+export default class Currency extends Component {
   constructor() {
     super();
     this.state = { 
-    val1: "",
-    val2: "",
+    val1: "USD",
+    val2: "EUR",
     val3: 1,
-    convert: {}
+    convert: {},
+    toggle: false
   };
   }
  
 
   getIn1(val){
+    console.log(val)
     this.setState({
       val1: val
     })
@@ -34,13 +35,18 @@ export default class Autocomplete extends Component {
   getCurency(){
     console.log('this works')
     const {val1,val2} = this.state
+    console.log(val1)
     axios.post('/api/getcurency',{val1,val2}).then(res=>{
       var key = val1+'_'+val2;
       console.log(res.data.results[key])
-      this.setState({ convert: res.data.results[key] });
+      this.setState({ 
+        convert: res.data.results[key], 
+        toggle: true
+      });
     })}
   showcurrency(){
     const {val2,val3, convert} = this.state
+
     let num = convert.val*val3
     return(
       <div>
@@ -55,14 +61,42 @@ export default class Autocomplete extends Component {
 
       <div>
         
-      <div style={{display: 'flex'}}>
+      <div style={{display: 'flex', color: 'white'}}>
         <div style={{display: 'flex',flexDirection: "column"}}>
-          <input onChange={e=>this.getIn1(e.target.value)}/>
-          <input onChange={e=>this.getIn2(e.target.value)}/>
+          <select onChange={(e)=> this.getIn1(e.target.value)}>
+            <option value='USD'>US Dollar</option>
+            <option value='EUR'>Euro</option>
+            <option value='RUB'>Russian ruble</option>
+            <option value='AFN'>Afghan afghani</option>
+            <option value='ALL'>Albanian lek</option>
+            <option value='AUD'>Australian dollar</option>
+            <option value='BSD'>Bahamian dollar</option>
+            <option value='BRL'>Brazilian real</option>
+            <option value='CLP'>Chilean peso</option>
+            <option value='CLP'>Chinese yuan</option>
+            <option value='CLC'>Costa Rican colón</option>
+            <option value='GBP'>British pound</option>
+            <option value='KRW'>South Korean won</option>
+          </select>
+          <select onChange={(e)=>this.getIn2(e.target.value)} placeholder='EUR'>
+            <option value='EUR'>Euro</option>
+            <option value='USD'>US Dollar</option>
+            <option value='RUB'>Russian ruble</option>
+            <option value='AFN'>Afghan afghani</option>
+            <option value='ALL'>Albanian lek</option>
+            <option value='AUD'>Australian dollar</option>
+            <option value='BSD'>Bahamian dollar</option>
+            <option value='BRL'>Brazilian real</option>
+            <option value='CLP'>Chilean peso</option>
+            <option value='CLP'>Chinese yuan</option>
+            <option value='CLC'>Costa Rican colón</option>
+            <option value='GBP'>British pound</option>
+            <option value='KRW'>South Korean won</option>
+          </select>
         </div>
         <div style={{display: 'flex',flexDirection: "column" }}>
           <input onChange={e=>this.getIn3(e.target.value)}/>
-          <p>{this.showcurrency()}</p>
+          {this.state.toggle ? <p>{this.showcurrency()}</p>: <p>0</p>}
         </div>
       </div>
 
