@@ -6,6 +6,7 @@ import axios from 'axios'
 import '../../../node_modules/react-grid-layout/css/styles.css'
 import GridTheme from './GridTheme'
 import './Dashboard.css'
+import { Scrollbars } from 'react-custom-scrollbars';
 //WIDGETS
 import Clock from '../widgets/clock/Clock'
 import Dictionary from '../widgets/dictionary/Dictionary'
@@ -16,6 +17,7 @@ import GlobalSettings from './GlobalSettings'
 import Calculator from '../widgets/calculator/Calculator'
 import Favorites from '../widgets/favorites/Favorites'
 import Bitcoin from '../widgets/bitcoin/Bitcoin'
+import Currency from '../Currency/Currency'
 //REDUX
 import { connect } from 'react-redux'
 import { setUser } from '../../ducks/reducer'
@@ -120,6 +122,7 @@ class Dashboard extends Component {
         {/* HEADER */}
         <div className="header">
 
+
           <div className="user-info">
             {this.props.user_name.replace(/\s/g, ' | ')}
           </div>
@@ -142,8 +145,11 @@ class Dashboard extends Component {
         { this.state.globalOpen ? <GlobalSettings/> : null }
 
         {/* REACT GRID */}
+        <Currency />
         <GridTheme />
+        
         <ReactGridLayout
+        
           className="layout"
           cols={30}
           rowHeight={5}
@@ -164,8 +170,8 @@ class Dashboard extends Component {
               {this.widgetSwitch(val)}
             </div>
           ))}
+           
         </ReactGridLayout>
-
         {/* DRAWER */}
         <div style={{
           display: `flex`,
@@ -270,6 +276,7 @@ class Dashboard extends Component {
               <button onClick={() => this.setState({ drawerOpen: !this.state.drawerOpen })}>{this.state.drawerOpen ? <i className="fas fa-minus-square"></i> : <i className="fas fa-plus-square"></i>}</button>
             </div>
           </div >
+         
         </div >
     )
   }
