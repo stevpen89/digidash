@@ -34,11 +34,19 @@ app.put    ('/widget/settings/:master_id', widgetController.settings);
 app.delete ('/widget/:master_id',          widgetController.delete  );
 
 //API ENDPOINTS
+<<<<<<< HEAD
 app.post ('/api/dictionary',        apiController.dictionary);
 app.post ('/api/weather',           apiController.weather   );
 app.put  ('/api/vibrant',           apiController.vibrant   );
 app.put  ('/api/unsplash/:user_id', apiController.unsplash  );
 
+=======
+app.post('/api/dictionary', apiController.dictionary);
+app.post('/api/weather', apiController.weather);
+app.put('/api/vibrant', apiController.vibrant);
+app.put('/api/unsplash/:user_id', apiController.unsplash);
+app.post('/api/getcurency', apiController.getcurency);
+>>>>>>> master
 //RUN THE SERVER
 massive(CONNECTION_STRING).then(db => {
   app.set('db', db);
