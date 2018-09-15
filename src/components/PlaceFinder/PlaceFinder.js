@@ -53,14 +53,7 @@ class Maps extends Component {
         console.log(display)
     return display
   }
-  renderMarkers(map, maps) {
-      let myLatLng ={lat: 40.23,lng: -111.65}
-    let marker = new maps.Marker({
-      position: myLatLng,
-      map,
-      title: 'Hello World!'
-    });
-  }
+
   render() {
     const {REACT_APP_GOOGLE} = process.env
     
