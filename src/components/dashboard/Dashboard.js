@@ -18,6 +18,7 @@ import Calculator from '../widgets/calculator/Calculator'
 import Favorites from '../widgets/favorites/Favorites'
 import Bitcoin from '../widgets/bitcoin/Bitcoin'
 import Currency from '../Currency/Currency'
+import PlaceFinder from './../PlaceFinder/PlaceFinder'
 //REDUX
 import { connect } from 'react-redux'
 import { setUser } from '../../ducks/reducer'
@@ -145,7 +146,7 @@ class Dashboard extends Component {
         { this.state.globalOpen ? <GlobalSettings/> : null }
 
         {/* REACT GRID */}
-        <Currency />
+        <PlaceFinder />
         <GridTheme />
         
         <ReactGridLayout
