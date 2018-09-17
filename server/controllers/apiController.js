@@ -3,7 +3,7 @@ const Dictionary = require('oxford-dictionary');
 const Vibrant    = require('node-vibrant');
 
 require('dotenv').config();
-const { REACT_APP_WEATHERKEY, REACT_APP_DICTIONARY_ID, REACT_APP_DICTIONARY_KEY } = process.env
+const { REACT_APP_WEATHERKEY, REACT_APP_DICTIONARY_ID, REACT_APP_DICTIONARY_KEY,REACT_APP_PLACES } = process.env
 
 const config = {
 	app_id      : REACT_APP_DICTIONARY_ID,
@@ -24,6 +24,13 @@ module.exports = {
 		const { lat, lng } = req.body
 
 		axios.get(`https://api.darksky.net/forecast/${REACT_APP_WEATHERKEY}/${lat},${lng}`)
+			.then(api => { res.status(200).send(api.data) })
+	},
+	getplaces: (req, res) => {
+		const db = req.app.get('db');
+		const { lat, lng } = req.body
+
+		axios.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat},${lng}&radius=1500&type=restaurant&keyword=cruise&key=${REACT_APP_PLACES}`)
 			.then(api => { res.status(200).send(api.data) })
 	},
 

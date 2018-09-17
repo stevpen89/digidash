@@ -9,6 +9,7 @@ import GridTheme from './GridTheme';
 import './Dashboard.css'
 
 //WIDGETS
+import PlaceFinder from './../PlaceFinder/PlaceFinder'
 import Calculator     from '../widgets/calculator/Calculator';
 import Clock          from '../widgets/clock/Clock';
 import Currency       from '../widgets/currency/Currency';
