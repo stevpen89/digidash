@@ -9,7 +9,6 @@ import GridTheme from './GridTheme';
 import './Dashboard.css'
 
 //WIDGETS
-import PlaceFinder from './../PlaceFinder/PlaceFinder'
 import Calculator     from '../widgets/calculator/Calculator';
 import Clock          from '../widgets/clock/Clock';
 import Currency       from '../widgets/currency/Currency';
@@ -17,6 +16,7 @@ import Bitcoin        from '../widgets/bitcoin/Bitcoin';
 import Dictionary     from '../widgets/dictionary/Dictionary';
 import Favorites      from '../widgets/favorites/Favorites';
 import Note           from '../widgets/note/Note';
+import Restaurants    from '../widgets/restaurants/Restaurants';
 import Search         from '../widgets/search/Search';
 import Stocks         from '../widgets/stocks/Stocks';
 import Weather        from '../widgets/weather/Weather';
@@ -41,6 +41,7 @@ class Dashboard extends Component {
     }
     this.onLayoutChange = this.onLayoutChange.bind(this);
     this.updateWidgets  = this.updateWidgets.bind(this);
+    this.globalToggle   = this.globalToggle.bind(this);
   }
 
   //axios call to get user data from auth zero storing on redux.
@@ -97,34 +98,36 @@ class Dashboard extends Component {
     let dataGrid = {i: `${val.master_id}`, x: val.x, y: val.y, w: val.w, h: val.h}
 
     switch (val.widget_name) {
-      case 'Search'     : return <div key={key} data-grid={dataGrid} onMouseUpCapture={updateDB}><Search     o={val} updateWidgets={updateWidgets} /></div>;
-      case 'Dictionary' : return <div key={key} data-grid={dataGrid} onMouseUpCapture={updateDB}><Dictionary o={val} updateWidgets={updateWidgets} /></div>;
-      case 'Note'       : return <div key={key} data-grid={dataGrid} onMouseUpCapture={updateDB}><Note       o={val} updateWidgets={updateWidgets} /></div>;
-      case 'Clock'      : return <div key={key} data-grid={dataGrid} onMouseUpCapture={updateDB}><Clock      o={val} updateWidgets={updateWidgets} /></div>;
-      case 'Weather'    : return <div key={key} data-grid={dataGrid} onMouseUpCapture={updateDB}><Weather    o={val} updateWidgets={updateWidgets} /></div>;
-      case 'Calculator' : return <div key={key} data-grid={dataGrid} onMouseUpCapture={updateDB}><Calculator o={val} updateWidgets={updateWidgets} /></div>;
-      case 'Bitcoin'    : return <div key={key} data-grid={dataGrid} onMouseUpCapture={updateDB}><Bitcoin    o={val} updateWidgets={updateWidgets} /></div>;
-      case 'Favorites'  : return <div key={key} data-grid={dataGrid} onMouseUpCapture={updateDB}><Favorites  o={val} updateWidgets={updateWidgets} /></div>;
-      case 'Currency'   : return <div key={key} data-grid={dataGrid} onMouseUpCapture={updateDB}><Currency   o={val} updateWidgets={updateWidgets} /></div>;
-      case 'Stocks'     : return <div key={key} data-grid={dataGrid} onMouseUpCapture={updateDB}><Stocks     o={val} updateWidgets={updateWidgets} /></div>;
-      default           : return 'defaulted';
+      case 'Search'      : return <div key={key} data-grid={dataGrid} onMouseUpCapture={updateDB}><Search      o={val} updateWidgets={updateWidgets} /></div>;
+      case 'Dictionary'  : return <div key={key} data-grid={dataGrid} onMouseUpCapture={updateDB}><Dictionary  o={val} updateWidgets={updateWidgets} /></div>;
+      case 'Note'        : return <div key={key} data-grid={dataGrid} onMouseUpCapture={updateDB}><Note        o={val} updateWidgets={updateWidgets} /></div>;
+      case 'Clock'       : return <div key={key} data-grid={dataGrid} onMouseUpCapture={updateDB}><Clock       o={val} updateWidgets={updateWidgets} /></div>;
+      case 'Weather'     : return <div key={key} data-grid={dataGrid} onMouseUpCapture={updateDB}><Weather     o={val} updateWidgets={updateWidgets} /></div>;
+      case 'Calculator'  : return <div key={key} data-grid={dataGrid} onMouseUpCapture={updateDB}><Calculator  o={val} updateWidgets={updateWidgets} /></div>;
+      case 'Bitcoin'     : return <div key={key} data-grid={dataGrid} onMouseUpCapture={updateDB}><Bitcoin     o={val} updateWidgets={updateWidgets} /></div>;
+      case 'Favorites'   : return <div key={key} data-grid={dataGrid} onMouseUpCapture={updateDB}><Favorites   o={val} updateWidgets={updateWidgets} /></div>;
+      case 'Currency'    : return <div key={key} data-grid={dataGrid} onMouseUpCapture={updateDB}><Currency    o={val} updateWidgets={updateWidgets} /></div>;
+      case 'Stocks'      : return <div key={key} data-grid={dataGrid} onMouseUpCapture={updateDB}><Stocks      o={val} updateWidgets={updateWidgets} /></div>;
+      case 'Restaurants' : return <div key={key} data-grid={dataGrid} onMouseUpCapture={updateDB}><Restaurants o={val} updateWidgets={updateWidgets} /></div>;
+      default            : return 'defaulted';
     }
   }
 
   //Renders a specific icon in the toolbar based on which widget it is
   toolbarSwitch(val) {
     switch (val.widget_name) {
-      case 'Search'     : return <i className="fas fa-search"         ></i>;
-      case 'Dictionary' : return <i className="fas fa-book-open"      ></i>;
-      case 'Note'       : return <i className="fas fa-sticky-note"    ></i>;
-      case 'Clock'      : return <i className="fas fa-clock"          ></i>;
-      case 'Weather'    : return <i className="fas fa-cloud"          ></i>;
-      case 'Calculator' : return <i className="fas fa-calculator"     ></i>;
-      case 'Bitcoin'    : return <i className="fab fa-btc"            ></i>;
-      case 'Favorites'  : return <i className="fas fa-star"           ></i>;
-      case 'Currency'   : return <i className="fas fa-money-check-alt"></i>;
-      case 'Stocks'     : return <i className="fas fa-chart-line"     ></i>;
-      default           : return 'defaulted';
+      case 'Search'      : return <i className="fas fa-search"         ></i>;
+      case 'Dictionary'  : return <i className="fas fa-book-open"      ></i>;
+      case 'Note'        : return <i className="fas fa-sticky-note"    ></i>;
+      case 'Clock'       : return <i className="fas fa-clock"          ></i>;
+      case 'Weather'     : return <i className="fas fa-cloud"          ></i>;
+      case 'Calculator'  : return <i className="fas fa-calculator"     ></i>;
+      case 'Bitcoin'     : return <i className="fab fa-btc"            ></i>;
+      case 'Favorites'   : return <i className="fas fa-star"           ></i>;
+      case 'Currency'    : return <i className="fas fa-money-check-alt"></i>;
+      case 'Stocks'      : return <i className="fas fa-chart-line"     ></i>;
+      case 'Restaurants' : return <i className="fas fa-utensils"       ></i>;
+      default            : return 'defaulted';
     }
   }
 
@@ -156,8 +159,8 @@ class Dashboard extends Component {
         </div>
 
         {/* GLOBAL SETTINGS */}
-        { globalOpen ? <GlobalSettings/> : null }
-
+        <GlobalSettings globalOpen={globalOpen} globalToggle={this.globalToggle}/>
+       
         {/* REACT GRID */}
         <GridTheme />
         <ReactGridLayout
@@ -190,17 +193,18 @@ class Dashboard extends Component {
           transition      : `.5s`
         }}>
           <div className="drawer">
-            {/* Widget Name, Height, Width, Icon, o1, o2, o3, o4, o5, o6 */}
-            {this.drawerItem ('Search',     26, 4,  'fas fa-search'         )}
-            {this.drawerItem ('Weather',    10, 10, 'fas fa-cloud'          )}
-            {this.drawerItem ('Dictionary', 10, 10, 'fas fa-book-open'      )}
-            {this.drawerItem ('Clock',      5,  11, 'fas fa-clock', 'true'  )}
-            {this.drawerItem ('Note',       5,  18, 'fas fa-sticky-note'    )}
-            {this.drawerItem ('Calculator', 5,  18, 'fas fa-calculator'     )}
-            {this.drawerItem ('Bitcoin',    15, 22, 'fab fa-btc'            )}
-            {this.drawerItem ('Favorites',  6,  8,  'fas fa-star'           )}
-            {this.drawerItem ('Currency',   6,  8,  'fas fa-money-check-alt')}
-            {this.drawerItem ('Stocks',     10, 12,  'fas fa-chart-line'    )}
+            {/* Widget Name, HeigIcon, o1, o2, o3, o4, o5, o6 */}
+            {this.drawerItem ('Search',      26, 4,  'fas fa-search'         )}
+            {this.drawerItem ('Weather',     10, 10, 'fas fa-cloud'          )}
+            {this.drawerItem ('Dictionary',  10, 10, 'fas fa-book-open'      )}
+            {this.drawerItem ('Clock',       5,  11, 'fas fa-clock', 'true'  )}
+            {this.drawerItem ('Note',        5,  18, 'fas fa-sticky-note'    )}
+            {this.drawerItem ('Calculator',  5,  18, 'fas fa-calculator'     )}
+            {this.drawerItem ('Bitcoin',     15, 22, 'fab fa-btc'            )}
+            {this.drawerItem ('Favorites',   6,  8,  'fas fa-star'           )}
+            {this.drawerItem ('Currency',    6,  8,  'fas fa-money-check-alt')}
+            {this.drawerItem ('Stocks',      10, 12, 'fas fa-chart-line'     )}
+            {this.drawerItem ('Restaurants', 10, 12, 'fas fa-utensils'       )}
           </div>
           <div className="drawer-background"></div>
         </div>
