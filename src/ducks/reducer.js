@@ -8,7 +8,6 @@ const initialState = {
   color        : '115, 164, 191',
   theme        : 'dark',
   flavor       : 'modern',
-  search       : true,
   compact      : true,
   collision    : false
 }
@@ -18,7 +17,6 @@ const SET_THEME     = "SET_THEME";
 const SET_COLOR     = "SET_COLOR";
 const SET_BG        = "SET_BG";
 const SET_FLAVOR    = "SET_FLAVOR";
-const SET_SEARCH    = "SET_SEARCH";
 const SET_COLLISION = "SET_COLLISION";
 const SET_COMPACT   = "SET_COMPACT";
 
@@ -27,7 +25,6 @@ export function setTheme(val)        {return {type: SET_THEME,     payload: val}
 export function setColor(val)        {return {type: SET_COLOR,     payload: val}}
 export function setBG(val)           {return {type: SET_BG,        payload: val}}
 export function setFlavor(val)       {return {type: SET_FLAVOR,    payload: val}}
-export function setSearch(val)       {return {type: SET_SEARCH,    payload: val}}
 export function setCollision(val)    {return {type: SET_COLLISION, payload: val}}
 export function setCompact(val)      {return {type: SET_COMPACT,   payload: val}}
 
@@ -38,7 +35,6 @@ export default function reducer(state = initialState, action) {
     case SET_COLOR      : return Object.assign({}, state, {color     : action.payload})
     case SET_BG         : return Object.assign({}, state, {user_bg   : action.payload})
     case SET_FLAVOR     : return Object.assign({}, state, {flavor    : action.payload})
-    case SET_SEARCH     : return Object.assign({}, state, {search    : !state.search})
     case SET_COLLISION  : return Object.assign({}, state, {collision : !state.collision})
     case SET_COMPACT    : return Object.assign({}, state, {compact   : !state.compact})
     default             : return state;
