@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import {Line} from 'react-chartjs-2'
+import './Stocks.css'
 
 class Stocks extends Component{
 	constructor(props){
@@ -103,10 +104,15 @@ class Stocks extends Component{
 	render(){
 		let {graphMax,graphMin} = this.state
 		return (
-			<div>
-				<input onChange={(e)=>this.handleInput(e.target.value)}/>
-				<button onClick={()=>this.getStocks()}>Click For Stocks</button>
-				<div style={{height:"600px",width:"800px",backgroundColor:"rgba(0,0,0,.8)"}}>
+			<div className="stocks-main standard-widget" >
+			<style>
+
+			</style>
+				<div className="stocks-header">
+					<input className="theme-input inputter" onChange={(e)=>this.handleInput(e.target.value)}/>
+					<button onClick={()=>this.getStocks()} className="go-button">Retrieve</button>
+				</div>
+				<div className='chart-wrapper' >
 				<Line
                     data={this.state.newState? this.state.newState.graphData.datasets : this.state.graphData}
                     options={{
@@ -114,7 +120,7 @@ class Stocks extends Component{
                             labels:{
                                 fontColor:'white',
                                 boxWidth:80,
-                                fontSize:18,
+                                fontSize:16,
                                 fontFamily:"'Arial'",
                             }
                         },
@@ -123,24 +129,23 @@ class Stocks extends Component{
                             yAxes:[{
                                 gridLines:{
                                     display:true,
-                                    color:"white",
-                                    zeroLineColor:'white',
-                                    zeroLineWidth: 3,
+                                    color:"rgba(255,255,255,.3)",
+                                    zeroLineColor:'rgba(255,255,255,.3)',
                                 },
                                 ticks:{
                                     max:(graphMax *1),
                                     min:(graphMin *1),
                                     stepSize:((graphMax - graphMin)/10),
-                                    fontColor:'white',
+                                    fontColor:'rgba(255,255,255,.3)',
                                 }
                             }],
                             xAxes:[{
                                 gridLines:{
                                     display:false,
-                                    color:"white"
+                                    color:"rgba(255,255,255,.3)"
                                 },
                                 ticks:{
-                                    fontColor:'white'
+                                    fontColor:'rgba(255,255,255,.3)'
                                 }
                             }],
                         }
@@ -149,9 +154,13 @@ class Stocks extends Component{
                 />
 								</div>
 								{/* Graph Ends One Line Above */}
+					<div className="theme-glow"></div>
+				<div className="theme-accent"></div>
 			</div>
 		)
 	}
 }
+
+
 
 export default Stocks

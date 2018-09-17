@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios'
-
+import './Currency.css'
 
 
 export default class Currency extends Component {
@@ -59,11 +59,11 @@ export default class Currency extends Component {
     return (
      
 
-      <div>
+      <div className="standard-widget search2" >
         
       <div style={{display: 'flex', color: 'white'}}>
         <div style={{display: 'flex',flexDirection: "column"}}>
-          <select onChange={(e)=> this.getIn1(e.target.value)}>
+          <select className='space' onChange={(e)=> this.getIn1(e.target.value)}>
             <option value='USD'>US Dollar</option>
             <option value='EUR'>Euro</option>
             <option value='RUB'>Russian ruble</option>
@@ -78,7 +78,7 @@ export default class Currency extends Component {
             <option value='GBP'>British pound</option>
             <option value='KRW'>South Korean won</option>
           </select>
-          <select onChange={(e)=>this.getIn2(e.target.value)} placeholder='EUR'>
+          <select className='space' onChange={(e)=>this.getIn2(e.target.value)} placeholder='EUR'>
             <option value='EUR'>Euro</option>
             <option value='USD'>US Dollar</option>
             <option value='RUB'>Russian ruble</option>
@@ -94,14 +94,14 @@ export default class Currency extends Component {
             <option value='KRW'>South Korean won</option>
           </select>
         </div>
-        <div style={{display: 'flex',flexDirection: "column" }}>
-          <input onChange={e=>this.getIn3(e.target.value)}/>
+        <div  className='space' style={{display: 'flex',flexDirection: "column" }}>
+          <input className='theme-input' onChange={e=>this.getIn3(e.target.value)}/>
           {this.state.toggle ? <p>{this.showcurrency()}</p>: <p>0</p>}
         </div>
       </div>
-
-        <button onClick={()=> this.getCurency()}>the things</button>
-      
+      <div className='center'>
+        <button className=" go-button" onClick={()=> this.getCurency()}>convert</button>
+      </div>
       </div>
 
 
