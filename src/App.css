@@ -12,6 +12,8 @@ body {
   -khtml-user-select: none;
   -webkit-user-select: none;
   -o-user-select: none;
+  overflow: hidden;
+  padding-bottom: 130px;
 }
 
 button, input, select {font-family: 'Montserrat', sans-serif; transition: .25s;}
