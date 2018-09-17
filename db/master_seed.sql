@@ -13,13 +13,12 @@ CREATE TABLE users (
 	color					TEXT DEFAULT '#CCC',
 	theme					TEXT DEFAULT 'light',
 	flavor				TEXT DEFAULT 'modern',
-	search				BOOLEAN DEFAULT true,
 	compact				BOOLEAN DEFAULT true,
 	collision			BOOLEAN DEFAULT false
 );
 
-INSERT INTO users (user_name, user_email, auth_id, auth_picture, user_bg, color, theme, flavor, search, compact, collision)
-VALUES ('Taryn Ficklin', 'tarynficklin@gmail.com', 'google-oauth2|100800992512531079080', 'https://lh4.googleusercontent.com/-xeeCTQ3xyYw/AAAAAAAAAAI/AAAAAAAAAHM/59818DJojEk/photo.jpg', 'http://unsplash.com', '#CCC', 'light', 'modern', true, true, false);
+INSERT INTO users (user_name, user_email, auth_id, auth_picture, user_bg, color, theme, flavor, compact, collision)
+VALUES ('Taryn Ficklin', 'tarynficklin@gmail.com', 'google-oauth2|100800992512531079080', 'https://lh4.googleusercontent.com/-xeeCTQ3xyYw/AAAAAAAAAAI/AAAAAAAAAHM/59818DJojEk/photo.jpg', 'http://unsplash.com', '#CCC', 'light', 'modern', true, false);
 
 select * from users;
 

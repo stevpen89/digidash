@@ -7,11 +7,10 @@ import Bgp from './Bgp'
 class GlobalSettings extends Component {
 	constructor(props) {
 		super(props)
-		const { search, compact, collision } = props
+		const { compact, collision } = props
 		this.state = {
 			color: '115, 164, 191',
 			bg_image: 'https://images.unsplash.com/photo-1536130371825-ac75012d9b24?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=c1c97eb0f52f1174d7a8281dd8348828&auto=format&fit=crop&w=1050&q=80',
-			search: search,
 			compact: compact,
 			collision: collision,
 			bgPicker: false
@@ -22,8 +21,8 @@ class GlobalSettings extends Component {
 	bgPickerToggle() { this.setState({ bgPicker: !this.state.bgPicker }) }
 
 	render() {
-		const { setTheme, setFlavor, setSearch, setCollision, setCompact } = this.props
-		const { theme, flavor, search, compact, collision, globalOpen, globalToggle } = this.props
+		const { setTheme, setFlavor, setCollision, setCompact } = this.props
+		const { theme, flavor, compact, collision, globalOpen, globalToggle } = this.props
 		return (
 			<div className={globalOpen ? `global-settings-wrapper global-open` : `global-settings-wrapper`}>
 				<div className="global-settings">
@@ -60,17 +59,14 @@ class GlobalSettings extends Component {
 											</div>
 											<a>Widget Collision</a>
 										</div>
-										<div className="listItem" onClick={() => { setSearch() }}>
-											<div className={search ? `checkbox checked theme-color` : `checkbox`}>
-												<i className="fas fa-check"></i>
-											</div>
-											<a>Locked Search Bar</a>
-										</div>
 										<div className="listItem" onClick={() => { setCompact() }}>
 											<div className={compact ? `checkbox checked theme-color` : `checkbox`}>
 												<i className="fas fa-check"></i>
 											</div>
 											<a>Auto Compact Widgets</a>
+										</div>
+										<div className="listItem">
+											<button className="filled-button" onClick={() => this.bgPickerToggle()}>Save Changes</button>
 										</div>
 									</div>
 								</div>
@@ -84,7 +80,7 @@ class GlobalSettings extends Component {
 }
 
 function mapStateToProps(state) {
-	const { flavor, theme, search, compact, collision } = state
-	return { flavor, theme, search, compact, collision }
+	const { flavor, theme, compact, collision } = state
+	return { flavor, theme, compact, collision }
 };
-export default connect(mapStateToProps, { setFlavor, setTheme, setSearch, setCollision, setCompact })(GlobalSettings);
+export default connect(mapStateToProps, { setFlavor, setTheme, setCollision, setCompact })(GlobalSettings);

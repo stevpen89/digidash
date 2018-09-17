@@ -64,6 +64,7 @@
 
 .listItem button {
 	margin-top: 10px;
+	width: 300px;
 }
 
 .global-settings-wrapper {

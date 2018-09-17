@@ -39,9 +39,9 @@ class Dashboard extends Component {
       deleteMode : false,
       globalOpen : false
     }
-    this.onLayoutChange = this.onLayoutChange.bind(this);
-    this.updateWidgets  = this.updateWidgets.bind(this);
     this.globalToggle   = this.globalToggle.bind(this);
+    this.updateWidgets  = this.updateWidgets.bind(this);
+    this.onLayoutChange = this.onLayoutChange.bind(this);
   }
 
   //axios call to get user data from auth zero storing on redux.
@@ -240,7 +240,7 @@ class Dashboard extends Component {
 }
 
 function mapStateToProps(state) {
-	const  { user_id, user_name, search, compact, collision } = state
-	return { user_id, user_name, search, compact, collision }
+	const  { user_id, user_name, compact, collision } = state
+	return { user_id, user_name, compact, collision }
 };
 export default connect(mapStateToProps, { setUser })(Dashboard);
