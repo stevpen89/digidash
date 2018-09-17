@@ -30,7 +30,6 @@ module.exports = {
 		const db = req.app.get('db');
 		const { lat, lng } = req.body
 
-		axios.get(`https://api.darksky.net/forecast/${REACT_APP_WEATHERKEY}/${lat},${lng}`)
 		axios.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat},${lng}&radius=1500&type=restaurant&keyword=cruise&key=${REACT_APP_PLACES}`)
 			.then(api => { res.status(200).send(api.data) })
 	},

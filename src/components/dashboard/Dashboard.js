@@ -143,12 +143,13 @@ class Dashboard extends Component {
           </div>
 
         </div>
+        
         { this.state.globalOpen ? <GlobalSettings/> : null }
 
         {/* REACT GRID */}
-        <PlaceFinder />
-        <GridTheme />
         
+        <GridTheme />
+        <PlaceFinder />
         <ReactGridLayout
         
           className="layout"

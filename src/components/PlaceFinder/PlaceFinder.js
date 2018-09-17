@@ -25,8 +25,8 @@ class Maps extends Component {
 
   handleSelect = address => {
     geocodeByAddress(address).then(results => getLatLng(results[0])).then(latLng => {
-      let lat = latLng.lat
-      let lng = latLng.lng
+      var lat = latLng.lat
+      var lng = latLng.lng
       axios.post('/api/getplaces', { lat, lng }).then(res => {
           console.log(res.data.results)
         this.setState({ 
@@ -58,7 +58,8 @@ class Maps extends Component {
     const {REACT_APP_GOOGLE} = process.env
     
     return (
-    <div>
+    <div style={{display: 'flex', flexDirection: 'column'}}>       
+            <div>
                 <PlacesAutocomplete
                 value={this.state.address}
                 onChange={this.handleChange}
@@ -91,8 +92,10 @@ class Maps extends Component {
                 </div>
                 )}
             </PlacesAutocomplete>
+            </div>
+            <div >
         {this.state.toggle ?
-        <div style={{ height: '90vh', width: '160vh' }}>
+        <div style={{ height: '90vh', width: '160vh', position: 'relative' }}>
             <GoogleMapReact
             bootstrapURLKeys={{ key: REACT_APP_GOOGLE }}
             defaultCenter={this.props.center}
@@ -108,6 +111,7 @@ class Maps extends Component {
         :
         <p>select a location</p>
         }
+        </div>
       </div>
     );
   }
