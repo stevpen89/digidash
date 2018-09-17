@@ -39,15 +39,16 @@
 	flex-direction:column;
 	justify-content: center;
 	align-items:center;
-	width: 402px;
+	width: 452px;
 	border-right: 1px solid white;
+	padding-bottom: 25px;
 }
 .globalLayout{
 	display:flex;
 	flex-direction:column;
 	justify-content: center;
 	align-items: center;
-	width: 400px;
+	width: 450px;
 }
 .list{
 	display:flex;
@@ -59,6 +60,10 @@
 	align-items: center;
 	justify-content: center;
 	padding:5px;
+}
+
+.listItem button {
+	margin-top: 10px;
 }
 
 .global-settings-wrapper {

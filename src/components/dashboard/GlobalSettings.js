@@ -16,6 +16,7 @@ class GlobalSettings extends Component {
 			collision: collision,
 			bgPicker: false
 		}
+		this.bgPickerToggle = this.bgPickerToggle.bind(this)
 	}
 
 	bgPickerToggle() { this.setState({ bgPicker: !this.state.bgPicker }) }
@@ -33,49 +34,49 @@ class GlobalSettings extends Component {
 								<div className="globalThemes">
 									<h2 className="globalItem">THEMES</h2>
 									<div className="list">
-										<div className="listItem">
-											<div className={flavor === 'modern' ? `checkbox checked theme-color` : `checkbox`} onClick={() => { setFlavor(flavor === 'modern' ? 'classic' : 'modern') }}>
-												<i className="fas fa-check"></i>
-											</div>
-											<a>Modern</a>
-										</div>
-										<div className="listItem">
-											<div className={theme === 'dark' ? `checkbox checked theme-color` : `checkbox`} onClick={() => { setTheme(theme === 'dark' ? 'light' : 'dark') }}>
+										<div className="listItem" onClick={() => { setTheme(theme === 'dark' ? 'light' : 'dark') }}>
+											<div className={theme === 'dark' ? `checkbox checked theme-color` : `checkbox`}>
 												<i className="fas fa-check"></i>
 											</div>
 											<a>Dark Theme</a>
 										</div>
+										<div className="listItem" onClick={() => { setFlavor(flavor === 'modern' ? 'classic' : 'modern') }}>
+											<div className={flavor === 'modern' ? `checkbox checked theme-color` : `checkbox`}>
+												<i className="fas fa-check"></i>
+											</div>
+											<a>Accent Theme</a>
+										</div>
 										<div className="listItem">
-											<button className="filled-button" onClick={() => this.bgPickerToggle()}>Change Background</button>
+											<button className="filled-button theme-color" onClick={() => this.bgPickerToggle()}>Change Background</button>
 										</div>
 									</div>
 								</div>
 								<div className="globalLayout">
 									<h2 className="globalItem">LAYOUT</h2>
 									<div className="list">
-										<div className="listItem">
-											<div className={search ? `checkbox checked theme-color` : `checkbox`} onClick={() => { setSearch() }}>
+										<div className="listItem" onClick={() => { setCollision() }}>
+											<div className={collision ? `checkbox` : `checkbox checked theme-color`}>
 												<i className="fas fa-check"></i>
 											</div>
-											<a>Static Search Bar</a>
+											<a>Widget Collision</a>
 										</div>
-										<div className="listItem">
-											<div className={compact ? `checkbox checked theme-color` : `checkbox`} onClick={() => { setCompact() }}>
+										<div className="listItem" onClick={() => { setSearch() }}>
+											<div className={search ? `checkbox checked theme-color` : `checkbox`}>
 												<i className="fas fa-check"></i>
 											</div>
-											<a>Compact Widgets</a>
+											<a>Locked Search Bar</a>
 										</div>
-										<div className="listItem">
-											<div className={collision ? `checkbox checked theme-color` : `checkbox`} onClick={() => { setCollision() }}>
+										<div className="listItem" onClick={() => { setCompact() }}>
+											<div className={compact ? `checkbox checked theme-color` : `checkbox`}>
 												<i className="fas fa-check"></i>
 											</div>
-											<a>Prevent Widget Collision</a>
+											<a>Auto Compact Widgets</a>
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-						: <Bgp globalToggle={globalToggle} globalOpen={this.props.globalOpen} />}
+						: <Bgp globalToggle={globalToggle} globalOpen={this.props.globalOpen} bgPickerToggle={this.bgPickerToggle} />}
 				</div>
 			</div>
 		)

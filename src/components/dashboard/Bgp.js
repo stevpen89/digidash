@@ -65,6 +65,7 @@ class Bgp extends Component {
     setColor(color);
     setBG(image);
     axios.put(`/api/unsplash/${user_id}`, { image: newImage, color, theme });
+    this.props.bgPickerToggle();
     this.props.globalToggle();
   }
 
@@ -79,6 +80,7 @@ class Bgp extends Component {
 
         {!this.state.showBig ?
           <div className="header-wrapper">
+            <div className="bgp-back" onClick={() => this.props.bgPickerToggle()}><i class="fas fa-caret-left"></i><a>Back</a></div>
             <h1 className="bgp-header">Customize your background</h1>
             <div className="bgp-search theme-text">
               <input onChange={(e) => this.changeHandle(e.target.value)} type="text" onKeyDown={this.keyPress} />

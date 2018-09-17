@@ -91,6 +91,7 @@
 	justify-content: center;
 	position: absolute;
 	height: calc(100% - 200px);
+	padding-bottom: 40px;
 	bottom: 0;
 }
 
@@ -157,4 +158,12 @@
 
 .background-button {
 	color: white;
+}
+
+@media only screen and (max-width: 1080px) {
+	.bgp-header {
+		width: 300px;
+		text-align: center;
+		font-size: 22px;
+	}
 }
