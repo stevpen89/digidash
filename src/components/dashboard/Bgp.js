@@ -3,6 +3,7 @@ import axios from 'axios'
 import './Bgp.css'
 import { connect } from 'react-redux'
 import {setTheme, setColor, setBG} from '../../ducks/reducer'
+import { Scrollbars } from 'react-custom-scrollbars';
 require('dotenv').config()
 
 class Bgp extends Component {
@@ -103,10 +104,12 @@ class Bgp extends Component {
               : null
             :
             this.state.imgs ?
-              <div className="overall-wrapper">
-                <div className="thumbnail-wrapper">
+              <div className="overall-wrapper" style={{width: `100%`}}>
+                <Scrollbars style={{height: `100%`, width: `100%`}} className="thumbnail-wrapper">
+                <div className="thumbnail-wrapper" style={{width: `100%`}}>
                   {this.state.imgs.map((val, i) => {return <div className="map-item" onClick={() => this.bigPicture(i, this.state.imgs[i].urls.raw)} key={i} style={{ background: `url(${val.urls.small}) center`, backgroundSize: `cover`, borderRadius: `3px` }}></div>})}
                 </div>
+                </Scrollbars>
               </div>
               : null}
         </div>

@@ -20,6 +20,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "body-parser": "^1.18.3",
+    "chart.js": "^2.7.2",
     "dotenv": "^6.0.0",
     "express": "^4.16.3",
     "express-session": "^1.15.6",
@@ -32,6 +33,7 @@
     "oxford-dictionary": "^1.4.1",
     "react": "^16.5.0",
     "react-analog-clock": "^2.1.0",
+    "react-chartjs-2": "^2.7.4",
     "react-clock": "^2.3.0",
     "react-custom-scrollbars": "^4.2.1",
     "react-dom": "^16.4.2",
