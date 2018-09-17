@@ -17,6 +17,7 @@ import Dictionary     from '../widgets/dictionary/Dictionary';
 import Favorites      from '../widgets/favorites/Favorites';
 import Note           from '../widgets/note/Note';
 import Search         from '../widgets/search/Search';
+import Stocks         from '../widgets/stocks/Stocks';
 import Weather        from '../widgets/weather/Weather';
 import GlobalSettings from './GlobalSettings';
 
@@ -103,7 +104,8 @@ class Dashboard extends Component {
       case 'Calculator' : return <div key={key} data-grid={dataGrid} onMouseUpCapture={updateDB}><Calculator o={val} updateWidgets={updateWidgets} /></div>;
       case 'Bitcoin'    : return <div key={key} data-grid={dataGrid} onMouseUpCapture={updateDB}><Bitcoin    o={val} updateWidgets={updateWidgets} /></div>;
       case 'Favorites'  : return <div key={key} data-grid={dataGrid} onMouseUpCapture={updateDB}><Favorites  o={val} updateWidgets={updateWidgets} /></div>;
-      case 'Favorites'  : return <div key={key} data-grid={dataGrid} onMouseUpCapture={updateDB}><Currency   o={val} updateWidgets={updateWidgets} /></div>;
+      case 'Currency'   : return <div key={key} data-grid={dataGrid} onMouseUpCapture={updateDB}><Currency   o={val} updateWidgets={updateWidgets} /></div>;
+      case 'Stocks'     : return <div key={key} data-grid={dataGrid} onMouseUpCapture={updateDB}><Stocks     o={val} updateWidgets={updateWidgets} /></div>;
       default           : return 'defaulted';
     }
   }
@@ -120,6 +122,7 @@ class Dashboard extends Component {
       case 'Bitcoin'    : return <i className="fab fa-btc"            ></i>;
       case 'Favorites'  : return <i className="fas fa-star"           ></i>;
       case 'Currency'   : return <i className="fas fa-money-check-alt"></i>;
+      case 'Stocks'     : return <i className="fas fa-chart-line"     ></i>;
       default           : return 'defaulted';
     }
   }
@@ -196,6 +199,7 @@ class Dashboard extends Component {
             {this.drawerItem ('Bitcoin',    15, 22, 'fab fa-btc'            )}
             {this.drawerItem ('Favorites',  6,  8,  'fas fa-star'           )}
             {this.drawerItem ('Currency',   6,  8,  'fas fa-money-check-alt')}
+            {this.drawerItem ('Stocks',     10, 12,  'fas fa-chart-line'    )}
           </div>
           <div className="drawer-background"></div>
         </div>
