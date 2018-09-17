@@ -13,6 +13,7 @@
 	width: 50%;
 	display: flex;
 	justify-content: space-around;
+	height: 90px;
 }
 
 .header-wrapper {

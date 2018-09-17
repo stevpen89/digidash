@@ -1,24 +1,28 @@
 //DEPENDENCIES
-import React, { Component } from 'react'
-import RGL, { WidthProvider } from "react-grid-layout"
-import axios from 'axios'
+import React, { Component } from 'react';
+import RGL, { WidthProvider } from "react-grid-layout";
+import axios from 'axios';
+
 //STYLING
 import '../../../node_modules/react-grid-layout/css/styles.css'
-import GridTheme from './GridTheme'
+import GridTheme from './GridTheme';
 import './Dashboard.css'
+
 //WIDGETS
-import Clock from '../widgets/clock/Clock'
-import Dictionary from '../widgets/dictionary/Dictionary'
-import Note from '../widgets/note/Note'
-import Search from '../widgets/search/Search'
-import Weather from '../widgets/weather/Weather'
-import GlobalSettings from './GlobalSettings'
-import Calculator from '../widgets/calculator/Calculator'
-import Favorites from '../widgets/favorites/Favorites'
-import Bitcoin from '../widgets/bitcoin/Bitcoin'
+import Calculator     from '../widgets/calculator/Calculator';
+import Clock          from '../widgets/clock/Clock';
+import Currency       from '../widgets/currency/Currency';
+import Bitcoin        from '../widgets/bitcoin/Bitcoin';
+import Dictionary     from '../widgets/dictionary/Dictionary';
+import Favorites      from '../widgets/favorites/Favorites';
+import Note           from '../widgets/note/Note';
+import Search         from '../widgets/search/Search';
+import Weather        from '../widgets/weather/Weather';
+import GlobalSettings from './GlobalSettings';
+
 //REDUX
-import { connect } from 'react-redux'
-import { setUser } from '../../ducks/reducer'
+import { connect }    from 'react-redux';
+import { setUser }    from '../../ducks/reducer';
 
 const ReactGridLayout = WidthProvider(RGL);
 
@@ -26,15 +30,15 @@ class Dashboard extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      widgets: [],
-      layout: [],
-      locked: false,
-      drawerOpen: false,
-      deleteMode: false,
-      globalOpen: false
+      widgets    : [],
+      layout     : [],
+      locked     : false,
+      drawerOpen : false,
+      deleteMode : false,
+      globalOpen : false
     }
     this.onLayoutChange = this.onLayoutChange.bind(this);
-    this.updateWidgets = this.updateWidgets.bind(this);
+    this.updateWidgets  = this.updateWidgets.bind(this);
   }
 
   //axios call to get user data from auth zero storing on redux.
@@ -45,8 +49,6 @@ class Dashboard extends Component {
     })
   }
 
-  updateWidgets() { axios.get(`/widget/${this.props.user_id}`).then(res => this.setState({ widgets: res.data })) }
-
   //authZero
   login() {
     const { REACT_APP_DOMAIN, REACT_APP_CLIENT_ID } = process.env;
@@ -54,8 +56,23 @@ class Dashboard extends Component {
     window.location = `https://${REACT_APP_DOMAIN}/authorize?client_id=${REACT_APP_CLIENT_ID}&scope=openid%20profile%20email&redirect_uri=${url}&response_type=code`
   }
 
+  //makes it so you cannot move your widgets with RGL.
+  lockToggle() {this.setState((prevState) => { return { locked: !prevState.locked } }) }
+
+  //refreshes all widgets on RGL
+  updateWidgets() { axios.get(`/widget/${this.props.user_id}`).then(res => this.setState({ widgets: res.data })) }
+
   //layout business with RGL
   onLayoutChange(val) { this.setState({ layout: val }) }
+
+  //makes it so you can delete widgets in the toolbar.
+  toggleDeleteMode() {this.setState({deleteMode: !this.state.deleteMode})}
+
+  //deletes a widget
+  deleteWidget(val){axios.delete(`/widget/${val}`).then(() => this.updateWidgets()) }
+
+  //opens and close the global menu
+  globalToggle(){ this.setState({globalOpen:!this.state.globalOpen}) }
 
   //Updating layout according to specific user
   updateDB(i) {
@@ -69,182 +86,120 @@ class Dashboard extends Component {
     axios.put(`/widget/position/${i}`, { i, x, y, w, h })
   }
 
-  //makes it so you cannot move your widgets with RGL.
-  lockToggle() {
-    this.setState((prevState) => { return { locked: !prevState.locked } })
-  }
-
-  toggleDeleteMode() {this.setState({deleteMode: !this.state.deleteMode})}
-
   //Rendering specific widgets according to Widget Id in database and its case number... Add a widget here when created.
   widgetSwitch(val) {
-    function dataGrid () {return { i: `${val.master_id}`, x: val.x, y: val.y, w: val.w, h: val.h }}
+    const { updateWidgets } = this;
+
+    let key      = `${val.master_id}`
+    let updateDB = () => this.updateDB(val.master_id)
+    let dataGrid = {i: `${val.master_id}`, x: val.x, y: val.y, w: val.w, h: val.h}
+
     switch (val.widget_name) {
-      case 'Search'     : return <div key={`${val.master_id}`} data-grid={dataGrid()} onMouseUpCapture={() => this.updateDB(val.master_id)}><Search     o={val} updateWidgets={this.updateWidgets} /></div>;
-      case 'Dictionary' : return <div key={`${val.master_id}`} data-grid={dataGrid()} onMouseUpCapture={() => this.updateDB(val.master_id)}><Dictionary o={val} updateWidgets={this.updateWidgets} /></div>;
-      case 'Note'       : return <div key={`${val.master_id}`} data-grid={dataGrid()} onMouseUpCapture={() => this.updateDB(val.master_id)}><Note       o={val} updateWidgets={this.updateWidgets} /></div>;
-      case 'Clock'      : return <div key={`${val.master_id}`} data-grid={dataGrid()} onMouseUpCapture={() => this.updateDB(val.master_id)}><Clock      o={val} updateWidgets={this.updateWidgets} /></div>;
-      case 'Weather'    : return <div key={`${val.master_id}`} data-grid={dataGrid()} onMouseUpCapture={() => this.updateDB(val.master_id)}><Weather    o={val} updateWidgets={this.updateWidgets} /></div>;
-      case 'Calculator' : return <div key={`${val.master_id}`} data-grid={dataGrid()} onMouseUpCapture={() => this.updateDB(val.master_id)}><Calculator o={val} updateWidgets={this.updateWidgets} /></div>;
-      case 'Bitcoin'    : return <div key={`${val.master_id}`} data-grid={dataGrid()} onMouseUpCapture={() => this.updateDB(val.master_id)}><Bitcoin    o={val} updateWidgets={this.updateWidgets} /></div>;
-      case 'Favorites'  : return <div key={`${val.master_id}`} data-grid={dataGrid()} onMouseUpCapture={() => this.updateDB(val.master_id)}><Favorites  o={val} updateWidgets={this.updateWidgets} /></div>;
+      case 'Search'     : return <div key={key} data-grid={dataGrid} onMouseUpCapture={updateDB}><Search     o={val} updateWidgets={updateWidgets} /></div>;
+      case 'Dictionary' : return <div key={key} data-grid={dataGrid} onMouseUpCapture={updateDB}><Dictionary o={val} updateWidgets={updateWidgets} /></div>;
+      case 'Note'       : return <div key={key} data-grid={dataGrid} onMouseUpCapture={updateDB}><Note       o={val} updateWidgets={updateWidgets} /></div>;
+      case 'Clock'      : return <div key={key} data-grid={dataGrid} onMouseUpCapture={updateDB}><Clock      o={val} updateWidgets={updateWidgets} /></div>;
+      case 'Weather'    : return <div key={key} data-grid={dataGrid} onMouseUpCapture={updateDB}><Weather    o={val} updateWidgets={updateWidgets} /></div>;
+      case 'Calculator' : return <div key={key} data-grid={dataGrid} onMouseUpCapture={updateDB}><Calculator o={val} updateWidgets={updateWidgets} /></div>;
+      case 'Bitcoin'    : return <div key={key} data-grid={dataGrid} onMouseUpCapture={updateDB}><Bitcoin    o={val} updateWidgets={updateWidgets} /></div>;
+      case 'Favorites'  : return <div key={key} data-grid={dataGrid} onMouseUpCapture={updateDB}><Favorites  o={val} updateWidgets={updateWidgets} /></div>;
+      case 'Favorites'  : return <div key={key} data-grid={dataGrid} onMouseUpCapture={updateDB}><Currency   o={val} updateWidgets={updateWidgets} /></div>;
       default           : return 'defaulted';
     }
   }
 
+  //Renders a specific icon in the toolbar based on which widget it is
   toolbarSwitch(val) {
     switch (val.widget_name) {
-      case 'Search': return <i className="fas fa-search"></i>;
-      case 'Dictionary': return <i className="fas fa-book-open"></i>;
-      case 'Note': return <i className="fas fa-sticky-note"></i>;
-      case 'Clock': return <i className="fas fa-clock"></i>;
-      case 'Weather': return <i className="fas fa-cloud"></i>;
-      case 'Calculator': return <i className="fas fa-calculator"></i>;
-      case 'Bitcoin': return <i className="fab fa-btc"></i>;
-      case 'Favorites': return <i className="fas fa-star"></i>;
-      default: return 'defaulted';
+      case 'Search'     : return <i className="fas fa-search"         ></i>;
+      case 'Dictionary' : return <i className="fas fa-book-open"      ></i>;
+      case 'Note'       : return <i className="fas fa-sticky-note"    ></i>;
+      case 'Clock'      : return <i className="fas fa-clock"          ></i>;
+      case 'Weather'    : return <i className="fas fa-cloud"          ></i>;
+      case 'Calculator' : return <i className="fas fa-calculator"     ></i>;
+      case 'Bitcoin'    : return <i className="fab fa-btc"            ></i>;
+      case 'Favorites'  : return <i className="fas fa-star"           ></i>;
+      case 'Currency'   : return <i className="fas fa-money-check-alt"></i>;
+      default           : return 'defaulted';
     }
   }
 
-  deleteWidget(val){
-    axios.delete(`/widget/${val}`).then(() => this.updateWidgets())
-  }
-
-  globalToggle(){
-    this.setState({globalOpen:!this.state.globalOpen})
+  //renders out a drawer item
+  drawerItem (widget_name, w, h, fa_icon, o1, o2, o3, o4, o5, o6) {
+    const {user_id} = this.props
+    return (
+      <div onClick={() => {axios.post(`/widget/${user_id}`,
+        {user_id, widget_name, x: 0, y: 0, w, h, o1, o2, o3, o4, o5, o6})
+        .then(() => this.updateWidgets())}}>
+        <i className={fa_icon}></i><a>{widget_name}</a>
+      </div>)
   }
 
   render() {
+    const { locked, layout, drawerOpen, globalOpen } = this.state;
+    const { compact, collision, user_name } = this.props;
     return (
       <div>
-        
+
         {/* HEADER */}
         <div className="header">
-
-
-          <div className="user-info">
-            {this.props.user_name.replace(/\s/g, ' | ')}
-          </div>
-
+          <div className="user-info">{user_name.replace(/\s/g, ' | ')}</div>
           <div className="user-controls">
-            <button onClick={()=>this.globalToggle()}>
-              •••
-            </button><a>|</a>
-
-            <button onClick={() => this.login()} className="theme-color">
-              <i className="fas fa-users"></i>
-            </button><a>|</a>
-
-            <button onClick={() => this.lockToggle()} className="theme-color">
-              {!this.state.locked ? <i className="fas fa-lock"></i> : <i className="fas fa-lock-open"></i>}
-            </button>
+            <button onClick={()=>this.globalToggle()}>•••</button><a>|</a>
+            <button onClick={() => this.login()} className="theme-color"><i className="fas fa-users"></i></button><a>|</a>
+            <button onClick={() => this.lockToggle()} className="theme-color">{!locked ? <i className="fas fa-lock"></i> : <i className="fas fa-lock-open"></i>}</button>
           </div>
-
         </div>
-        { this.state.globalOpen ? <GlobalSettings/> : null }
+
+        {/* GLOBAL SETTINGS */}
+        { globalOpen ? <GlobalSettings/> : null }
 
         {/* REACT GRID */}
         <GridTheme />
-        
         <ReactGridLayout
-        
           className="layout"
-          cols={30}
-          rowHeight={5}
-          width={800}
-          height={300}
-          layout={this.state.layout}
-          onLayoutChange={this.onLayoutChange}
-          isDraggable={this.state.locked}
-          isResizable={this.state.locked}
-          compactType={'vertical'}
-          preventCollision={false}>
-
+          cols             = {30}
+          rowHeight        = {5}
+          width            = {800}
+          height           = {300}
+          layout           = {layout}
+          onLayoutChange   = {this.onLayoutChange}
+          isDraggable      = {locked}
+          isResizable      = {locked}
+          compactType      = {compact ? 'vertical' : null}
+          preventCollision = {collision}>
           {this.state.widgets.map((val) => (this.widgetSwitch(val)))}
-           
         </ReactGridLayout>
+
         {/* DRAWER */}
         <div style={{
-          display: `flex`,
-          width: `100vw`,
-          height: `100vh`,
-          zIndex: `5`,
-          position: `absolute`,
-          top: `0`,
-          left: `0`,
-          backgroundColor: `black`,
-          pointerEvents: this.state.drawerOpen ? `auto` : `none`,
-          opacity: this.state.drawerOpen ? `1` : `0`,
-          transition: `.5s`
+          display         : `flex`,
+          width           : `100vw`,
+          height          : `100vh`,
+          zIndex          : `5`,
+          position        : `fixed`,
+          top             : `0`,
+          left            : `0`,
+          backgroundColor : `black`,
+          pointerEvents   : drawerOpen ? `auto` : `none`,
+          opacity         : drawerOpen ? `1` : `0`,
+          transition      : `.5s`
         }}>
           <div className="drawer">
-            <div onClick={() => {
-              axios.post(`/widget/${this.props.user_id}`, {
-                user_id: this.props.user_id,
-                widget_name: 'Search', x: 0, y: 0, w: 26, h: 4
-              })
-                .then(() => this.updateWidgets())
-            }
-            }><i className="fas fa-search"></i><a>Search</a></div>
-            <div onClick={() => {
-              axios.post(`/widget/${this.props.user_id}`, {
-                user_id: this.props.user_id,
-                widget_name: 'Weather', x: 0, y: 0, w: 10, h: 10
-              })
-                .then(() => this.updateWidgets())
-            }
-            }><i className="fas fa-cloud"></i><a>Weather</a></div>
-            <div onClick={() => {
-              axios.post(`/widget/${this.props.user_id}`, {
-                user_id: this.props.user_id,
-                widget_name: 'Dictionary', x: 0, y: 0, w: 10, h: 10
-              })
-                .then(() => this.updateWidgets())
-            }
-            }><i className="fas fa-book-open"></i><a>Dictionary</a></div>
-            <div onClick={() => {
-              axios.post(`/widget/${this.props.user_id}`, {
-                user_id: this.props.user_id,
-                widget_name: 'Clock', x: 0, y: 0, w: 5, h: 11, o1: 'true'
-              })
-                .then(() => this.updateWidgets())
-            }
-            }><i className="fas fa-clock"></i><a>Clock</a></div>
-            <div onClick={() => {
-              axios.post(`/widget/${this.props.user_id}`, {
-                user_id: this.props.user_id,
-                widget_name: 'Note', x: 0, y: 0, w: 5, h: 18
-              })
-                .then(() => this.updateWidgets())
-            }
-            }><i className="fas fa-sticky-note"></i><a>Note</a></div>
-            <div onClick={() => {
-              axios.post(`/widget/${this.props.user_id}`, {
-                user_id: this.props.user_id,
-                widget_name: 'Calculator', x: 0, y: 0, w: 5, h: 18
-              })
-                .then(() => this.updateWidgets())
-            }
-            }><i className="fas fa-calculator"></i><a>Calculator</a></div>
-            <div onClick={() => {
-              axios.post(`/widget/${this.props.user_id}`, {
-                user_id: this.props.user_id,
-                widget_name: 'Bitcoin', x: 0, y: 0, w: 15, h: 22
-              })
-                .then(() => this.updateWidgets())
-            }
-            }><i className="fab fa-btc"></i><a>Bitcoin</a></div>
-            <div onClick={() => {
-              axios.post(`/widget/${this.props.user_id}`, {
-                user_id: this.props.user_id,
-                widget_name: 'Favorites', x: 0, y: 0, w: 6, h: 8
-              })
-                .then(() => this.updateWidgets())
-            }
-            }><i className="fas fa-star"></i><a>Favorites</a></div>
+            {/* Widget Name, Height, Width, Icon, o1, o2, o3, o4, o5, o6 */}
+            {this.drawerItem ('Search',     26, 4,  'fas fa-search'         )}
+            {this.drawerItem ('Weather',    10, 10, 'fas fa-cloud'          )}
+            {this.drawerItem ('Dictionary', 10, 10, 'fas fa-book-open'      )}
+            {this.drawerItem ('Clock',      5,  11, 'fas fa-clock', 'true'  )}
+            {this.drawerItem ('Note',       5,  18, 'fas fa-sticky-note'    )}
+            {this.drawerItem ('Calculator', 5,  18, 'fas fa-calculator'     )}
+            {this.drawerItem ('Bitcoin',    15, 22, 'fab fa-btc'            )}
+            {this.drawerItem ('Favorites',  6,  8,  'fas fa-star'           )}
+            {this.drawerItem ('Currency',   6,  8,  'fas fa-money-check-alt')}
           </div>
           <div className="drawer-background"></div>
         </div>
+
         {/* TOOLBAR */} 
         <div className={this.state.locked ? 'toolbar toolbar-open' : 'toolbar'}>
           <div style={{ display: "flex" }}>
@@ -264,7 +219,9 @@ class Dashboard extends Component {
           </div>
             <div className="toolbar-controls">
               <button onClick={() => this.toggleDeleteMode()}><i className="fas fa-trash-alt"></i></button>
-              <button onClick={() => this.setState({ drawerOpen: !this.state.drawerOpen })}>{this.state.drawerOpen ? <i className="fas fa-minus-square"></i> : <i className="fas fa-plus-square"></i>}</button>
+              <button onClick={() => this.setState({ drawerOpen: !this.state.drawerOpen })}>
+                {this.state.drawerOpen ? <i className="fas fa-minus-square"></i> : <i className="fas fa-plus-square"></i>}
+              </button>
             </div>
           </div >
          
@@ -273,5 +230,8 @@ class Dashboard extends Component {
   }
 }
 
-function mapStateToProps(state) { return { user_id: state.user_id, user_name: state.user_name } };
+function mapStateToProps(state) {
+	const  { user_id, user_name, search, compact, collision } = state
+	return { user_id, user_name, search, compact, collision }
+};
 export default connect(mapStateToProps, { setUser })(Dashboard);
