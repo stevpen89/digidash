@@ -6,7 +6,6 @@ import axios from 'axios'
 import '../../../node_modules/react-grid-layout/css/styles.css'
 import GridTheme from './GridTheme'
 import './Dashboard.css'
-import { Scrollbars } from 'react-custom-scrollbars';
 //WIDGETS
 import Clock from '../widgets/clock/Clock'
 import Dictionary from '../widgets/dictionary/Dictionary'
@@ -17,7 +16,6 @@ import GlobalSettings from './GlobalSettings'
 import Calculator from '../widgets/calculator/Calculator'
 import Favorites from '../widgets/favorites/Favorites'
 import Bitcoin from '../widgets/bitcoin/Bitcoin'
-import Currency from '../Currency/Currency'
 //REDUX
 import { connect } from 'react-redux'
 import { setUser } from '../../ducks/reducer'
@@ -80,16 +78,17 @@ class Dashboard extends Component {
 
   //Rendering specific widgets according to Widget Id in database and its case number... Add a widget here when created.
   widgetSwitch(val) {
+    function dataGrid () {return { i: `${val.master_id}`, x: val.x, y: val.y, w: val.w, h: val.h }}
     switch (val.widget_name) {
-      case 'Search': return <Search o={val} updateWidgets={this.updateWidgets} />;
-      case 'Dictionary': return <Dictionary o={val} updateWidgets={this.updateWidgets} />;
-      case 'Note': return <Note o={val} updateWidgets={this.updateWidgets} />;
-      case 'Clock': return <Clock o={val} updateWidgets={this.updateWidgets} />;
-      case 'Weather': return <Weather o={val} updateWidgets={this.updateWidgets} />;
-      case 'Calculator': return <Calculator o={val} updateWidgets={this.updateWidgets} />;
-      case 'Bitcoin': return <Bitcoin o={val} updateWidgets={this.updateWidgets} />;
-      case 'Favorites': return <Favorites o={val} updateWidgets={this.updateWidgets} />;
-      default: return 'defaulted';
+      case 'Search'     : return <div key={`${val.master_id}`} data-grid={dataGrid()} onMouseUpCapture={() => this.updateDB(val.master_id)}><Search     o={val} updateWidgets={this.updateWidgets} /></div>;
+      case 'Dictionary' : return <div key={`${val.master_id}`} data-grid={dataGrid()} onMouseUpCapture={() => this.updateDB(val.master_id)}><Dictionary o={val} updateWidgets={this.updateWidgets} /></div>;
+      case 'Note'       : return <div key={`${val.master_id}`} data-grid={dataGrid()} onMouseUpCapture={() => this.updateDB(val.master_id)}><Note       o={val} updateWidgets={this.updateWidgets} /></div>;
+      case 'Clock'      : return <div key={`${val.master_id}`} data-grid={dataGrid()} onMouseUpCapture={() => this.updateDB(val.master_id)}><Clock      o={val} updateWidgets={this.updateWidgets} /></div>;
+      case 'Weather'    : return <div key={`${val.master_id}`} data-grid={dataGrid()} onMouseUpCapture={() => this.updateDB(val.master_id)}><Weather    o={val} updateWidgets={this.updateWidgets} /></div>;
+      case 'Calculator' : return <div key={`${val.master_id}`} data-grid={dataGrid()} onMouseUpCapture={() => this.updateDB(val.master_id)}><Calculator o={val} updateWidgets={this.updateWidgets} /></div>;
+      case 'Bitcoin'    : return <div key={`${val.master_id}`} data-grid={dataGrid()} onMouseUpCapture={() => this.updateDB(val.master_id)}><Bitcoin    o={val} updateWidgets={this.updateWidgets} /></div>;
+      case 'Favorites'  : return <div key={`${val.master_id}`} data-grid={dataGrid()} onMouseUpCapture={() => this.updateDB(val.master_id)}><Favorites  o={val} updateWidgets={this.updateWidgets} /></div>;
+      default           : return 'defaulted';
     }
   }
 
@@ -145,7 +144,6 @@ class Dashboard extends Component {
         { this.state.globalOpen ? <GlobalSettings/> : null }
 
         {/* REACT GRID */}
-        <Currency />
         <GridTheme />
         
         <ReactGridLayout
@@ -162,14 +160,7 @@ class Dashboard extends Component {
           compactType={'vertical'}
           preventCollision={false}>
 
-          {this.state.widgets.map((val) => (
-            <div
-              key={`${val.master_id}`}
-              data-grid={{ i: `${val.master_id}`, x: val.x, y: val.y, w: val.w, h: val.h }}
-              onMouseUpCapture={() => this.updateDB(val.master_id)}>
-              {this.widgetSwitch(val)}
-            </div>
-          ))}
+          {this.state.widgets.map((val) => (this.widgetSwitch(val)))}
            
         </ReactGridLayout>
         {/* DRAWER */}
