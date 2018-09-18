@@ -5,14 +5,16 @@ import './Stocks.css'
 
 class Stocks extends Component{
 	constructor(props){
+		const {o1,o2,o3,o4} = props.o
 		super(props)
 		this.state={
+			miniSettings:false,
 			results:null,
 			input:"",
-			openData:[],
-			highData:[],
-			lowData:[],
-			closeData:[],
+			openData:o1?o1:[],
+			highData:o2?o2:[],
+			lowData:o3?o3:[],
+			closeData:o4?o4:[],
 			graphMin:null,
 			graphMax:null,
 			graphData:{
@@ -101,17 +103,33 @@ class Stocks extends Component{
 		console.log(this.state)
 	}
 
+	toggleSettings() {
+		this.setState({ miniSettings: !this.state.miniSettings })
+		this.saveData();
+	}
+
+	saveData() {
+		const { openData,highData,lowData,closeData } = this.state
+		axios.put(`/widget/settings/${this.props.o.master_id}`, {
+			o1:openData,
+			o2:highData,
+			o3:lowData,
+			o4:closeData
+		}).then(this.props.updateWidgets())
+	}
+
 	render(){
-		let {graphMax,graphMin} = this.state
+		let {graphMax,graphMin,miniSettings} = this.state
 		return (
 			<div className="stocks-main standard-widget" >
-			<style>
-
-			</style>
-				<div className="stocks-header">
-					<input className="theme-input inputter" onChange={(e)=>this.handleInput(e.target.value)}/>
-					<button onClick={()=>this.getStocks()} className="go-button">Retrieve</button>
-				</div>
+				<button className="widget-settings-button" onClick={() => this.toggleSettings()}>•••</button>
+				{miniSettings? 
+					<div>
+						<input className="theme-input inputter" onChange={(e)=>this.handleInput(e.target.value)}/>
+						<button onClick={()=>this.getStocks()} className="go-button">Retrieve</button>
+					</div>
+					:null}
+				
 				<div className='chart-wrapper' >
 				<Line
                     data={this.state.newState? this.state.newState.graphData.datasets : this.state.graphData}
