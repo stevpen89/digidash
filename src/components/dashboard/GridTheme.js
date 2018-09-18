@@ -18,6 +18,7 @@ function GridTheme (props) {
 						height: 5px;
 						border-right: 2px solid rgba(255, 255, 255, .25);
 						border-bottom: 2px solid rgba(255, 255, 255, .25);
+						z-index: 3;
 				}
 			`}
 		</style>

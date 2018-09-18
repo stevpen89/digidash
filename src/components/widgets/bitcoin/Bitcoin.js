@@ -78,7 +78,7 @@ class Bitcoin extends Component {
           <div id="coindesk"> Powered by <a href="http://www.coindesk.com/price/">CoinDesk</a></div>
         </div>
         <div className="theme-glow"></div>
-        <div className="theme-accent"></div>
+        <div className="theme-accent"><i class="fas fa-arrows-alt"></i></div>
       </div>
 
     );

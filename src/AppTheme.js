@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 
 function AppTheme (props) {
 	
-	const {background, themeColor, flavor} = props
+	const {background, themeColor, flavor, locked} = props
 
 	let blue   = '000, 174, 255',
 	    yellow = '255, 255, 000',
@@ -15,11 +15,11 @@ function AppTheme (props) {
 
 	let theme = (widget, color, strength) => {
 		return (`
-			.${widget} .theme-text   {color      : rgb(${color})}
-			.${widget} .theme-color  {background : rgb(${color})}
-			.${widget} .theme-accent {background : rgb(${color})}
-			.${widget} .theme-glow   {background : rgb(${color}, ${strength})}
-			.${widget} .theme-input  {border     : rgb(${color}) solid; border-width : 0 0 1px 0;}
+			.${widget} .theme-text   {color         : rgb(${color})}
+			.${widget} .theme-color  {background    : rgb(${color})}
+			.${widget} .theme-accent {border-bottom : rgb(${color}) 1px solid}
+			.${widget} .theme-glow   {background    : rgb(${color}, ${strength})}
+			.${widget} .theme-input  {border        : rgb(${color}) solid; border-width : 0 0 1px 0;}
 		`)
 	}			
 
@@ -105,11 +105,24 @@ function AppTheme (props) {
 				.theme-accent {
 					position         : absolute;
 					width            : 100%;
-					height           : 1px;
+					height           : 100%;
+					border-bottom    : rgb(${themeColor}) 1px solid ;
 					left             : 0;
 					bottom           : 0;
-					background-color : rgb(${themeColor});
-					z-index          : 2;
+					background-color : ${locked ? `transparent` : `rgba(0, 0, 0, .75)`};
+					pointer-events   : ${locked ? `none` : `auto`};
+					z-index          : 3;
+					display          : flex;
+					justify-content  : center;
+					align-items      : center;
+					transition       : 1s;
+				}
+
+				.theme-accent i {
+					display: ${locked ? `none` : `auto`};
+					// -webkit-text-stroke: .75px rgba(255,255,255,.75);
+					color: rgba(255,255,255,.5);
+					font-size: 22px;
 				}
 
 				${flavor === 'classic' ? 
@@ -138,5 +151,8 @@ function AppTheme (props) {
 	)
 }
 
-function mapStateToProps (state) {return {background: state.user_bg, themeColor: state.color, flavor : state.flavor}};
+function mapStateToProps (state) {
+	const  {user_bg, color, flavor, locked} = state;
+	return {background: user_bg, themeColor: color, flavor, locked}
+};
 export default connect(mapStateToProps)(AppTheme);
