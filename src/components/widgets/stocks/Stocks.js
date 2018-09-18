@@ -105,9 +105,6 @@ class Stocks extends Component{
 		let {graphMax,graphMin} = this.state
 		return (
 			<div className="stocks-main standard-widget" >
-			<style>
-
-			</style>
 				<div className="stocks-header">
 					<input className="theme-input inputter" onChange={(e)=>this.handleInput(e.target.value)}/>
 					<button onClick={()=>this.getStocks()} className="go-button">Retrieve</button>
