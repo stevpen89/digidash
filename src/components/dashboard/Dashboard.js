@@ -78,11 +78,18 @@ class Dashboard extends Component {
   deleteWidget(val) { axios.delete(`/widget/${val}`).then(() => this.updateWidgets()) }
 
   //opens and close the global menu
-  globalToggle() { this.setState({ globalOpen: !this.state.globalOpen }) }
+  globalToggle() {
+    const { user_id, user_bg, color, theme, flavor, compact, collision } = this.props;
+    this.setState({ globalOpen: !this.state.globalOpen })
+    axios.put(`/api/update/${user_id}`, { user_bg, color, theme, flavor, compact, collision }).then(console.log(user_bg, color, theme, flavor, compact, collision))
+
+  }
 
   //Updating layout according to specific user
   updateDB(i) {
+    console.log(i, 'this is the Index')
     const { layout } = this.state
+    console.log(layout, 'this is the layout')
     let indexKeys = layout.map(val => val.i)
     let layoutKey = indexKeys.indexOf(i.toString())
     let x = layout[layoutKey].x
@@ -97,21 +104,20 @@ class Dashboard extends Component {
     const { updateWidgets } = this;
 
     let key = `${val.master_id}`
-    let updateDB = () => this.updateDB(val.master_id)
     // let dataGrid = {i: `${val.master_id}`, x: val.x, y: val.y, w: val.w, h: val.h}
 
     switch (val.widget_name) {
-      case 'Search': return <div key={key} data-grid={{ i: `${val.master_id}`, x: val.x, y: val.y, w: val.w, h: val.h, minH: 4, minW: 12 }} onMouseUpCapture={updateDB}><Search o={val} updateWidgets={updateWidgets} /></div>;
-      case 'Dictionary': return <div key={key} data-grid={{ i: `${val.master_id}`, x: val.x, y: val.y, w: val.w, h: val.h, minH: 20, minW: 6 }} onMouseUpCapture={updateDB}><Dictionary o={val} updateWidgets={updateWidgets} /></div>;
-      case 'Note': return <div key={key} data-grid={{ i: `${val.master_id}`, x: val.x, y: val.y, w: val.w, h: val.h, minH: 15, minW: 6 }} onMouseUpCapture={updateDB}><Note o={val} updateWidgets={updateWidgets} /></div>;
-      case 'Clock': return <div key={key} data-grid={{ i: `${val.master_id}`, x: val.x, y: val.y, w: val.w, h: val.h, minH: 11, minW: 6 }} onMouseUpCapture={updateDB}><Clock o={val} updateWidgets={updateWidgets} /></div>;
-      case 'Weather': return <div key={key} data-grid={{ i: `${val.master_id}`, x: val.x, y: val.y, w: val.w, h: val.h, minH: 13, minW: 6 }} onMouseUpCapture={updateDB}><Weather o={val} updateWidgets={updateWidgets} /></div>;
-      case 'Calculator': return <div key={key} data-grid={{ i: `${val.master_id}`, x: val.x, y: val.y, w: val.w, h: val.h, minH: 20, minW: 6 }} onMouseUpCapture={updateDB}><Calculator o={val} updateWidgets={updateWidgets} /></div>;
-      case 'Bitcoin': return <div key={key} data-grid={{ i: `${val.master_id}`, x: val.x, y: val.y, w: val.w, h: val.h, minH: 19, minW: 12 }} onMouseUpCapture={updateDB}><Bitcoin o={val} updateWidgets={updateWidgets} /></div>;
-      case 'Favorites': return <div key={key} data-grid={{ i: `${val.master_id}`, x: val.x, y: val.y, w: val.w, h: val.h, minH: 14, minW: 6 }} onMouseUpCapture={updateDB}><Favorites o={val} updateWidgets={updateWidgets} /></div>;
-      case 'Currency': return <div key={key} data-grid={{ i: `${val.master_id}`, x: val.x, y: val.y, w: val.w, h: val.h, minH: 6, minW: 6 }} onMouseUpCapture={updateDB}><Currency o={val} updateWidgets={updateWidgets} /></div>;
-      case 'Stocks': return <div key={key} data-grid={{ i: `${val.master_id}`, x: val.x, y: val.y, w: val.w, h: val.h, minH: 24, minW: 12 }} onMouseUpCapture={updateDB}><Stocks o={val} updateWidgets={updateWidgets} /></div>;
-      case 'Restaurants': return <div key={key} data-grid={{ i: `${val.master_id}`, x: val.x, y: val.y, w: val.w, h: val.h, minH: 24, minW: 12 }} onMouseUpCapture={updateDB}><Restaurants o={val} updateWidgets={updateWidgets} /></div>;
+      case 'Search': return <div key={key} data-grid={{ i: `${val.master_id}`, x: val.x, y: val.y, w: val.w, h: val.h, minH: 4, minW: 12 }} onMouseUpCapture={() => this.updateDB(val.master_id)}><Search o={val} updateWidgets={updateWidgets} /></div>;
+      case 'Dictionary': return <div key={key} data-grid={{ i: `${val.master_id}`, x: val.x, y: val.y, w: val.w, h: val.h, minH: 20, minW: 6 }} onMouseUpCapture={() => this.updateDB(val.master_id)}><Dictionary o={val} updateWidgets={updateWidgets} /></div>;
+      case 'Note': return <div key={key} data-grid={{ i: `${val.master_id}`, x: val.x, y: val.y, w: val.w, h: val.h, minH: 15, minW: 6 }} onMouseUpCapture={() => this.updateDB(val.master_id)}><Note o={val} updateWidgets={updateWidgets} /></div>;
+      case 'Clock': return <div key={key} data-grid={{ i: `${val.master_id}`, x: val.x, y: val.y, w: val.w, h: val.h, minH: 11, minW: 6 }} onMouseUpCapture={() => this.updateDB(val.master_id)}><Clock o={val} updateWidgets={updateWidgets} /></div>;
+      case 'Weather': return <div key={key} data-grid={{ i: `${val.master_id}`, x: val.x, y: val.y, w: val.w, h: val.h, minH: 13, minW: 6 }} onMouseUpCapture={() => this.updateDB(val.master_id)}><Weather o={val} updateWidgets={updateWidgets} /></div>;
+      case 'Calculator': return <div key={key} data-grid={{ i: `${val.master_id}`, x: val.x, y: val.y, w: val.w, h: val.h, minH: 20, minW: 6 }} onMouseUpCapture={() => this.updateDB(val.master_id)}><Calculator o={val} updateWidgets={updateWidgets} /></div>;
+      case 'Bitcoin': return <div key={key} data-grid={{ i: `${val.master_id}`, x: val.x, y: val.y, w: val.w, h: val.h, minH: 19, minW: 12 }} onMouseUpCapture={() => this.updateDB(val.master_id)}><Bitcoin o={val} updateWidgets={updateWidgets} /></div>;
+      case 'Favorites': return <div key={key} data-grid={{ i: `${val.master_id}`, x: val.x, y: val.y, w: val.w, h: val.h, minH: 14, minW: 6 }} onMouseUpCapture={() => this.updateDB(val.master_id)}><Favorites o={val} updateWidgets={updateWidgets} /></div>;
+      case 'Currency': return <div key={key} data-grid={{ i: `${val.master_id}`, x: val.x, y: val.y, w: val.w, h: val.h, minH: 6, minW: 6 }} onMouseUpCapture={() => this.updateDB(val.master_id)}><Currency o={val} updateWidgets={updateWidgets} /></div>;
+      case 'Stocks': return <div key={key} data-grid={{ i: `${val.master_id}`, x: val.x, y: val.y, w: val.w, h: val.h, minH: 24, minW: 12 }} onMouseUpCapture={() => this.updateDB(val.master_id)}><Stocks o={val} updateWidgets={updateWidgets} /></div>;
+      case 'Restaurants': return <div key={key} data-grid={{ i: `${val.master_id}`, x: val.x, y: val.y, w: val.w, h: val.h, minH: 24, minW: 12 }} onMouseUpCapture={() => this.updateDB(val.master_id)}><Restaurants o={val} updateWidgets={updateWidgets} /></div>;
       default: return 'defaulted';
     }
   }
@@ -158,9 +164,17 @@ class Dashboard extends Component {
         <div className="header">
           <div className="user-info">{user_name.replace(/\s/g, ' | ')}</div>
           <div className="user-controls">
-            <button onClick={() => this.globalToggle()}>•••</button><a>|</a>
-            {user_id ? <button onClick={() => this.logout()} className="theme-color"><i class="fas fa-user-times"></i></button> : <button onClick={() => this.login()} className="theme-color"><i class="fas fa-user"></i></button>}<a>|</a>
-            <button onClick={() => this.lockToggle()} className="theme-color">{!locked ? <i className="fas fa-lock"></i> : <i className="fas fa-lock-open"></i>}</button>
+            {user_id ?
+              <div>
+                <button onClick={() => this.globalToggle()}>•••</button><a>|</a>
+                <button onClick={() => this.logout()} className="theme-color"><i class="fas fa-user-times"></i></button><a>|</a>
+                <button onClick={() => this.lockToggle()} className="theme-color">{!locked ? <i className="fas fa-lock"></i> : <i className="fas fa-lock-open"></i>}</button>
+              </div>
+              :
+              <div className="login-button" onClick={() => this.login()}>
+                <button className="theme-color"><i class="fas fa-user"></i><a>Login</a></button>
+              </div>
+            }
           </div>
         </div>
 
@@ -171,6 +185,7 @@ class Dashboard extends Component {
         <GridTheme />
         <ReactGridLayout
           className="layout"
+          style={{ position: `relative` }}
           cols={36}
           rowHeight={5}
           width={800}
@@ -181,7 +196,7 @@ class Dashboard extends Component {
           isResizable={locked}
           compactType={compact ? 'vertical' : null}
           preventCollision={collision}>
-          {user_id ? this.state.widgets.map((val) => (this.widgetSwitch(val))) : <div key={1} data-grid={{ i: `1`, x: 9, y: 4, w: 18, h: 4, minH: 4, minW: 12 }}><Search /></div>
+          {user_id ? this.state.widgets.map((val) => (this.widgetSwitch(val))) : <div key={0} data-grid={{ i: `0`, x: 9, y: 4, w: 18, h: 4, minH: 4, minW: 12 }}><Search /></div>
           }
         </ReactGridLayout>
 
@@ -200,7 +215,7 @@ class Dashboard extends Component {
           transition: `.5s`
         }}>
           <div className="drawer">
-            {/* Widget Name, HeigIcon, o1, o2, o3, o4, o5, o6 */}
+            {/* Widget Name, Heigth, Width, Icon, o1, o2, o3, o4, o5, o6 */}
             {this.drawerItem('Search', 26, 4, 'fas fa-search')}
             {this.drawerItem('Weather', 10, 10, 'fas fa-cloud')}
             {this.drawerItem('Dictionary', 10, 10, 'fas fa-book-open')}
@@ -247,7 +262,7 @@ class Dashboard extends Component {
 }
 
 function mapStateToProps(state) {
-  const { user_id, user_name, compact, collision } = state
-  return { user_id, user_name, compact, collision }
+  const { user_id, user_name, user_bg, color, theme, flavor, compact, collision } = state
+  return { user_id, user_name, user_bg, color, theme, flavor, compact, collision }
 };
 export default connect(mapStateToProps, { setUser, setLock, deleteUser })(Dashboard);

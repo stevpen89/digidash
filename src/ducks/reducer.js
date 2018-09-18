@@ -1,6 +1,6 @@
 const initialState = {
   user_id: null,
-  user_name: 'Roger Williams',
+  user_name: 'GUEST',
   user_email: '',
   auth_id: '',
   auth_picture: '',
