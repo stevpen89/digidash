@@ -11,10 +11,10 @@
 	font-weight: 200;
 	z-index: 5;
 	width: 100%;
-	position: fixed;
+	
 }
 
-.user-info {padding-left: 15px;}
+.user-info {padding-left: 25px;}
 
 .header button {
 	background: transparent;
@@ -66,9 +66,9 @@
 	letter-spacing: 4px;
 }
 
-.layout {
-	padding-top: 50px;
-}
+/* .layout {
+	margin-top: 50px;
+} */
 
 .toolbar {
   position: fixed;
@@ -88,7 +88,7 @@
 	overflow-y: hidden;
 }
 
-.toolbar-controls button {margin-left: 20px;}
+.toolbar-controls button {margin-left: 10px;}
 .toolbar-icon {margin-right: 10px;}
 
 .toolbar-open {bottom: 0;}
@@ -111,4 +111,22 @@
 
 .delete-button:hover {
 	color: rgba(255, 0, 0, 1);
+}
+
+.login-button {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+.login-button button {
+	width: auto;
+	height: auto;
+}
+
+.login-button a {
+	padding: 0 15px;
+	font-weight: 200;
+	letter-spacing: 5px;
+	font-size: 14px;
 }
