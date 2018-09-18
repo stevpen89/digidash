@@ -148,7 +148,7 @@ extractRootDomain(url,num) {
 					</div>
 				</div>
 				<div className="theme-glow"></div>
-				<div className="theme-accent"></div>
+				<div className="theme-accent"><i class="fas fa-arrows-alt"></i></div>
 			</div>
 		)
 	}
