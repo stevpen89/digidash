@@ -42,6 +42,7 @@ class Dashboard extends Component {
     this.globalToggle = this.globalToggle.bind(this);
     this.updateWidgets = this.updateWidgets.bind(this);
     this.onLayoutChange = this.onLayoutChange.bind(this);
+    this.updateDB = this.updateDB.bind(this);
   }
 
   //axios call to get user data from auth zero storing on redux.

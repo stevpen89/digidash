@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import './Search.css';
 
 class Search extends Component {
-	constructor() {
-		super()
+	constructor(props) {
+		super(props)
 		this.state = { selected: 'https://www.google.com/search?q=', search: '' }
 	}
 	

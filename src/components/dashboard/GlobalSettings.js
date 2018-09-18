@@ -66,7 +66,7 @@ class GlobalSettings extends Component {
 											<a>Auto Compact Widgets</a>
 										</div>
 										<div className="listItem">
-											<button className="filled-button" onClick={() => this.bgPickerToggle()}>Save Changes</button>
+											<button className="filled-button" onClick={() => globalToggle()}>Save Changes</button>
 										</div>
 									</div>
 								</div>

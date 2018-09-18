@@ -37,7 +37,7 @@ export default class Dictionary extends Component {
 				</div>
 				<div className="dictionary-body">
 					{ !this.state.returnedData ?
-						<div className="dictionary-empty"><p>Oxford dictionary</p></div>
+						<div className="dictionary-empty"><p>Oxford Dictionary</p></div>
 						:
 						<p>{this.state.returnedData ? this.state.returnedData.results[0].lexicalEntries.map((val,i) => <div key={i} className="dictionary-result">{i+1}. {val.entries[0].senses[0].definitions}</div>) : "" }</p>
 					}

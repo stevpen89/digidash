@@ -9,9 +9,9 @@ CREATE TABLE users (
 	user_email   	VARCHAR(100),
 	auth_id       TEXT,
 	auth_picture  TEXT,
-	user_bg				TEXT,
-	color					TEXT DEFAULT '#CCC',
-	theme					TEXT DEFAULT 'light',
+	user_bg				TEXT DEFAULT 'https://images.unsplash.com/photo-1536130371825-ac75012d9b24?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=c1c97eb0f52f1174d7a8281dd8348828&auto=format&fit=crop&w=1050&q=80',
+	color					TEXT DEFAULT '115, 164, 191',
+	theme					TEXT DEFAULT 'dark',
 	flavor				TEXT DEFAULT 'modern',
 	compact				BOOLEAN DEFAULT true,
 	collision			BOOLEAN DEFAULT false
