@@ -1,17 +1,17 @@
 import React from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
-function AppTheme (props) {
-	
-	const {background, themeColor, flavor, locked} = props
+function AppTheme(props) {
 
-	let blue   = '000, 174, 255',
-	    yellow = '255, 255, 000',
-			red    = '255, 000, 000',
-			purple = '140, 000, 255',
-			green  = '000, 255, 000',
-			orange = '255, 175, 000',
-			pink   = '255, 000, 230'
+	const { background, themeColor, flavor, locked } = props
+
+	let blue = '000, 174, 255',
+		yellow = '255, 255, 000',
+		red = '255, 000, 000',
+		purple = '140, 000, 255',
+		green = '000, 255, 000',
+		orange = '255, 175, 000',
+		pink = '255, 000, 230'
 
 	let theme = (widget, color, strength) => {
 		return (`
@@ -21,7 +21,7 @@ function AppTheme (props) {
 			.${widget} .theme-glow   {background    : rgb(${color}, ${strength})}
 			.${widget} .theme-input  {border        : rgb(${color}) solid; border-width : 0 0 1px 0;}
 		`)
-	}			
+	}
 
 	return (
 		<style>
@@ -102,6 +102,8 @@ function AppTheme (props) {
 					z-index          : 2;
 				}
 
+
+	
 				.theme-accent {
 					position         : absolute;
 					width            : 100%;
@@ -125,15 +127,15 @@ function AppTheme (props) {
 					font-size: 22px;
 				}
 
-				${flavor === 'classic' ? 
-				`
-					${theme('clock',      red   , '.15')}
-					${theme('bitcoin',    green , '.1 ')}
-					${theme('weather',    blue  , '.15')}
+				${flavor === 'classic' ?
+					`
+					${theme('clock', red, '.15')}
+					${theme('bitcoin', green, '.1 ')}
+					${theme('weather', blue, '.15')}
 					${theme('dictionary', purple, '.15')}
-					${theme('note',       yellow, '.15')}
+					${theme('note', yellow, '.15')}
 					${theme('calculator', orange, '.15')}
-					${theme('favorites',  pink,   '.15')}
+					${theme('favorites', pink, '.15')}
 
 					.clock .react-clock__second-hand__body {background-color: rgba(${red})}
 					.bitcoin .linechart_area  { fill   : rgb(${green}) }
@@ -145,14 +147,14 @@ function AppTheme (props) {
 					.bitcoin .heading         { color  : rgb(${green}) }
 					.bitcoin .subtext         { color  : rgb(${green}) }
 				`
-				: null}
+					: null}
 			`}
 		</style>
 	)
 }
 
-function mapStateToProps (state) {
-	const  {user_bg, color, flavor, locked} = state;
-	return {background: user_bg, themeColor: color, flavor, locked}
+function mapStateToProps(state) {
+	const { user_bg, color, flavor, locked } = state;
+	return { background: user_bg, themeColor: color, flavor, locked }
 };
 export default connect(mapStateToProps)(AppTheme);

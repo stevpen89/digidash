@@ -39,12 +39,22 @@ module.exports = {
   },
 
   purge: (req, res) => {
-    req.session.destroy(); 
+    req.session.destroy();
     const db = req.app.get('db');
-		const {user_id} = req.params;
+    const { user_id } = req.params;
 
-		db.users.purge_user([user_id])
-			.then(user => res.status(200).send(user))
-			.catch(err => console.log(`Error Message: ${err}`))
+    db.users.purge_user([user_id])
+      .then(user => res.status(200).send(user))
+      .catch(err => console.log(`Error Message: ${err}`))
+  },
+
+  update: (req, res) => {
+    const db = req.app.get('db');
+    const { user_id } = req.params;
+    const { user_bg, color, theme, flavor, compact, collision } = req.body;
+
+    db.users.update_user([user_bg, color, theme, flavor, compact, collision, user_id])
+      .then(user => res.status(200).send(user))
+      .catch(err => console.log(`Error Message: ${err}`))
   }
 }
