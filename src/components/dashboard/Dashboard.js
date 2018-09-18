@@ -88,7 +88,7 @@ class Dashboard extends Component {
 
   //Updating layout according to specific user
   updateDB(i) {
-    console.log(i,'this is the Index')
+    console.log(i, 'this is the Index')
     const { layout } = this.state
     console.log(layout, 'this is the layout')
     let indexKeys = layout.map(val => val.i)
@@ -172,8 +172,8 @@ class Dashboard extends Component {
                 <button onClick={() => this.lockToggle()} className="theme-color">{!locked ? <i className="fas fa-lock"></i> : <i className="fas fa-lock-open"></i>}</button>
               </div>
               :
-              <div>
-                <button onClick={() => this.login()} className="theme-color"><i class="fas fa-user"></i></button>
+              <div className="login-button" onClick={() => this.login()}>
+                <button className="theme-color"><i class="fas fa-user"></i><a>Login</a></button>
               </div>
             }
           </div>
@@ -186,8 +186,8 @@ class Dashboard extends Component {
         <GridTheme />
         <ReactGridLayout
           className="layout"
-          style={{position: `relative`}}
-          cols={30}
+          style={{ position: `relative` }}
+          cols={36}
           rowHeight={5}
           width={800}
           height={300}

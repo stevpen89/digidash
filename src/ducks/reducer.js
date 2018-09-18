@@ -1,6 +1,10 @@
 const initialState = {
   user_id: null,
+<<<<<<< HEAD
   user_name: 'Guest',
+=======
+  user_name: 'GUEST',
+>>>>>>> master
   user_email: '',
   auth_id: '',
   auth_picture: '',
