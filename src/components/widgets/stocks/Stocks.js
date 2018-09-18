@@ -11,10 +11,10 @@ class Stocks extends Component{
 			miniSettings:false,
 			results:null,
 			input:"",
-			openData:o1?o1:[],
-			highData:o2?o2:[],
-			lowData:o3?o3:[],
-			closeData:o4?o4:[],
+			openData:[],
+			highData:[],
+			lowData:[],
+			closeData:[],
 			graphMin:null,
 			graphMax:null,
 			graphData:{
@@ -86,6 +86,8 @@ class Stocks extends Component{
 		let min = Math.min(...lowData)
 		let max = Math.max(...highData)
 
+		const {o1,o2,o3,o4} = this.props
+
 
 		let newState = {...this.state}
 			newState.graphData.labels = newlabels
@@ -94,10 +96,10 @@ class Stocks extends Component{
 
 		this.setState({openData:openData,highData:highData,lowData:lowData,closeData:closeData,})
 
-			newState.graphData.datasets[0].data = openData
-			newState.graphData.datasets[1].data = highData
-			newState.graphData.datasets[2].data = lowData
-			newState.graphData.datasets[3].data = closeData
+			newState.graphData.datasets[0].data = o1?o1:openData
+			newState.graphData.datasets[1].data = o2?o2:highData
+			newState.graphData.datasets[2].data = o3?o3:lowData
+			newState.graphData.datasets[3].data = o4?o4:closeData
 
 		this.setState({...newState})
 		console.log(this.state)
