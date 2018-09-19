@@ -4,7 +4,6 @@ import './Bgp.css'
 import { connect } from 'react-redux'
 import { setTheme, setColor, setBG } from '../../ducks/reducer'
 import { Scrollbars } from 'react-custom-scrollbars';
-require('dotenv').config()
 
 class Bgp extends Component {
   constructor() {

@@ -3,7 +3,6 @@ import GoogleMapReact from 'google-map-react';
 import axios from 'axios'
 import marker from './Map-Marker-Marker-Outside-Chartreuse.png'
 import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
-require('dotenv').config()
 const AnyReactComponent = ({ img }) => <div>{img}</div>;
 
 class Restaurants extends Component {
