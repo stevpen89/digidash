@@ -20,6 +20,28 @@ describe('Tests the props from Note', ()=>{
 })
 
 
+const {favoritesCheck1,favoritesCheck2,favoritesCheck3,favoritesCheck4,favoritesCheck5} = require('../Logic/logic');
+
+
+describe('Tests the props from Favorites', ()=>{
+	test('x exists',()=>{
+		expect(favoritesCheck1(true)).toBe(true)
+	})
+	test('y exists',()=>{
+		expect(favoritesCheck2(true)).toBe(true)
+	})
+	test('w exists',()=>{
+		expect(favoritesCheck3(true)).toBe(true)
+	})
+	test('h exists',()=>{
+		expect(favoritesCheck4(true)).toBe(true)
+	})
+	test('masterId exists',()=>{
+		expect(favoritesCheck5(true)).toBe(true)
+	})
+})
+
+
 //Adams tests
 const {weatherCheck1,weatherCheck2,weatherCheck3,weatherCheck4,weatherCheck5} = require('../Logic/logic');
 
