@@ -34,6 +34,24 @@ const logic = {
 	},
 	weatherCheck5(val){
 		return val ? true : false
+	},
+
+
+	
+	favoritesCheck1(val){
+		return val ? true : false
+	},
+	favoritesCheck2(val){
+		return val ? true : false
+	},
+	favoritesCheck3(val){
+		return val ? true : false
+	},
+	favoritesCheck4(val){
+		return val ? true : false
+	},
+	favoritesCheck5(val){
+		return val ? true : false
 	}
 };
 

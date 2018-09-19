@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import './Favorites.css'
+import {favoritesCheck1,favoritesCheck2,favoritesCheck3,favoritesCheck4,favoritesCheck5} from '../../../logic/logic'
 
 export default class Favorites extends Component {
 	constructor(props){
@@ -96,6 +97,11 @@ extractRootDomain(url,num) {
 		const {url1,url2,url3,url4,url5,url6} = this.state
 		return (
 			<div className="favorites standard-widget">
+			{favoritesCheck1(this.props.x)}
+			{favoritesCheck2(this.props.y)}
+			{favoritesCheck3(this.props.w)}
+			{favoritesCheck4(this.props.h)}
+			{favoritesCheck5(this.props.master_id)}
 				<div className="favorites-insert">
 					<h1 className="widget-settings-button" onClick={()=>this.toggleSettings()}>...</h1>
 				{this.state.showSettings?
