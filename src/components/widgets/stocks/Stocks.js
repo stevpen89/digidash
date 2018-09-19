@@ -5,8 +5,11 @@ import './Stocks.css'
 
 class Stocks extends Component{
 	constructor(props){
+		const {o1,o2,o3,o4} = props.o
+		console.log(o1)
 		super(props)
 		this.state={
+			miniSettings:false,
 			results:null,
 			input:"",
 			openData:[],
@@ -20,22 +23,22 @@ class Stocks extends Component{
 				datasets:[
 					{
 						label:['Open'],
-						data:[],
+						data:[o1?o1*1:null],
 						backgroundColor:['rgba(0,255,0,.2)']
 					},
 					{
 						label:['High'],
-						data:[],
+						data:[o2?o2*1:null],
 						backgroundColor:['rgba(255,255,0,.2)']
 					},
 					{
 						label:['Low'],
-						data:[],
+						data:[o3?o3*1:null],
 						backgroundColor:['rgba(0,255,255,.2)']
 					},
 					{
 						label:['Close'],
-						data:[],
+						data:[o4?o4*1:null],
 						backgroundColor:['rgba(255,0,255,.2)']
 					},
 				]
@@ -84,31 +87,51 @@ class Stocks extends Component{
 		let min = Math.min(...lowData)
 		let max = Math.max(...highData)
 
+		const {o1,o2,o3,o4} = this.props
+
 
 		let newState = {...this.state}
 			newState.graphData.labels = newlabels
 			newState.graphMin = min
 			newState.graphMax = max
 
-		this.setState({openData:openData,highData:highData,lowData:lowData,closeData:closeData,})
+		this.setState({openData:openData,highData:highData,lowData:lowData,closeData:closeData})
 
-			newState.graphData.datasets[0].data = openData
-			newState.graphData.datasets[1].data = highData
-			newState.graphData.datasets[2].data = lowData
-			newState.graphData.datasets[3].data = closeData
+			newState.graphData.datasets[0].data = o1?o1:openData
+			newState.graphData.datasets[1].data = o2?o2:highData
+			newState.graphData.datasets[2].data = o3?o3:lowData
+			newState.graphData.datasets[3].data = o4?o4:closeData
 
 		this.setState({...newState})
-		console.log(this.state)
+		this.saveData()
+	}
+
+	toggleSettings() {
+		this.setState({ miniSettings: !this.state.miniSettings })
+		this.saveData();
+	}
+
+	saveData() {
+		axios.put(`/widget/settings/${this.props.o.master_id}`, {
+			o1:this.state.openData?this.state.graphData.datasets[0].data:null,
+			o2:this.state.openData?this.state.graphData.datasets[1].data:null,
+			o3:this.state.openData?this.state.graphData.datasets[2].data:null,
+			o4:this.state.openData?this.state.graphData.datasets[3].data:null
+		}).then(()=>{this.props.updateWidgets()})
 	}
 
 	render(){
-		let {graphMax,graphMin} = this.state
+		let {graphMax,graphMin,miniSettings} = this.state
 		return (
 			<div className="stocks-main standard-widget" >
-				<div className="stocks-header">
-					<input className="theme-input inputter" onChange={(e)=>this.handleInput(e.target.value)}/>
-					<button onClick={()=>this.getStocks()} className="go-button">Retrieve</button>
-				</div>
+				<button className="widget-settings-button" onClick={() => this.toggleSettings()}>•••</button>
+				{miniSettings? 
+					<div>
+						<input className="theme-input inputter" onChange={(e)=>this.handleInput(e.target.value)}/>
+						<button onClick={()=>this.getStocks()} className="go-button">Retrieve</button>
+					</div>
+					:null}
+				
 				<div className='chart-wrapper' >
 				<Line
                     data={this.state.newState? this.state.newState.graphData.datasets : this.state.graphData}
@@ -125,13 +148,13 @@ class Stocks extends Component{
                         scales:{
                             yAxes:[{
                                 gridLines:{
-                                    display:true,
+                                    display:false,
                                     color:"rgba(255,255,255,.3)",
                                     zeroLineColor:'rgba(255,255,255,.3)',
                                 },
                                 ticks:{
-                                    max:(graphMax *1),
-                                    min:(graphMin *1),
+                                    max:(graphMax *1)+1,
+                                    min:(graphMin *1)-1,
                                     stepSize:((graphMax - graphMin)/10),
                                     fontColor:'rgba(255,255,255,.3)',
                                 }
