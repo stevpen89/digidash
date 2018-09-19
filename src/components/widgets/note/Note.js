@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import './Note.css'
+import {noteCheck1,noteCheck2,noteCheck3,noteCheck4,noteCheck5} from '../../../logic/logic'
+
 
 class Note extends Component {
 	constructor(props) {
@@ -38,6 +40,11 @@ class Note extends Component {
 		const { miniSettings } = this.state
 		return (
 			<div className="note standard-widget" style={{ height: "100%", width: "100%" }}>
+			{noteCheck1(this.props.x)}
+			{noteCheck2(this.props.y)}
+			{noteCheck3(this.props.w)}
+			{noteCheck4(this.props.h)}
+			{noteCheck5(this.props.master_id)}
 				<button className="widget-settings-button" onClick={() => this.toggleSettings()}>•••</button>
 
 				<div>{miniSettings ?

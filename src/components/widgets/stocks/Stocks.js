@@ -6,6 +6,7 @@ import './Stocks.css'
 class Stocks extends Component{
 	constructor(props){
 		const {o1,o2,o3,o4} = props.o
+		console.log(o1)
 		super(props)
 		this.state={
 			miniSettings:false,
@@ -22,22 +23,22 @@ class Stocks extends Component{
 				datasets:[
 					{
 						label:['Open'],
-						data:[],
+						data:[o1?o1*1:null],
 						backgroundColor:['rgba(0,255,0,.2)']
 					},
 					{
 						label:['High'],
-						data:[],
+						data:[o2?o2*1:null],
 						backgroundColor:['rgba(255,255,0,.2)']
 					},
 					{
 						label:['Low'],
-						data:[],
+						data:[o3?o3*1:null],
 						backgroundColor:['rgba(0,255,255,.2)']
 					},
 					{
 						label:['Close'],
-						data:[],
+						data:[o4?o4*1:null],
 						backgroundColor:['rgba(255,0,255,.2)']
 					},
 				]
@@ -94,7 +95,7 @@ class Stocks extends Component{
 			newState.graphMin = min
 			newState.graphMax = max
 
-		this.setState({openData:openData,highData:highData,lowData:lowData,closeData:closeData,})
+		this.setState({openData:openData,highData:highData,lowData:lowData,closeData:closeData})
 
 			newState.graphData.datasets[0].data = o1?o1:openData
 			newState.graphData.datasets[1].data = o2?o2:highData
@@ -102,7 +103,7 @@ class Stocks extends Component{
 			newState.graphData.datasets[3].data = o4?o4:closeData
 
 		this.setState({...newState})
-		console.log(this.state)
+		this.saveData()
 	}
 
 	toggleSettings() {
@@ -111,13 +112,12 @@ class Stocks extends Component{
 	}
 
 	saveData() {
-		const { openData,highData,lowData,closeData } = this.state
 		axios.put(`/widget/settings/${this.props.o.master_id}`, {
-			o1:openData,
-			o2:highData,
-			o3:lowData,
-			o4:closeData
-		}).then(this.props.updateWidgets())
+			o1:this.state.openData?this.state.graphData.datasets[0].data:null,
+			o2:this.state.openData?this.state.graphData.datasets[1].data:null,
+			o3:this.state.openData?this.state.graphData.datasets[2].data:null,
+			o4:this.state.openData?this.state.graphData.datasets[3].data:null
+		}).then(()=>{this.props.updateWidgets()})
 	}
 
 	render(){
@@ -148,13 +148,13 @@ class Stocks extends Component{
                         scales:{
                             yAxes:[{
                                 gridLines:{
-                                    display:true,
+                                    display:false,
                                     color:"rgba(255,255,255,.3)",
                                     zeroLineColor:'rgba(255,255,255,.3)',
                                 },
                                 ticks:{
-                                    max:(graphMax *1),
-                                    min:(graphMin *1),
+                                    max:(graphMax *1)+1,
+                                    min:(graphMin *1)-1,
                                     stepSize:((graphMax - graphMin)/10),
                                     fontColor:'rgba(255,255,255,.3)',
                                 }
