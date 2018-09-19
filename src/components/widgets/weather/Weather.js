@@ -4,6 +4,7 @@ import './Weather.css'
 import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
 import Skycons from 'react-skycons'
 import { Scrollbars } from 'react-custom-scrollbars';
+import {weatherCheck1,weatherCheck2,weatherCheck3,weatherCheck4,weatherCheck5} from '../../../logic/logic'
 export default class Autocomplete extends Component {
   constructor(props) {
     super(props);
@@ -114,6 +115,11 @@ export default class Autocomplete extends Component {
 	const {miniSettings} = this.state
     return (
       <div className="standard-widget weather">
+      {weatherCheck1(this.props.x)}
+			{weatherCheck2(this.props.y)}
+			{weatherCheck3(this.props.w)}
+			{weatherCheck4(this.props.h)}
+			{weatherCheck5(this.props.master_id)}
 	  <Scrollbars>
 		<button className="widget-settings-button" onClick={() => this.toggleSettings()}>•••</button>
     	{miniSettings ?
