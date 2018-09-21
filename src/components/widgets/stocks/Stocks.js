@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import {Line} from 'react-chartjs-2'
+import {connect} from 'react-redux'
 import './Stocks.css'
 
 class Stocks extends Component{
@@ -24,22 +25,22 @@ class Stocks extends Component{
 					{
 						label:['Open'],
 						data:[o1?o1*1:null],
-						backgroundColor:['rgba(0,255,0,.2)']
+						backgroundColor:[`rgba(${this.props.themeColor}, .8)`]
 					},
 					{
 						label:['High'],
 						data:[o2?o2*1:null],
-						backgroundColor:['rgba(255,255,0,.2)']
+						backgroundColor:[`rgba(${this.props.themeColor}, .6)`]
 					},
 					{
 						label:['Low'],
 						data:[o3?o3*1:null],
-						backgroundColor:['rgba(0,255,255,.2)']
+						backgroundColor:[`rgba(${this.props.themeColor}, .4)`]
 					},
 					{
 						label:['Close'],
 						data:[o4?o4*1:null],
-						backgroundColor:['rgba(255,0,255,.2)']
+						backgroundColor:[`rgba(${this.props.themeColor}, .2)`]
 					},
 				]
 			}
@@ -109,6 +110,7 @@ class Stocks extends Component{
 	toggleSettings() {
 		this.setState({ miniSettings: !this.state.miniSettings })
 		this.saveData();
+		this.getStocks();
 	}
 
 	saveData() {
@@ -123,16 +125,18 @@ class Stocks extends Component{
 	render(){
 		let {graphMax,graphMin,miniSettings} = this.state
 		return (
-			<div className="stocks-main standard-widget" >
+			<div className="stocks standard-widget" >
 				<button className="widget-settings-button" onClick={() => this.toggleSettings()}>•••</button>
 				{miniSettings? 
-					<div>
+					<div className="widget-settings">
 						<input className="theme-input inputter" onChange={(e)=>this.handleInput(e.target.value)}/>
 						<button onClick={()=>this.getStocks()} className="go-button">Retrieve</button>
 					</div>
 					:null}
 				
+				{this.state.results ?
 				<div className='chart-wrapper' >
+				<h1>{this.state.input}</h1>
 				<Line
                     data={this.state.newState? this.state.newState.graphData.datasets : this.state.graphData}
                     options={{
@@ -172,7 +176,7 @@ class Stocks extends Component{
 
                     }}
                 />
-								</div>
+								</div> : <div className="ghost-stock-icon"><i className="fas fa-chart-line"></i></div>}
 								{/* Graph Ends One Line Above */}
 					<div className="theme-glow"></div>
 				<div className="theme-accent"><i class="fas fa-arrows-alt"></i></div>
@@ -181,6 +185,5 @@ class Stocks extends Component{
 	}
 }
 
-
-
-export default Stocks
+function mapStateToProps(state) {return { themeColor: state.color, flavor: state.flavor }};
+export default connect(mapStateToProps)(Stocks);

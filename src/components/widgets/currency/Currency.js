@@ -59,7 +59,7 @@ export default class Currency extends Component {
     return (
      
 
-      <div className="standard-widget search2" >
+      <div className="standard-widget currency" >
         
       <div style={{display: 'flex', color: 'white'}}>
         <div style={{display: 'flex',flexDirection: "column"}}>
@@ -102,6 +102,8 @@ export default class Currency extends Component {
       <div className='center'>
         <button className=" go-button" onClick={()=> this.getCurency()}>convert</button>
       </div>
+      <div className="theme-glow"></div>
+      <div className="theme-accent"><i class="fas fa-arrows-alt"></i></div>
       </div>
 
 
