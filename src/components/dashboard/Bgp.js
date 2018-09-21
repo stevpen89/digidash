@@ -122,5 +122,8 @@ class Bgp extends Component {
   }
 }
 
-function mapStateToProps(state) { return { user_id: state.user_id } };
+function mapStateToProps(state) {
+	const  { user_id, image, color, theme } = state
+	return { user_id, image, color, theme }
+};
 export default connect(mapStateToProps, { setTheme, setColor, setBG })(Bgp);

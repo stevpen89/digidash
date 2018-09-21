@@ -52,6 +52,23 @@ const logic = {
 	},
 	favoritesCheck5(val){
 		return val ? true : false
+	},
+
+
+	clockCheck1(val){
+		return val ? true : false
+	},
+	clockCheck2(val){
+		return val ? true : false
+	},
+	clockCheck3(val){
+		return val ? true : false
+	},
+	clockCheck4(val){
+		return val ? true : false
+	},
+	clockCheck5(val){
+		return val ? true : false
 	}
 };
 

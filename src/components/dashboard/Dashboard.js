@@ -83,7 +83,6 @@ class Dashboard extends Component {
     const { user_id, user_bg, color, theme, flavor, compact, collision } = this.props;
     this.setState({ globalOpen: !this.state.globalOpen })
     axios.put(`/api/update/${user_id}`, { user_bg, color, theme, flavor, compact, collision }).then(console.log(user_bg, color, theme, flavor, compact, collision))
-
   }
 
   //Updating layout according to specific user

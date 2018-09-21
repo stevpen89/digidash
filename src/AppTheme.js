@@ -136,6 +136,8 @@ function AppTheme(props) {
 					${theme('note', yellow, '.15')}
 					${theme('calculator', orange, '.15')}
 					${theme('favorites', pink, '.15')}
+					${theme('stocks', red, '.15')}
+					${theme('currency', orange, '.15')}
 
 					.clock .react-clock__second-hand__body {background-color: rgba(${red})}
 					.bitcoin .linechart_area  { fill   : rgb(${green}) }

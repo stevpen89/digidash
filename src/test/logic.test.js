@@ -42,6 +42,28 @@ describe('Tests the props from Favorites', ()=>{
 })
 
 
+const {clockCheck1,clockCheck2,clockCheck3,clockCheck4,clockCheck5} = require('../Logic/logic');
+
+
+describe('Tests the props from clock', ()=>{
+	test('x exists',()=>{
+		expect(clockCheck1(true)).toBe(true)
+	})
+	test('y exists',()=>{
+		expect(clockCheck2(true)).toBe(true)
+	})
+	test('w exists',()=>{
+		expect(clockCheck3(true)).toBe(true)
+	})
+	test('h exists',()=>{
+		expect(clockCheck4(true)).toBe(true)
+	})
+	test('masterId exists',()=>{
+		expect(clockCheck5(true)).toBe(true)
+	})
+})
+
+
 //Adams tests
 const {weatherCheck1,weatherCheck2,weatherCheck3,weatherCheck4,weatherCheck5} = require('../Logic/logic');
 

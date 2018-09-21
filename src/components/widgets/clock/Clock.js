@@ -4,6 +4,7 @@ import Clock from 'react-clock';
 import Digital from './Digital'
 import axios from 'axios'
 import './Clock.css'
+import {clockCheck1,clockCheck2,clockCheck3,clockCheck4,clockCheck5} from '../../../logic/logic'
 
 class WidgetClock extends Component {
   constructor(props) {
@@ -35,6 +36,11 @@ class WidgetClock extends Component {
     const { show, miniSettings } = this.state;
     return (
       <div className="clock standard-widget">
+      {clockCheck1(this.props.x)}
+			{clockCheck2(this.props.y)}
+			{clockCheck3(this.props.w)}
+			{clockCheck4(this.props.h)}
+			{clockCheck5(this.props.master_id)}
 
         <ClockTheme />
         <button className="widget-settings-button" onClick={() => this.toggleSettings()}>•••</button>
