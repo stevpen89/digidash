@@ -5,16 +5,16 @@
   "main": "server/server.js",
   "proxy": {
     "/api": {
-      "target": "http://localhost:4040"
+      "target": "https://localhost:4040"
     },
     "/widget": {
-      "target": "http://localhost:4040"
+      "target": "https://localhost:4040"
     },
     "/users": {
-      "target": "http://localhost:4040"
+      "target": "https://localhost:4040"
     },
     "/auth/callback": {
-      "target": "http://localhost:4040"
+      "target": "https://localhost:4040"
     }
   },
   "dependencies": {
